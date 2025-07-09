@@ -8,6 +8,9 @@ html
     --primary-text:black;
     --bg-color:white;
     --border:#E6E6E6;
+    --banner:#F9F9F9;
+    --accent-color:#03A543;
+    background-color: var(--bg-color);
 }
 body {
     font-family: 'Montserrat', sans-serif;
@@ -26,8 +29,12 @@ body *
   }
 .first
 {
-    background-color: #03A543;
+    background-color: var(--accent-color);
     height: 3px;
+}
+header,main,footer
+{
+    background-color: var(--bg-color);
 }
 .pre_header
 {
@@ -127,5 +134,36 @@ header .logo
 {
     font-size: 2rem;
     margin-right: 5.2rem;
-    
+}
+.banner
+{
+    background-color: var(--banner);
+    display: flex;
+    gap: 14.7rem;
+}
+h1
+{
+    margin-top: 12rem;
+    font-size: 6.4rem;
+    font-weight: bold;
+    line-height: 125%;
+    max-width: 69rem;
+}
+h1 .accent
+{
+    color: var(--accent-color);
+    font-weight: 300;
+}
+.banner img
+{
+    margin-left: 5.4rem;
+    width: 32.96vw;
+    height: auto;
+}
+.banner p
+{
+    margin-top: 2.6rem;
+    width: 45rem;
+    font-size: 1.8rem;
+    line-height: 140%;
 }
