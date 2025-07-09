@@ -140,6 +140,7 @@ header .logo
     background-color: var(--banner);
     display: flex;
     gap: 14.7rem;
+    padding-bottom: 8.5rem;
 }
 h1
 {
@@ -149,9 +150,17 @@ h1
     line-height: 125%;
     max-width: 69rem;
 }
-h1 .accent
+p
+{
+    line-height: 140%;
+}
+.accent
 {
     color: var(--accent-color);
+}
+h1 .accent
+{
+
     font-weight: 300;
 }
 .banner img
@@ -166,4 +175,64 @@ h1 .accent
     width: 45rem;
     font-size: 1.8rem;
     line-height: 140%;
+}
+.about
+{
+    margin-top: 18rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+.about h2
+{
+    margin-top: 2.7rem;
+    font-size: 4.8rem;
+    width: 145rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 2.5rem;
+    line-height: 145%;
+    padding-left: 1rem;
+}
+.about p
+{
+    width: 63rem;
+    text-align: center;
+    margin-top: 1.2rem;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 2rem;
+}
+.about .cards
+{
+    display: flex;
+    gap: 4.2rem;
+    margin-top: 2.2rem;
+}
+.about .card
+{
+    background-color: var(--banner);
+    border-radius: 8px;
+    width: 54.5rem;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.digit
+{
+    font-size: 10.5rem;
+    font-weight: 300;
+    margin-left: 3.9rem;
+    margin-top: 3.5rem;
+}
+.about .text
+{
+    font-weight: 300;
+    font-size: 1.8rem;
+    line-height: 130%;
+    opacity: 65%;
+    margin-left: 2.8rem;
+    margin-bottom: 2.3rem;
 }
