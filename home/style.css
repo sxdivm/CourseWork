@@ -182,6 +182,11 @@ h1 .accent
     padding-left: 10rem;
     padding-right: 10rem;
 }
+h2
+{
+    font-size: 4.8rem;
+    line-height: 145%;
+}
 .about h2
 {
     margin-top: 2.7rem;
@@ -192,7 +197,6 @@ h1 .accent
     text-align: center;
     text-transform: uppercase;
     margin-bottom: 2.5rem;
-    line-height: 145%;
     padding-left: 1rem;
 }
 .about p
@@ -235,4 +239,61 @@ h1 .accent
     opacity: 65%;
     margin-left: 2.8rem;
     margin-bottom: 2.3rem;
+}
+
+.head
+{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    margin-top: 18rem;
+    margin-bottom: 7rem;
+}
+.catalog
+{
+    margin-top: 1rem;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+.categories
+{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+.category
+{
+    width: 18rem;
+    height: 70rem;
+    background-color: var(--banner);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+    align-items: center;
+}
+.category p
+{
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-size: 2rem;
+    width: max-content;
+    margin-top: 3rem;
+    text-align: center;
+    transform: rotate(180deg);
+    text-align: center;
+
+}
+.category button
+{
+    margin-bottom: 3.2rem;
+}
+.category img
+{
+    transform: rotate(90deg);
 }
