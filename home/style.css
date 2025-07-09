@@ -1,0 +1,131 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html
+{
+    font-size: 10px;
+    --primary-text:black;
+    --bg-color:white;
+    --border:#E6E6E6;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+  }
+button
+{
+    border: none;
+    background: none;
+}
+body *
+  {
+    font-family: 'Montserrat', sans-serif;
+  }
+.first
+{
+    background-color: #03A543;
+    height: 3px;
+}
+.pre_header
+{
+ display: flex;
+ justify-content: space-between;
+ height: 7.2rem;
+}
+.left_part , .right_part{
+    display: flex;
+    align-items: center; 
+}
+.lang
+{
+    font-size: 1.7rem;
+    font-weight: 300;
+    padding-left: 3.8rem;
+    padding-right: 3.6rem;
+}
+.theme
+{
+    height: 100%;
+    border-left: 0.2rem solid var(--border);
+    border-right: 0.2rem solid var(--border);
+    padding-left: 3.4rem;
+    padding-right: 3.4rem;
+}
+hr
+{
+    background-color: var(--border);
+    height: 1.5px;
+    border: none;
+}
+.cart,.fav,.login
+{
+    height: 100%;
+}
+.cart
+{
+    padding-left: 3.7rem;
+    padding-right: 3.4rem;
+    border-left: 0.2rem solid var(--border);
+    border-right: 0.2rem solid var(--border);
+}
+.fav
+{
+    padding-left: 3.65rem;
+    padding-right: 3.85rem;
+    border-right: 0.2rem solid var(--border);
+}
+.login
+{
+    display: flex;
+    padding-left: 5.75rem;
+    padding-right: 5.6rem;
+    gap: 8px;
+    font-size: 1.8rem;
+    font-weight: 300;
+    align-items: center;
+}
+.login img
+{
+    height: fit-content;
+}
+.nav_header
+{
+    display: flex;
+    justify-content: space-between;
+    height: 10.35rem;
+    align-items: center;
+}
+header ul
+{
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+}
+a
+{
+    text-decoration: none;
+    color: var(--primary-text);
+    font-size: 1.8rem;
+}
+header .logo
+{
+    margin-left: 10rem;
+}
+.phone
+{
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    height: 100%;
+    padding-left: 4.25rem;
+    border-left: 0.2rem solid var(--border);
+}
+.phone p
+{
+    font-size: 2rem;
+    margin-right: 5.2rem;
+    
+}
