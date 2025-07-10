@@ -628,7 +628,7 @@ footer hr {
 
     .category {
         width: 10rem;
-        height: 80vw;
+        height: 90vw;
     }
     .category p
     {
@@ -693,4 +693,151 @@ footer hr {
     {
         display: none;
     }
+}
+@media screen and (max-width: 610px) {
+
+    .pre_header {
+        display: none;
+    }
+    h1
+    {
+        font-size: 3.4rem;
+    }
+    .about h2
+    {
+        font-size: 2.8rem;
+    }
+    .head h2
+    {
+        font-size: 2.8rem;
+    }
+
+    .mobile-pre-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 2rem;
+        border-top: 1px solid var(--border);
+        margin-top: 1.5rem;
+        flex-wrap: wrap; 
+        max-width: 100%; 
+    }
+
+
+    .mobile-pre-header .left_part,
+    .mobile-pre-header .right_part {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+
+    .mobile-pre-header .lang,
+    .mobile-pre-header .theme,
+    .mobile-pre-header .cart,
+    .mobile-pre-header .fav,
+    .mobile-pre-header .login {
+        font-size: 1.6rem;
+        padding: 1rem 1.5rem;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap; 
+        max-width: 100%; 
+        box-sizing: border-box; 
+    }
+
+    .mobile-pre-header .lang:hover,
+    .mobile-pre-header .login:hover {
+        background-color: var(--accent-color);
+        color: white;
+    }
+
+    .mobile-pre-header .theme img,
+    .mobile-pre-header .cart img,
+    .mobile-pre-header .fav img,
+    .mobile-pre-header .login img {
+        width: 2rem;
+        height: 2rem;
+        margin-left: 0.5rem; 
+    }
+
+    .mobile-pre-header .login {
+        gap: 0.5rem;
+    }
+
+    .nav-menu {
+        width: 100%;
+        max-width: 100vw; 
+        padding-bottom: 3rem;
+        box-sizing: border-box;
+    }
+
+    .nav-menu ul {
+        gap: 1rem;
+        padding: 0;
+        width: 100%;
+        margin-top: 3rem;
+    }
+
+    .nav-menu li {
+        margin: 1rem 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu a {
+        font-size: 2rem;
+    }
+
+    .nav-menu {
+        height: 100vh;
+        justify-content: flex-start;
+        overflow-x: hidden; 
+    }
+
+    .burger-toggle:checked ~ .nav-menu {
+        transform: translateX(0);
+    }
+    .head
+    {
+        flex-wrap: wrap;
+        margin-bottom: 10rem;
+        justify-content: center;
+    }
+    .portfolio
+    {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .project
+    {
+        width: 90vw;
+    }
+    .type
+    {
+        justify-content: center;
+    }
+    .category p
+    {
+        font-size: 1.6rem;
+    }
+    .copyright p
+    {
+        font-size: 1.6rem;
+    }
+}
+
+.mobile-pre-header {
+    display: none;
+}
+
+@media screen and (max-width: 610px) {
+    .mobile-pre-header {
+        display: flex;
+    }
+    
 }
