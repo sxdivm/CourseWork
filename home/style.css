@@ -11,8 +11,8 @@ html {
     --banner: #F9F9F9;
     --accent-color: #03A543;
     --category-color: #F5F5F5;
-    --button-circe: #D2D2D2;
-    --foter-bg: #1C1C1C;
+    --button-circle: #D2D2D2;
+    --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
 }
 
@@ -114,18 +114,7 @@ hr {
     justify-content: space-between;
     height: 10.35rem;
     align-items: center;
-}
-
-header ul {
-    list-style: none;
-    display: flex;
-    gap: 5rem;
-}
-
-a {
-    text-decoration: none;
-    color: var(--primary-text);
-    font-size: 1.8rem;
+    position: relative;
 }
 
 header .logo {
@@ -146,6 +135,57 @@ header .phone {
     margin-right: 5.2rem;
 }
 
+.burger-toggle {
+    display: none;
+}
+
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+.burger-menu span {
+    width: 3rem;
+    height: 0.3rem;
+    background-color: var(--primary-text);
+    margin: 0.3rem 0;
+    transition: all 0.3s ease;
+}
+
+.burger-toggle:checked + .burger-menu span:nth-child(1) {
+    transform: rotate(45deg) translate(0.5rem, 0.5rem);
+}
+
+.burger-toggle:checked + .burger-menu span:nth-child(2) {
+    opacity: 0;
+}
+
+.burger-toggle:checked + .burger-menu span:nth-child(3) {
+    transform: rotate(-45deg) translate(0.7rem, -0.7rem);
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+}
+
+header ul {
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-text);
+    font-size: 1.8rem;
+}
+
 .banner {
     background-color: var(--banner);
     display: flex;
@@ -155,7 +195,7 @@ header .phone {
 
 h1 {
     margin-top: 12rem;
-    font-size: 6.4rem;
+    font-size: 6.4rem ;
     font-weight: bold;
     line-height: 125%;
     max-width: 69rem;
@@ -170,7 +210,6 @@ p {
 }
 
 h1 .accent {
-
     font-weight: 300;
 }
 
@@ -201,7 +240,7 @@ h2 {
 .about h2 {
     margin-top: 2.7rem;
     font-size: 4.8rem;
-    width: 75,52vw;
+    width: 75.52vw;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -296,8 +335,6 @@ h2 {
     margin-top: 3rem;
     text-align: center;
     transform: rotate(180deg);
-    text-align: center;
-
 }
 
 .category button {
@@ -312,21 +349,21 @@ h2 {
     margin-top: -1.2rem;
     display: flex;
     flex-direction: column;
-    margin-left: 10rem;
-    margin-right: 10rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+    overflow-x: hidden;
 }
 
 .type {
     display: flex;
     justify-content: space-between;
-
-
 }
 
 .type ul {
     list-style: none;
     display: flex;
     gap: 5rem;
+    flex-wrap: wrap;
 }
 
 .type li {
@@ -356,7 +393,7 @@ h2 {
 .type button {
     width: 5.2rem;
     height: 5.2rem;
-    border: 1px solid var(--button-circe);
+    border: 1px solid var(--button-circle);
     border-radius: 50%;
 }
 
@@ -365,13 +402,15 @@ h2 {
 }
 
 .projects {
+    width: 100vw;
     display: flex;
     margin-top: 3.7rem;
     gap: 4rem;
+    overflow-x: hidden;
 
 }
-
 .project {
+    flex-shrink: 0;
     width: 84rem;
     height: 50rem;
     background-color: var(--accent-color);
@@ -389,7 +428,7 @@ h2 {
 
 footer {
     margin-top: 8.6rem;
-    background-color: var(--foter-bg);
+    background-color: var(--footer-bg);
     padding-top: 10rem;
     color: white;
 }
@@ -405,15 +444,15 @@ footer .main {
     display: flex;
     gap: 3rem;
 }
-footer ul
-{
+
+footer ul {
     display: flex;
     flex-direction: column;
     gap: 1.1rem;
 }
+
 footer li {
     list-style: none;
-    
 }
 
 footer h4 {
@@ -426,7 +465,6 @@ footer a {
     font-weight: 300;
     font-size: 1.8rem;
     font-family: 'Montserrat', sans-serif;
-    
 }
 
 footer .phone p,
@@ -470,4 +508,189 @@ footer hr {
     opacity: 50%;
     font-size: 1.8rem;
     font-weight: 300;
+}
+
+@media screen and (max-width: 1280px) {
+    .burger-toggle {
+        display: none;
+    }
+
+    .burger-menu {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 10.35rem;
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
+
+    .burger-toggle:checked ~ .nav-menu {
+        transform: translateX(0);
+        justify-content: center;
+    }
+
+    .nav-menu ul {
+        flex-direction: column;
+        padding: 2rem;
+        align-items: center;
+    }
+
+    .nav-menu li {
+        margin: 1.5rem 0;
+    }
+
+    .nav-menu a {
+        font-size: 2.4rem;
+        color: var(--primary-text);
+    }
+
+    header .phone {
+        display: none;
+    }
+
+    header .logo {
+        margin-left: 2rem;
+    }
+
+    .banner {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        padding-bottom: 4rem;
+    }
+
+    .banner img {
+        margin-left: 0;
+        width: 80%;
+        max-width: 500px;
+    }
+
+    .banner .content {
+        text-align: center;
+        padding: 0 2rem;
+    }
+
+    h1 {
+        font-size: 4.8rem;
+        margin-top: 4rem;
+    }
+
+    .banner p {
+        width: 100%;
+        font-size: 1.6rem;
+    }
+
+    .about {
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin-top: 10rem;
+    }
+
+    .about h2 {
+        font-size: 3.6rem;
+        width: 100%;
+        padding-left: 0;
+    }
+
+    .about p {
+        width: 100%;
+        font-size: 1.6rem;
+    }
+
+    .about .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .about .card {
+        width: 100%;
+        max-width: 400px;
+        height: 25rem;
+    }
+
+    .categories_section {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+
+    .categories {
+        gap: 2rem;
+        justify-content: center;
+        transform: rotate(-90deg);
+    }
+
+    .category {
+        width: 10rem;
+        height: 80vw;
+    }
+    .category p
+    {
+        transform: rotate(0deg)
+    };
+    .portfolio {
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .project {
+        width: 100%;
+        max-width: 500px;
+        height: 40rem;
+    }
+
+    .info {
+        width: 80%;
+        height: 30rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    footer .main {
+        flex-direction: column;
+        align-items: center;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        text-align: center;
+    }
+
+    .email {
+        margin-right: 0;
+        margin-top: 2rem;
+    }
+
+    .copyright p {
+        padding-left: 2rem;
+    }
+    footer h4
+    {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    footer .phone p
+    {
+        margin-top: 1rem;
+        margin-right: 0rem;
+        margin-bottom: 1rem;
+    }
+    .copyright
+    {
+        text-align: center;
+    }
+}
+@media (max-width:786px) {
+    .type
+    {
+        justify-content: end;
+    }
+    .type ul
+    {
+        display: none;
+    }
 }
