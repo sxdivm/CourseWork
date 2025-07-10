@@ -10,6 +10,8 @@ html
     --border:#E6E6E6;
     --banner:#F9F9F9;
     --accent-color:#03A543;
+    --category-color:#F5F5F5;
+    --button-circe:#D2D2D2;
     background-color: var(--bg-color);
 }
 body {
@@ -245,10 +247,8 @@ h2
 {
     display: flex;
     justify-content: space-between;
-    padding-left: 10rem;
-    padding-right: 10rem;
     margin-top: 18rem;
-    margin-bottom: 7rem;
+    margin-bottom: 6.9rem;
 }
 .catalog
 {
@@ -259,18 +259,21 @@ h2
     font-size: 1.8rem;
     font-weight: 300;
 }
+.categories_section
+{
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
 .categories
 {
     display: flex;
     justify-content: space-between;
-    padding-left: 10rem;
-    padding-right: 10rem;
 }
 .category
 {
-    width: 18rem;
+    width: 9.375vw;
     height: 70rem;
-    background-color: var(--banner);
+    background-color: var(--category-color);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -296,4 +299,83 @@ h2
 .category img
 {
     transform: rotate(90deg);
+}
+.portfolio
+{
+    margin-top: -1.2rem;
+    display: flex;
+    flex-direction: column;
+    margin-left: 10rem;
+    margin-right: 10rem;
+}
+.type
+{
+    display: flex;
+    justify-content: space-between;
+    
+    
+}
+.type ul
+{
+    list-style: none;
+    display: flex;
+    gap: 5rem;
+}
+.type li
+{
+    text-decoration: underline;
+    font-size: 1.8rem;
+    font-weight: 300;
+}
+.type li:hover
+{
+    color: var(--accent-color);
+    opacity: 65%;
+}
+.type li:active
+{
+    color: var(--accent-color);
+    font-weight: normal;
+    opacity: 100%;
+}
+.buttons_div
+{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: -1.6rem;
+}
+.type button
+{
+    width: 5.2rem;
+    height: 5.2rem;
+    border: 1px solid var(--button-circe);
+    border-radius: 50%;
+}
+.next
+{
+    transform: scaleX(-1);
+}
+.projects
+{
+    display: flex;
+    margin-top: 3.7rem;
+    gap: 4rem;
+
+}
+.project
+{
+    width: 84rem;
+    height: 50rem;
+    background-color: var(--accent-color);
+    border-radius: 8px;
+}
+.info
+{
+    width: 37.7rem;
+    height: 35rem;
+    background-color: var(--bg-color);
+    border-radius: 8px;
+    margin-left: 3.5rem;
+    margin-top: 7.5rem;
 }
