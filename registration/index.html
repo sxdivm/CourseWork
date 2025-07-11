@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <hr class="first">
+        <div class="pre_header">
+            <div class="left_part">
+                <button class="lang">EN</button>
+                <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
+            </div>
+            <div class="right_part">
+                <button class="cart"><img src="../img/cart.svg" alt=""></button>
+                <button class="fav"><img src="../img/fav.svg" alt=""></button>
+                <button class="login">
+                    <p>Войти</p><img src="../img/user.svg" alt="">
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="nav_header">
+            <img src="../img/logo.svg" alt="logo" class="logo">
+            <input type="checkbox" id="burger-toggle" class="burger-toggle">
+            <label for="burger-toggle" class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="">Главная</a></li>
+                    <li><a href="">О компании</a></li>
+                    <li><a href="">Проекты</a></li>
+                    <li><a href="">Услуги</a></li>
+                    <li><a href="">Каталог</a></li>
+                    <li><a href="">Контакты</a></li>
+                    <li class="mobile-pre-header">
+                        <div class="left_part">
+                            <button class="lang">EN</button>
+                            <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
+                        </div>
+                        <div class="right_part">
+                            <button class="cart"><img src="../img/cart.svg" alt=""></button>
+                            <button class="fav"><img src="../img/fav.svg" alt=""></button>
+                            <button class="login">
+                                <p>Войти</p><img src="../img/user.svg" alt="">
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="phone"><img src="../img/phone.svg" alt="phone">
+                <p>+7 (495) 125-10-07</p>
+            </div>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <section class="registration">
+            <h2>Регистрация</h2>
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="phone">Номер телефона* <span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required>
+                    <span class="error-message" id="phone-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email* <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="email-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate">Дата рождения* <span class="required">*</span></label>
+                    <input type="date" id="birthdate" name="birthdate" required>
+                    <span class="error-message" id="birthdate-error"></span>
+                </div>
+                <div class="form-group">
+                    <label>Способ задания пароля* <span class="required">*</span></label>
+                    <div class="password-choice">
+                        <input type="radio" id="password-auto" name="password-type" value="auto" checked>
+                        <label for="password-auto">Автоматически</label>
+                        <input type="radio" id="password-manual" name="password-type" value="manual">
+                        <label for="password-manual">Вручную</label>
+                    </div>
+                </div>
+                <div class="form-group password-manual" style="display: none;">
+                    <label for="password">Пароль* <span class="required">*</span></label>
+                    <input type="password" id="password" name="password">
+                    <span class="error-message" id="password-error"></span>
+                </div>
+                <div class="form-group password-manual" style="display: none;">
+                    <label for="password-confirm">Подтверждение пароля* <span class="required">*</span></label>
+                    <input type="password" id="password-confirm" name="password-confirm">
+                    <span class="error-message" id="password-confirm-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">Имя* <span class="required">*</span></label>
+                    <input type="text" id="firstName" name="firstName" required>
+                    <span class="error-message" id="firstName-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Фамилия* <span class="required">*</span></label>
+                    <input type="text" id="lastName" name="lastName" required>
+                    <span class="error-message" id="lastName-error"></span>
+                </div>
+                <div class="form-group">
+                    <label for="middleName">Отчество</label>
+                    <input type="text" id="middleName" name="middleName">
+                </div>
+                <div class="form-group">
+                    <label for="nickname">Никнейм* <span class="required">*</span></label>
+                    <input type="text" id="nickname" name="nickname">
+                    <button type="button" id="regenerate-nickname">Сгенерировать новый никнейм</button>
+                    <span class="error-message" id="nickname-error"></span>
+                    <span id="nickname-attempts">Осталось попыток генерации: 5</span>
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="agreement" name="agreement" required disabled>
+                    <label for="agreement">Я прочитал и принимаю <a href="#" id="agreement-link">Соглашение
+                            пользователя</a>* <span class="required">*</span></label>
+                    <span class="error-message" id="agreement-error"></span>
+                </div>
+                <button type="submit" id="submit-button" disabled>Зарегистрироваться</button>
+            </form>
+        </section>
+        <div class="modal" id="agreement-modal">
+            <div class="modal-content">
+                <h3>Пользовательское соглашение</h3>
+                <div class="agreement-text" id="agreement-text">
+                    <p>Это пользовательское соглашение регулирует использование нашего сайта. Пожалуйста, внимательно
+                        прочитайте его перед регистрацией.</p>
+                    <p>1. <strong>Общие положения</strong></p>
+                    <p>Настоящее соглашение является юридически обязательным договором между вами и нашей компанией.
+                        Регистрируясь на сайте, вы соглашаетесь соблюдать все указанные условия.</p>
+                    <p>2. <strong>Условия использования</strong></p>
+                    <p>Вы обязуетесь предоставлять достоверную информацию при регистрации и не использовать сайт в
+                        незаконных целях.</p>
+                    <p>3. <strong>Конфиденциальность</strong></p>
+                    <p>Мы обязуемся защищать ваши персональные данные в соответствии с нашей политикой
+                        конфиденциальности.</p>
+                    <p>4. <strong>Ответственность</strong></p>
+                    <p>Вы несете ответственность за любые действия, совершенные с использованием вашей учетной записи.
+                    </p>
+                    <p>5. <strong>Изменения условий</strong></p>
+                    <p>Мы оставляем за собой право изменять данное соглашение. Уведомления об изменениях будут размещены
+                        на сайте.</p>
+                    <p>6. <strong>Контакты</strong></p>
+                    <p>По всем вопросам обращайтесь по адресу: info@h-t-l.ru или по телефону +7 (495) 125-10-07.</p>
+                    <p>7. <strong>Заключительные положения</strong></p>
+                    <p>Данное соглашение вступает в силу с момента вашей регистрации и действует до прекращения
+                        использования сайта.</p>
+                    <p>8. <strong>Дополнительные условия</strong></p>
+                    <p>Вы соглашаетесь не распространять вредоносное ПО и не предпринимать действия, которые могут
+                        нарушить работу сайта.</p>
+                    <p>9. <strong>Ограничения</strong></p>
+                    <p>Доступ к некоторым функциям сайта может быть ограничен в зависимости от вашего региона или
+                        статуса учетной записи.</p>
+                    <p>10. <strong>Заключение</strong></p>
+                    <p>Мы благодарим вас за выбор нашего сайта и надеемся на плодотворное сотрудничество.</p>
+                </div>
+                <div class="modal-buttons">
+                    <button id="confirm-agreement" disabled>Подтвердить</button>
+                    <button id="close-modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <section class="main">
+            <div class="logo&social">
+                <img src="../img/white_logo.svg" alt="logo">
+                <div class="s_icons">
+                    <a href=""><img src="../img/insta_w.svg" alt=""></a>
+                    <a href=""><img src="../img/fb_w.svg" alt=""></a>
+                    <a href=""><img src="../img/twitter_w.svg" alt=""></a>
+                </div>
+            </div>
+            <div class="nav">
+                <h4>Навигация</h4>
+                <nav>
+                    <ul>
+                        <li><a href="">Главная</a></li>
+                        <li><a href="">О компании</a></li>
+                        <li><a href="">Проекты</a></li>
+                        <li><a href="">Услуги</a></li>
+                        <li><a href="">Каталог</a></li>
+                        <li><a href="">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="phone">
+                <p>Телефон</p>
+                <h3>+7 (495) 125-10-07</h3>
+            </div>
+            <div class="email">
+                <p>Почта</p>
+                <h3>info@h-t-l.ru</h3>
+            </div>
+        </section>
+        <section class="copyright">
+            <hr>
+            <p>Политика конфиденциальности</p>
+        </section>
+    </footer>
+</body>
+<script src="../registration/script.js"></script>
+</html>

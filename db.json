@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "phone": "+375295315741",
+      "email": "skittels261105@gmail.com",
+      "birthdate": "2003-05-07",
+      "password": "Popug@i159",
+      "firstName": "Vlados123",
+      "lastName": "Петушков",
+      "middleName": "",
+      "nickname": "VlПет545Spark",
+      "role": "customer",
+      "id": 1
+    },
+    {
+      "phone": "+375295315742",
+      "email": "skittels261195@gmail.com",
+      "birthdate": "2009-07-10",
+      "password": "oxsjtlan@1aA",
+      "firstName": "Глеб",
+      "lastName": "Шумейко",
+      "middleName": "",
+      "nickname": "sxvdim",
+      "role": "customer",
+      "id": 2
+    }
+  ]
+}
