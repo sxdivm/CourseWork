@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+</head>
+<body>
+    <header>
+        <hr class="first">
+        <div class="pre_header">
+            <div class="left_part">
+                <button class="lang">EN</button>
+                <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
+            </div>
+            <div class="right_part">
+                <button class="cart"><img src="../img/cart.svg" alt=""></button>
+                <button class="fav"><img src="../img/fav.svg" alt=""></button>
+                <button class="login">
+                    <p>Войти</p><img src="../img/user.svg" alt="">
+                </button>
+            </div>
+        </div>
+        <hr>
+        <div class="nav_header">
+            <img src="../img/logo.svg" alt="logo" class="logo">
+            <input type="checkbox" id="burger-toggle" class="burger-toggle">
+            <label for="burger-toggle" class="burger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="">Главная</a></li>
+                    <li><a href="">О компании</a></li>
+                    <li><a href="">Проекты</a></li>
+                    <li><a href="">Услуги</a></li>
+                    <li><a href="">Каталог</a></li>
+                    <li><a href="">Контакты</a></li>
+                    <li class="mobile-pre-header">
+                        <div class="left_part">
+                            <button class="lang">EN</button>
+                            <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
+                        </div>
+                        <div class="right_part">
+                            <button class="cart"><img src="../img/cart.svg" alt=""></button>
+                            <button class="fav"><img src="../img/fav.svg" alt=""></button>
+                            <button class="login">
+                                <p>Войти</p><img src="../img/user.svg" alt="">
+                            </button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+            <div class="phone"><img src="../img/phone.svg" alt="phone">
+                <p>+7 (495) 125-10-07</p>
+            </div>
+        </div>
+        <hr>
+    </header>
+    <main>
+        <section class="registration">
+            <h2>Авторизация</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email* <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль* <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <span class="error-message" id="form-error"></span>
+                </div>
+                <div class="form-group">
+                    <p>Нет аккаунта? <a href="../registration/index.html">Зарегистрируйтесь</a></p>
+                </div>
+                <button type="submit" id="submit-button" disabled>Войти</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <section class="main">
+            <div class="logo&social">
+                <img src="../img/white_logo.svg" alt="logo">
+                <div class="s_icons">
+                    <a href=""><img src="../img/insta_w.svg" alt=""></a>
+                    <a href=""><img src="../img/fb_w.svg" alt=""></a>
+                    <a href=""><img src="../img/twitter_w.svg" alt=""></a>
+                </div>
+            </div>
+            <div class="nav">
+                <h4>Навигация</h4>
+                <nav>
+                    <ul>
+                        <li><a href="">Главная</a></li>
+                        <li><a href="">О компании</a></li>
+                        <li><a href="">Проекты</a></li>
+                        <li><a href="">Услуги</a></li>
+                        <li><a href="">Каталог</a></li>
+                        <li><a href="">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="phone">
+                <p>Телефон</p>
+                <h3>+7 (495) 125-10-07</h3>
+            </div>
+            <div class="email">
+                <p>Почта</p>
+                <h3>info@h-t-l.ru</h3>
+            </div>
+        </section>
+        <section class="copyright">
+            <hr>
+            <p>Политика конфиденциальности</p>
+        </section>
+    </footer>
+    <script>
+        // Form elements
+        const form = document.getElementById('login-form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const submitButton = document.getElementById('submit-button');
+        const formError = document.getElementById('form-error');
+
+        // Enable button when fields are non-empty
+        function checkFormFilled() {
+            const isFilled = emailInput.value.trim() !== '' && passwordInput.value.trim() !== '';
+            console.log('Form filled:', isFilled, 'Email:', emailInput.value, 'Password:', passwordInput.value); // Debug log
+            submitButton.disabled = !isFilled;
+        }
+
+        // Validate email and password
+        async function validateCredentials(email, password) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                return { isValid: false, message: 'Неверный email или пароль' };
+            }
+            try {
+                const response = await fetch(`http://localhost:3000/users?email=${encodeURIComponent(email)}`);
+                const users = await response.json();
+                console.log('Email fetch result:', users); // Debug log
+                if (users.length === 0) {
+                    return { isValid: false, message: 'Неверный email или пароль' };
+                }
+                const user = users[0];
+                if (password !== user.password) {
+                    return { isValid: false, message: 'Неверный email или пароль' };
+                }
+                return { isValid: true, message: '', user };
+            } catch (error) {
+                console.error('Validation error:', error); // Debug log
+                return { isValid: false, message: 'Нет доступа к серверу' };
+            }
+        }
+
+        // Event listeners
+        form.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                console.log(`Input changed: ${input.id} = ${input.value}`); // Debug log
+                formError.textContent = ''; // Clear error on input
+                checkFormFilled();
+            });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log('Form submitted'); // Debug log
+            formError.textContent = ''; // Clear previous error
+            const validation = await validateCredentials(emailInput.value, passwordInput.value);
+            console.log('Validation result:', validation); // Debug log
+            if (validation.isValid) {
+                alert(`Добро пожаловать, ${validation.user.firstName}!`);
+                form.reset();
+                submitButton.disabled = true;
+            } else {
+                formError.textContent = validation.message;
+            }
+        });
+    </script>
+</body>
+</html>
