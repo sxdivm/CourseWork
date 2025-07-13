@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTL Business Catalog</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../header/style.css">
+    <link rel="stylesheet" href="../footer/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <main>
+        <h1>HTL BUSINESS</h1>
+        <hr>
+        <section>
+            <div class="header">
+                <div class="settings">
+                    <button id="filter-button"><img src="../img/ar_up.svg" alt="arrow"></button>
+                    <h3>Фильтр</h3>
+                </div>
+                <div class="sort">
+                    <p>
+                        <span class="bold">Сортировка:</span>
+                        <select id="sort-select">
+                            <option value="name,asc">по типу (А-Я)</option>
+                            <option value="name,desc">по типу (Я-А)</option>
+                            <option value="price,asc">по цене (возр.)</option>
+                            <option value="price,desc">по цене (убыв.)</option>
+                            <option value="rating,asc">по рейтингу (возр.)</option>
+                            <option value="rating,desc">по рейтингу (убыв.)</option>
+                        </select>
+                    </p>
+                    <div class="search">
+                        <input type="text" id="search-input" placeholder="Поиск по названию...">
+                    </div>
+                </div>
+            </div>
+            <div class="content-wrapper">
+                <div class="filter-panel" id="filter-panel">
+                    <h4>Фильтры</h4>
+                    <div class="filter-group">
+                        <label><input type="checkbox" id="availability-in-stock"> Есть в наличии</label>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Тип</h5>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Цена</h5>
+                        <div class="price-range">
+                            <div class="range-slider">
+                                <input type="range" id="price-slider-min" min="0" max="3500" step="100" value="0">
+                                <input type="range" id="price-slider-max" min="0" max="3500" step="100" value="3500">
+                                <div class="active-range"></div>
+                            </div>
+                            <span id="price-value">От 0 ₽ до 3500 ₽</span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Мощность</h5>
+                        <div class="power-range">
+                            <div class="range-slider">
+                                <input type="range" id="power-slider-min" min="0" max="100" step="5" value="0">
+                                <input type="range" id="power-slider-max" min="0" max="100" step="5" value="100">
+                                <div class="active-range"></div>
+                            </div>
+                            <span id="power-value">От 0 Вт до 100 Вт</span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Световой поток</h5>
+                        <div class="luminous-flux-range">
+                            <div class="range-slider">
+                                <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100" value="0">
+                                <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100" value="6000">
+                                <div class="active-range"></div>
+                            </div>
+                            <span id="luminous-flux-value">От 0 лм до 6000 лм</span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h5>IP Защита</h5>
+                        <label><input type="checkbox" name="ip" value="IP65"> IP65</label>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Цветовая температура</h5>
+                        <div class="color-temperature-range">
+                            <div class="range-slider">
+                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100" value="2000">
+                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100" value="6500">
+                                <div class="active-range"></div>
+                            </div>
+                            <span id="color-temperature-value">От 2000 K до 6500 K</span>
+                        </div>
+                    </div>
+                    <div class="filter-group">
+                        <h5>Блок аварийного питания</h5>
+                        <label><input type="checkbox" id="emergency-block"> Включен</label>
+                    </div>
+                    <button id="apply-filters">Применить</button>
+                    <button id="reset-filters">Сбросить фильтры</button>
+                </div>
+                <div class="catalog" id="catalog">
+                    
+                </div>
+                <div class="pagination" id="pagination">
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+    <script src="catalog.js"></script>
+</body>
+
+</html>
