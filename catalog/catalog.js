@@ -145,6 +145,108 @@ async function updateCartItemQuantity(cartItemId, newQuantity) {
     }
 }
 
+async function deleteProduct(productId) {
+    try {
+        const response = await fetch(`http://localhost:3000/products/${productId}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
+
+        console.log('Товар удален:', productId);
+        alert('Товар удален!');
+        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
+        const search = document.getElementById('search-input')?.value.trim() || '';
+        loadProducts(sort, order, search);
+    } catch (error) {
+        console.error('Ошибка при удалении товара:', error);
+        alert('Ошибка при удалении товара. Попробуйте позже.');
+    }
+}
+
+async function openProductModal(productId = null) {
+    const modal = document.getElementById('modal');
+    const form = document.getElementById('product-form');
+    const title = document.getElementById('modal-title');
+    const idInput = document.getElementById('product-id');
+
+    if (productId) {
+        title.textContent = 'Редактировать товар';
+        const response = await fetch(`http://localhost:3000/products/${productId}`);
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
+        const product = await response.json();
+        idInput.value = product.id;
+        document.getElementById('product-name').value = product.name || '';
+        document.getElementById('product-type').value = product.type || '';
+        document.getElementById('product-price').value = product.price || '';
+        document.getElementById('product-availability').checked = product.availability || false;
+        document.getElementById('product-power').value = product.power || '';
+        document.getElementById('product-luminous-flux').value = product['luminous flux'] || '';
+        document.getElementById('product-ip').value = product.ip || '';
+        document.getElementById('product-color-temperature').value = product['color temperature'] || '';
+        document.getElementById('product-emergency-block').checked = product['emergency block'] || false;
+    } else {
+        title.textContent = 'Добавить товар';
+        const response = await fetch('http://localhost:3000/products?_sort=id&_order=desc&_limit=1');
+        const lastProduct = (await response.json())[0];
+        const newId = lastProduct ? parseInt(lastProduct.id) + 1 : 1;
+        idInput.value = newId;
+        form.reset();
+        document.getElementById('product-id').value = newId;
+    }
+
+    modal.style.display = 'flex';
+}
+
+async function saveProduct(event) {
+    event.preventDefault();
+    const id = document.getElementById('product-id').value;
+    const product = {
+        id: id,
+        name: document.getElementById('product-name').value,
+        type: document.getElementById('product-type').value,
+        price: document.getElementById('product-price').value ? parseFloat(document.getElementById('product-price').value) : null,
+        availability: document.getElementById('product-availability').checked,
+        power: document.getElementById('product-power').value ? parseFloat(document.getElementById('product-power').value) : null,
+        'luminous flux': document.getElementById('product-luminous-flux').value ? parseFloat(document.getElementById('product-luminous-flux').value) : null,
+        ip: document.getElementById('product-ip').value || null,
+        'color temperature': document.getElementById('product-color-temperature').value ? parseInt(document.getElementById('product-color-temperature').value) : null,
+        'emergency block': document.getElementById('product-emergency-block').checked
+    };
+
+    try {
+        const existingProductResponse = await fetch(`http://localhost:3000/products/${id}`);
+        const method = existingProductResponse.ok ? 'PATCH' : 'POST';
+        const url = method === 'PATCH' ? `http://localhost:3000/products/${id}` : 'http://localhost:3000/products';
+
+        const response = await fetch(url, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
+
+        console.log(method === 'PATCH' ? 'Товар обновлен' : 'Товар добавлен', await response.json());
+        alert(method === 'PATCH' ? 'Товар обновлен!' : 'Товар добавлен!');
+        document.getElementById('modal').style.display = 'none';
+        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
+        const search = document.getElementById('search-input')?.value.trim() || '';
+        loadProducts(sort, order, search);
+    } catch (error) {
+        console.error('Ошибка при сохранении товара:', error);
+        alert('Ошибка при сохранении товара. Попробуйте позже.');
+    }
+}
+
 async function loadProducts(sort = 'name', order = 'asc', search = '', availability = '', types = [], minPrice = null, maxPrice = null, minPower = null, maxPower = null, minLuminousFlux = null, maxLuminousFlux = null, ip = '', minColorTemperature = null, maxColorTemperature = null, emergencyBlock = '', page = 1) {
     try {
         const url = new URL('http://localhost:3000/products');
@@ -185,6 +287,7 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         }
 
         const userId = localStorage.getItem('userId');
+        const isAdmin = localStorage.getItem('role') === 'admin';
         let cartItems = [];
         let favorites = [];
         if (userId) {
@@ -192,6 +295,10 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             cartItems = await cartResponse.json();
             const favoritesResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}`);
             favorites = await favoritesResponse.json();
+        }
+
+        if (isAdmin) {
+            document.getElementById('admin-controls').style.display = 'flex';
         }
 
         const typeFilterGroup = document.querySelector('#filter-panel .filter-group:nth-child(2)');
@@ -230,7 +337,15 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             } else {
                 buttonContent = `<button class="add-to-cart" data-product-id="${product.id}"><i class="fas fa-shopping-cart"></i></button>`;
             }
+            let adminButtons = '';
+            if (isAdmin) {
+                adminButtons = `
+                    <button class="edit-btn" data-product-id="${product.id}" aria-label="Редактировать товар"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" data-product-id="${product.id}" aria-label="Удалить товар"><i class="fas fa-trash"></i></button>
+                `;
+            }
             productDiv.innerHTML = `
+                ${adminButtons}
                 <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-product-id="${product.id}" aria-label="Добавить в избранное">
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-solid fa-heart"></i>
@@ -280,6 +395,24 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
                 toggleFavorite(productId);
             });
         });
+
+        if (isAdmin) {
+            document.querySelectorAll('.edit-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = button.getAttribute('data-product-id');
+                    openProductModal(productId);
+                });
+            });
+
+            document.querySelectorAll('.delete-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const productId = button.getAttribute('data-product-id');
+                    if (confirm('Вы уверены, что хотите удалить этот товар?')) {
+                        deleteProduct(productId);
+                    }
+                });
+            });
+        }
 
         const totalCountUrl = new URL('http://localhost:3000/products');
         if (search) totalCountUrl.searchParams.append('q', search);
@@ -377,6 +510,25 @@ function updatePagination(totalPages, currentPage, sort, order, search, availabi
 
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
+
+    const isAdmin = localStorage.getItem('role') === 'admin';
+    if (isAdmin) {
+        document.getElementById('admin-controls').style.display = 'flex';
+        
+        document.getElementById('save-products').addEventListener('click', () => {
+            alert('Функция сохранения каталога пока не реализована.');
+        });
+
+        document.getElementById('add-product').addEventListener('click', () => {
+            openProductModal();
+        });
+    }
+
+    document.getElementById('modal-close').addEventListener('click', () => {
+        document.getElementById('modal').style.display = 'none';
+    });
+
+    document.getElementById('product-form').addEventListener('submit', saveProduct);
 
     document.getElementById('sort-select').addEventListener('change', (event) => {
         const [sort, order] = event.target.value.split(',');

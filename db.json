@@ -9,7 +9,7 @@
       "lastName": "Петушков",
       "middleName": "",
       "nickname": "VlПет545Spark",
-      "role": "customer",
+      "role": "admin",
       "id": 1
     },
     {
@@ -39,7 +39,13 @@
       "id": 2
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "productId": "5",
+      "userId": "1",
+      "id": 1
+    }
+  ],
   "products": [
     {
       "id": 1,

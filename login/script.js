@@ -48,19 +48,13 @@ form.addEventListener('submit', async (e) => {
     const validation = await validateCredentials(emailInput.value, passwordInput.value);
     console.log('Validation result:', validation);
     if (validation.isValid) {
-        if (!validation.user.id) {
-            console.error('User ID is missing in server response');
-            formError.textContent = 'Ошибка: пользователь не имеет идентификатора';
+        if (!validation.user.id || !validation.user.role) {
+            console.error('User ID or role is missing in server response');
+            formError.textContent = 'Ошибка: отсутствует идентификатор или роль пользователя';
             return;
         }
-        // Сохраняем только userId в localStorage
         localStorage.setItem('userId', validation.user.id);
-        // Удаляем любые другие данные, которые могли быть сохранены ранее
-        Object.keys(localStorage).forEach(key => {
-            if (key !== 'userId') {
-                localStorage.removeItem(key);
-            }
-        });
+        localStorage.setItem('role', validation.user.role);
         alert(`Добро пожаловать, ${validation.user.firstName}!`);
         form.reset();
         submitButton.disabled = true;
