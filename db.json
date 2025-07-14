@@ -25,6 +25,21 @@
       "id": 2
     }
   ],
+  "cart": [
+    {
+      "productId": "13",
+      "userId": "1",
+      "quantity": 1,
+      "id": 1
+    },
+    {
+      "productId": "5",
+      "userId": "1",
+      "quantity": 1,
+      "id": 2
+    }
+  ],
+  "favorites": [],
   "products": [
     {
       "id": 1,

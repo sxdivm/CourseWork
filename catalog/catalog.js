@@ -1,5 +1,150 @@
 const ITEMS_PER_PAGE = 12;
 
+async function addToCart(productId) {
+    try {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.log('Пользователь не авторизован, перенаправление на страницу логина');
+            window.location.href = '../login/index.html';
+            return;
+        }
+
+        const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}&productId=${productId}`);
+        const cartItems = await cartResponse.json();
+
+        if (cartItems.length > 0) {
+            const cartItem = cartItems[0];
+            const newQuantity = Math.min(cartItem.quantity + 1, 99);
+            const updateResponse = await fetch(`http://localhost:3000/cart/${cartItem.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ quantity: newQuantity })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${updateResponse.status}`);
+            }
+
+            console.log('Количество товара обновлено:', await updateResponse.json());
+            alert('Количество товара в корзине обновлено!');
+        } else {
+            const cartItem = {
+                productId: productId,
+                userId: userId,
+                quantity: 1
+            };
+
+            const response = await fetch('http://localhost:3000/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+            }
+
+            console.log('Товар добавлен в корзину:', await response.json());
+            alert('Товар добавлен в корзину!');
+        }
+
+        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
+        const search = document.getElementById('search-input')?.value.trim() || '';
+        loadProducts(sort, order, search);
+    } catch (error) {
+        console.error('Ошибка при добавлении в корзину:', error);
+        alert('Ошибка при добавлении товара в корзину. Попробуйте позже.');
+    }
+}
+
+async function toggleFavorite(productId) {
+    try {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.log('Пользователь не авторизован, перенаправление на страницу логина');
+            window.location.href = '../login/index.html';
+            return;
+        }
+
+        const favoriteResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}&productId=${productId}`);
+        const favorites = await favoriteResponse.json();
+
+        if (favorites.length > 0) {
+            const favorite = favorites[0];
+            const deleteResponse = await fetch(`http://localhost:3000/favorites/${favorite.id}`, {
+                method: 'DELETE'
+            });
+
+            if (!deleteResponse.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${deleteResponse.status}`);
+            }
+
+            console.log('Товар удален из избранного');
+            alert('Товар удален из избранного!');
+        } else {
+            const favoriteItem = {
+                productId: productId,
+                userId: userId
+            };
+
+            const response = await fetch('http://localhost:3000/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(favoriteItem)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+            }
+
+            console.log('Товар добавлен в избранное:', await response.json());
+            alert('Товар добавлен в избранное!');
+        }
+
+        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
+        const search = document.getElementById('search-input')?.value.trim() || '';
+        loadProducts(sort, order, search);
+    } catch (error) {
+        console.error('Ошибка при работе с избранным:', error);
+        alert('Ошибка при добавлении/удалении товара из избранного. Попробуйте позже.');
+    }
+}
+
+async function updateCartItemQuantity(cartItemId, newQuantity) {
+    try {
+        if (newQuantity < 1 || newQuantity > 99) {
+            console.log('Количество вне допустимого диапазона:', newQuantity);
+            return;
+        }
+
+        const response = await fetch(`http://localhost:3000/cart/${cartItemId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity: newQuantity })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
+
+        console.log('Количество товара обновлено:', await response.json());
+        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
+        const search = document.getElementById('search-input')?.value.trim() || '';
+        loadProducts(sort, order, search);
+    } catch (error) {
+        console.error('Ошибка при обновлении количества:', error);
+        alert('Ошибка при обновлении количества товара. Попробуйте позже.');
+    }
+}
+
 async function loadProducts(sort = 'name', order = 'asc', search = '', availability = '', types = [], minPrice = null, maxPrice = null, minPower = null, maxPower = null, minLuminousFlux = null, maxLuminousFlux = null, ip = '', minColorTemperature = null, maxColorTemperature = null, emergencyBlock = '', page = 1) {
     try {
         const url = new URL('http://localhost:3000/products');
@@ -39,6 +184,16 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             return;
         }
 
+        const userId = localStorage.getItem('userId');
+        let cartItems = [];
+        let favorites = [];
+        if (userId) {
+            const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}`);
+            cartItems = await cartResponse.json();
+            const favoritesResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}`);
+            favorites = await favoritesResponse.json();
+        }
+
         const typeFilterGroup = document.querySelector('#filter-panel .filter-group:nth-child(2)');
         if (typeFilterGroup) {
             const uniqueTypes = [...new Set(products.map(product => product.type))];
@@ -51,7 +206,6 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
                 `;
                 typeFilterGroup.appendChild(label);
             });
-
             if (types.length > 0) {
                 document.querySelectorAll('#filter-panel input[name="type"]').forEach(cb => {
                     cb.checked = types.includes(cb.value);
@@ -62,15 +216,69 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         products.forEach(product => {
             const productDiv = document.createElement('div');
             productDiv.className = 'product';
+            const cartItem = cartItems.find(item => item.productId === product.id.toString());
+            const isFavorite = favorites.some(item => item.productId === product.id.toString());
+            let buttonContent = '';
+            if (cartItem) {
+                buttonContent = `
+                    <div class="cart-control">
+                        <button class="cart-decrement" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Уменьшить количество">-</button>
+                        <span class="cart-quantity">${cartItem.quantity}</span>
+                        <button class="cart-increment" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Увеличить количество">+</button>
+                    </div>
+                `;
+            } else {
+                buttonContent = `<button class="add-to-cart" data-product-id="${product.id}"><i class="fas fa-shopping-cart"></i></button>`;
+            }
             productDiv.innerHTML = `
+                <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-product-id="${product.id}" aria-label="Добавить в избранное">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-solid fa-heart"></i>
+                </button>
                 <img src="../img/catalog/${product.id}.png" alt="${product.name}" onerror="this.src='../img/catalog/fallback.png'">
-                <p class="accent">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
-                <p class="type">${product.type}</p>
-                <p class="name">${product.name}</p>
-                <p class="price">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
-                <button><i class="fas fa-shopping-cart"></i></button>
+                <div class="text-content">
+                    <p class="accent">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
+                    <p class="type">${product.type}</p>
+                    <p class="name">${product.name}</p>
+                    <p class="price">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
+                </div>
+                ${buttonContent}
             `;
             catalog.appendChild(productDiv);
+        });
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                addToCart(productId);
+            });
+        });
+
+        document.querySelectorAll('.cart-decrement').forEach(button => {
+            button.addEventListener('click', () => {
+                const cartId = button.getAttribute('data-cart-id');
+                const currentQuantity = parseInt(button.nextElementSibling.textContent);
+                if (currentQuantity > 1) {
+                    updateCartItemQuantity(cartId, currentQuantity - 1);
+                }
+            });
+        });
+
+        document.querySelectorAll('.cart-increment').forEach(button => {
+            button.addEventListener('click', () => {
+                const cartId = button.getAttribute('data-cart-id');
+                const currentQuantity = parseInt(button.previousElementSibling.textContent);
+                if (currentQuantity < 99) {
+                    updateCartItemQuantity(cartId, currentQuantity + 1);
+                }
+            });
+        });
+
+        document.querySelectorAll('.favorite-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const productId = button.getAttribute('data-product-id');
+                toggleFavorite(productId);
+            });
         });
 
         const totalCountUrl = new URL('http://localhost:3000/products');
