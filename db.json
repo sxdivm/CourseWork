@@ -37,6 +37,12 @@
       "userId": "1",
       "quantity": 1,
       "id": 2
+    },
+    {
+      "productId": "5",
+      "userId": "2",
+      "quantity": 2,
+      "id": 3
     }
   ],
   "favorites": [
@@ -44,8 +50,14 @@
       "productId": "5",
       "userId": "1",
       "id": 1
+    },
+    {
+      "productId": "5",
+      "userId": "2",
+      "id": 2
     }
   ],
+  "orders": [],
   "products": [
     {
       "id": 1,

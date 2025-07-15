@@ -80,6 +80,8 @@ hr {
 .fav,
 .login {
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .cart {
@@ -87,12 +89,22 @@ hr {
     padding-right: 3.4rem;
     border-left: 0.2rem solid var(--border);
     border-right: 0.2rem solid var(--border);
+    position: relative;
 }
 
 .fav {
     padding-left: 3.65rem;
     padding-right: 3.85rem;
     border-right: 0.2rem solid var(--border);
+    position: relative;
+}
+
+.cart-count,
+.fav-count {
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-left: 0.5rem;
 }
 
 .login {
@@ -233,10 +245,9 @@ a {
     header .logo {
         margin-left: 2rem;
     }
-
 }
-@media screen and (max-width: 610px) {
 
+@media screen and (max-width: 610px) {
     .pre_header {
         display: none;
     }
@@ -250,10 +261,9 @@ a {
         padding: 2rem;
         border-top: 1px solid var(--border);
         margin-top: 1.5rem;
-        flex-wrap: wrap; 
-        max-width: 100%; 
+        flex-wrap: wrap;
+        max-width: 100%;
     }
-
 
     .mobile-pre-header .left_part,
     .mobile-pre-header .right_part {
@@ -261,7 +271,6 @@ a {
         align-items: center;
         gap: 1rem;
     }
-
 
     .mobile-pre-header .lang,
     .mobile-pre-header .theme,
@@ -274,17 +283,25 @@ a {
         display: flex;
         align-items: center;
         justify-content: center;
-        white-space: nowrap; 
-        max-width: 100%; 
-        box-sizing: border-box; 
+        white-space: nowrap;
+        max-width: 100%;
+        box-sizing: border-box;
     }
+
     .mobile-pre-header .theme img,
     .mobile-pre-header .cart img,
     .mobile-pre-header .fav img,
     .mobile-pre-header .login img {
         width: 2rem;
         height: 2rem;
-        margin-left: 0.5rem; 
+        margin-left: 0.5rem;
+    }
+
+    .mobile-pre-header .cart-count,
+    .mobile-pre-header .fav-count {
+        font-size: 1.2rem;
+        color: var(--accent-color);
+        margin-left: 0.4rem;
     }
 
     .mobile-pre-header .login {
@@ -293,7 +310,7 @@ a {
 
     .nav-menu {
         width: 100%;
-        max-width: 100vw; 
+        max-width: 100vw;
         padding-bottom: 3rem;
         box-sizing: border-box;
     }
@@ -318,7 +335,7 @@ a {
     .nav-menu {
         height: 100vh;
         justify-content: flex-start;
-        overflow-x: hidden; 
+        overflow-x: hidden;
     }
 
     .burger-toggle:checked ~ .nav-menu {
@@ -334,5 +351,4 @@ a {
     .mobile-pre-header {
         display: flex;
     }
-    
 }
