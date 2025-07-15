@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const isAdmin = localStorage.getItem('role') === 'admin';
     if (isAdmin) {
         document.getElementById('admin-controls').style.display = 'flex';
-        
+
         document.getElementById('save-products').addEventListener('click', () => {
             alert('Функция сохранения каталога пока не реализована.');
         });
@@ -698,6 +698,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Filters applied:', { types, availability, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock });
             loadProducts(sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock, 1);
+
+
+            if (window.innerWidth <= 768) {
+                filterPanel.classList.remove('active');
+                catalog.classList.remove('filter-active');
+                filterButton.classList.remove('active');
+                filterPanel.style.minHeight = '0';
+                catalog.style.height = 'auto';
+            }
         }
     });
 
@@ -740,6 +749,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, document.getElementById('color-temperature-value'), document.querySelector('.color-temperature-range .active-range'), 'K');
             }
             loadProducts();
+
+            if (window.innerWidth <= 768) {
+                filterPanel.classList.remove('active');
+                catalog.classList.remove('filter-active');
+                filterButton.classList.remove('active');
+                filterPanel.style.minHeight = '0';
+                catalog.style.height = 'auto';
+            }
         }
     });
 });

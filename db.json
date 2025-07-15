@@ -478,6 +478,18 @@
       "color temperature": 4000,
       "emergency block": false,
       "type": "линейный светодиодный светильник"
+    },
+    {
+      "id": "37",
+      "name": "ghbjnkml,;",
+      "type": "линейный светодиодный светильник",
+      "price": 1000,
+      "availability": false,
+      "power": 79,
+      "luminous flux": 400,
+      "ip": "IP40",
+      "color temperature": 400,
+      "emergency block": false
     }
   ]
 }

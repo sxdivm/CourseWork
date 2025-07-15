@@ -80,10 +80,8 @@
                         <h5>Световой поток</h5>
                         <div class="luminous-flux-range">
                             <div class="range-slider">
-                                <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100"
-                                    value="0">
-                                <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100"
-                                    value="6000">
+                                <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100" value="0">
+                                <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100" value="6000">
                                 <div class="active-range"></div>
                             </div>
                             <span id="luminous-flux-value">От 0 лм до 6000 лм</span>
@@ -97,10 +95,8 @@
                         <h5>Цветовая температура</h5>
                         <div class="color-temperature-range">
                             <div class="range-slider">
-                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100"
-                                    value="2000">
-                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100"
-                                    value="6500">
+                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100" value="2000">
+                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100" value="6500">
                                 <div class="active-range"></div>
                             </div>
                             <span id="color-temperature-value">От 2000 K до 6500 K</span>
@@ -113,71 +109,67 @@
                     <button id="apply-filters">Применить</button>
                     <button id="reset-filters">Сбросить фильтры</button>
                 </div>
-                <div class="catalog" id="catalog">
-
-                </div>
-                <div class="pagination" id="pagination">
-
-                </div>
+                <div class="catalog" id="catalog"></div>
+                <div class="pagination" id="pagination"></div>
             </div>
         </section>
         <div class="modal" id="modal" style="display: none;">
-    <div class="modal-content">
-        <span class="modal-close" id="modal-close">&times;</span>
-        <h2 id="modal-title">Добавить товар</h2>
-        <form id="product-form">
-            <div class="form-group">
-                <label for="product-id">ID</label>
-                <input type="text" id="product-id" readonly>
+            <div class="modal-content">
+                <span class="modal-close" id="modal-close">×</span>
+                <h2 id="modal-title">Добавить товар</h2>
+                <form id="product-form">
+                    <div class="form-group">
+                        <label for="product-id">ID</label>
+                        <input type="text" id="product-id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Название</label>
+                        <input type="text" id="product-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-type">Тип</label>
+                        <select id="product-type" required>
+                            <option value="линейный светодиодный светильник">Линейный светодиодный светильник</option>
+                            <option value="тарелка">Тарелка</option>
+                            <option value="прожектор">Прожектор</option>
+                            <option value="бра">Бра</option>
+                            <option value="люстра">Люстра</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Цена (₽)</label>
+                        <input type="number" id="product-price" step="100">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="product-availability"> Есть в наличии</label>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-power">Мощность (Вт)</label>
+                        <input type="number" id="product-power" step="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-luminous-flux">Световой поток (лм)</label>
+                        <input type="number" id="product-luminous-flux" step="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="product-ip">IP Защита</label>
+                        <select id="product-ip">
+                            <option value="IP40">IP40</option>
+                            <option value="IP54">IP54</option>
+                            <option value="IP65">IP65</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-color-temperature">Цветовая температура (K)</label>
+                        <input type="number" id="product-color-temperature" step="100">
+                    </div>
+                    <div class="form-group">
+                        <label><input type="checkbox" id="product-emergency-block"> Блок аварийного питания</label>
+                    </div>
+                    <button type="submit">Сохранить</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="product-name">Название</label>
-                <input type="text" id="product-name" required>
-            </div>
-            <div class="form-group">
-                <label for="product-type">Тип</label>
-                <select id="product-type" required>
-                    <option value="линейный светодиодный светильник">Линейный светодиодный светильник</option>
-                    <option value="тарелка">Тарелка</option>
-                    <option value="прожектор">Прожектор</option>
-                    <option value="бра">Бра</option>
-                    <option value="люстра">Люстра</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="product-price">Цена (₽)</label>
-                <input type="number" id="product-price" step="100">
-            </div>
-            <div class="form-group">
-                <label><input type="checkbox" id="product-availability"> Есть в наличии</label>
-            </div>
-            <div class="form-group">
-                <label for="product-power">Мощность (Вт)</label>
-                <input type="number" id="product-power" step="1">
-            </div>
-            <div class="form-group">
-                <label for="product-luminous-flux">Световой поток (лм)</label>
-                <input type="number" id="product-luminous-flux" step="100">
-            </div>
-            <div class="form-group">
-                <label for="product-ip">IP Защита</label>
-                <select id="product-ip">
-                    <option value="IP40">IP40</option>
-                    <option value="IP54">IP54</option>
-                    <option value="IP65">IP65</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="product-color-temperature">Цветовая температура (K)</label>
-                <input type="number" id="product-color-temperature" step="100">
-            </div>
-            <div class="form-group">
-                <label><input type="checkbox" id="product-emergency-block"> Блок аварийного питания</label>
-            </div>
-            <button type="submit">Сохранить</button>
-        </form>
-    </div>
-</div>
+        </div>
     </main>
     <script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
