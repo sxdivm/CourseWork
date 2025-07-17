@@ -58,6 +58,15 @@
     }
   ],
   "orders": [],
+  "requests": [
+    {
+      "id": 1,
+      "name": "Влад",
+      "city": "cfvgjhknjl",
+      "phone": "+375295315741",
+      "volume": "gjbhnj"
+    }
+  ],
   "products": [
     {
       "id": 1,
