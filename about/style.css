@@ -155,7 +155,7 @@ h2 {
     color: black;
 }
 
-.checkbox-row Rihanna {
+.checkbox-row {
     display: flex;
     align-items: flex-start;
     gap: 1rem;
@@ -183,11 +183,21 @@ h2 {
     background-color: #028c38;
 }
 
+.error-message {
+    color: #FF0000;
+    font-size: 1.4rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.error-message.success {
+    color: #03A543;
+}
+
 footer {
     margin-top: 0rem !important;
 }
 
-/* Медиа-запрос для десктопов/планшетов (1248px) */
 @media (max-width: 1248px) {
     html {
         font-size: 60%;
@@ -240,10 +250,13 @@ footer {
     .right {
         padding-right: 5rem;
     }
+
+    .error-message {
+        font-size: 1.3rem;
+    }
 }
 
-/* Медиа-запрос для планшетов (768px) */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     html {
         font-size: 55%;
     }
@@ -313,7 +326,7 @@ footer {
     }
 
     .right {
-        wpadding: 2rem;
+        padding: 2rem;
     }
 
     .form-row {
@@ -325,9 +338,12 @@ footer {
     .contact-form input[type="tel"] {
         width: 100%;
     }
+
+    .error-message {
+        font-size: 1.2rem;
+    }
 }
 
-/* Медиа-запрос для мобильных устройств (320px) */
 @media (max-width: 320px) {
     html {
         font-size: 50%;
@@ -339,8 +355,6 @@ footer {
         margin-top: 4rem;
         margin-bottom: 3rem;
     }
-
- —
 
     .parallax-container {
         height: 20rem;
@@ -393,5 +407,9 @@ footer {
 
     .checkbox-row {
         font-size: 1.2rem;
+    }
+
+    .error-message {
+        font-size: 1.1rem;
     }
 }

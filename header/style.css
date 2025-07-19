@@ -115,6 +115,7 @@ hr {
     font-size: 1.8rem;
     font-weight: 300;
     align-items: center;
+    width: 205.14px; 
 }
 
 .login img {
@@ -138,7 +139,7 @@ header .phone {
     align-items: center;
     gap: 1.2rem;
     height: 100%;
-    padding-left: 4.25rem;
+    padding-left: 4.75rem;
     border-left: 0.2rem solid var(--border);
 }
 
@@ -286,6 +287,7 @@ a {
         white-space: nowrap;
         max-width: 100%;
         box-sizing: border-box;
+        width: 205.14px; 
     }
 
     .mobile-pre-header .theme img,
