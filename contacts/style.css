@@ -1,0 +1,145 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    --primary-text: black;
+    --bg-color: white;
+    --border: #E6E6E6;
+    --accent-color: #03A543;
+    --favorite-color: #FF0000;
+    --category-color: #F5F5F5;
+    --footer-bg: #1C1C1C;
+    background-color: var(--bg-color);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+body * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    margin-top: 9rem;
+    margin-left: 10rem;
+    font-size: 5.2rem;
+    font-weight: bolder;
+    margin-bottom: 5.9rem;
+}
+
+.contacts {
+    margin-left: 10rem;
+    margin-right: 10rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 2rem;
+    justify-content: center;
+}
+
+.contact {
+    max-width: 23rem;
+    width: 100%;
+}
+
+.contact .name {
+    opacity: 50%;
+    font-size: 1.6rem;
+}
+
+.contact .content {
+    font-size: 2rem;
+    color: black;
+}
+
+.map-container {
+    margin: 3rem 10rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1024px) {
+    h1 {
+        margin-left: 5rem;
+        font-size: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    .contacts {
+        margin-left: 5rem;
+        margin-right: 5rem;
+        grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+        gap: 1.5rem;
+    }
+
+    .map-container {
+        margin: 3rem 5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        margin-left: 2rem;
+        font-size: 3.2rem;
+        margin-top: 6rem;
+        margin-bottom: 3rem;
+    }
+
+    .contacts {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+        gap: 1rem;
+    }
+
+    .map-container {
+        margin: 2rem;
+    }
+
+    .map-container iframe {
+        height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        margin-left: 1.5rem;
+        font-size: 2.4rem;
+        margin-top: 4rem;
+        margin-bottom: 2rem;
+    }
+
+    .contacts {
+        margin-left: 1.5rem;
+        margin-right: 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        gap: 0.8rem;
+    }
+
+    .contact .name {
+        font-size: 1.4rem;
+    }
+
+    .contact .content {
+        font-size: 1.6rem;
+    }
+
+    .map-container {
+        margin: 1.5rem;
+    }
+
+    .map-container iframe {
+        height: 250px;
+    }
+}
