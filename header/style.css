@@ -115,7 +115,7 @@ hr {
     font-size: 1.8rem;
     font-weight: 300;
     align-items: center;
-    width: 205.14px; 
+    width: 205.14px;
 }
 
 .login img {
@@ -258,19 +258,20 @@ a {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
-        padding: 2rem;
+        gap: 0.5rem;
+        padding: 1rem;
         border-top: 1px solid var(--border);
         margin-top: 1.5rem;
-        flex-wrap: wrap;
+        flex-wrap: wrap; 
         max-width: 100%;
+        width: 100%;
     }
 
     .mobile-pre-header .left_part,
     .mobile-pre-header .right_part {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 
     .mobile-pre-header .lang,
@@ -278,8 +279,8 @@ a {
     .mobile-pre-header .cart,
     .mobile-pre-header .fav,
     .mobile-pre-header .login {
-        font-size: 1.6rem;
-        padding: 1rem 1.5rem;
+        font-size: 1.4rem; 
+        padding: 0.5rem 1rem; 
         border: none;
         display: flex;
         align-items: center;
@@ -287,27 +288,27 @@ a {
         white-space: nowrap;
         max-width: 100%;
         box-sizing: border-box;
-        width: 205.14px; 
+        width: 70px;
     }
 
     .mobile-pre-header .theme img,
     .mobile-pre-header .cart img,
     .mobile-pre-header .fav img,
     .mobile-pre-header .login img {
-        width: 2rem;
-        height: 2rem;
-        margin-left: 0.5rem;
+        width: 1.8rem;
+        height: 1.8rem;
+        margin-left: 0.3rem;
     }
 
     .mobile-pre-header .cart-count,
     .mobile-pre-header .fav-count {
         font-size: 1.2rem;
         color: var(--accent-color);
-        margin-left: 0.4rem;
+        margin-left: 0.3rem;
     }
 
     .mobile-pre-header .login {
-        gap: 0.5rem;
+        gap: 0.3rem;
     }
 
     .nav-menu {
@@ -316,7 +317,10 @@ a {
         padding-bottom: 3rem;
         box-sizing: border-box;
     }
-
+    .login a
+    {
+        display: none;
+    }
     .nav-menu ul {
         gap: 1rem;
         padding: 0;
@@ -342,6 +346,46 @@ a {
 
     .burger-toggle:checked ~ .nav-menu {
         transform: translateX(0);
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .mobile-pre-header {
+        padding: 0.5rem;
+        gap: 0.3rem;
+    }
+
+    .mobile-pre-header .lang,
+    .mobile-pre-header .theme,
+    .mobile-pre-header .cart,
+    .mobile-pre-header .fav,
+    .mobile-pre-header .login {
+        font-size: 1.2rem; 
+        padding: 0.3rem 0.8rem; 
+        width: 60px; 
+    }
+    .login a
+    {
+        display: none;
+    }
+
+    .mobile-pre-header .theme img,
+    .mobile-pre-header .cart img,
+    .mobile-pre-header .fav img,
+    .mobile-pre-header .login img {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-left: 0.2rem;
+    }
+
+    .mobile-pre-header .cart-count,
+    .mobile-pre-header .fav-count {
+        font-size: 1rem;
+        margin-left: 0.2rem;
+    }
+
+    .mobile-pre-header .login {
+        gap: 0.2rem;
     }
 }
 
