@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    --primary-text: black;
+    --bg-color: white;
+    --border: #E6E6E6;
+    --accent-color: #03A543;
+    --favorite-color: #FF0000;
+    --category-color: #F5F5F5;
+    --footer-bg: #1C1C1C;
+    background-color: var(--bg-color);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+body * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    font-size: 5.2rem;
+    line-height: 100%;
+    margin-left: 10rem;
+    margin-top: 9.2rem;
+}
+
+.back {
+    margin-top: 4.5rem;
+    width: 100%;
+    background-image: url(../img/services.png);
+    background-size: cover;
+    background-position: center;
+    height: 70rem;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.inf_card {
+    max-width: 69.3rem;
+    background-color: var(--bg-color);
+    margin-right: 10rem;
+    font-size: 2rem;
+    padding: 4.8rem 5.8rem;
+    margin-bottom: 9rem;
+    border-radius: 9px;
+}
+
+.type_selection {
+    display: flex;
+    gap: 1.6rem;
+    padding-left: 10rem;
+    margin-top: 18rem;
+    flex-wrap: wrap;
+}
+
+.type_selection button.tab {
+    font-size: 4.8rem;
+    opacity: 50%;
+    cursor: pointer;
+    transition: opacity 0.3s, color 0.3s;
+    padding: 1rem 2rem;
+    touch-action: manipulation;
+}
+
+.type_selection button.tab:hover {
+    color: black;
+    opacity: 100%;
+}
+
+.type_selection button.tab.active {
+    color: black;
+    text-decoration: underline;
+    opacity: 100%;
+}
+
+.cards {
+    margin-top: 11rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+}
+
+.card {
+    height: 60rem;
+    background-color: var(--category-color);
+    padding: 4rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card[style*="display: none"] {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.card[style*="display: flex"] {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card hr {
+    margin-bottom: 4rem;
+    width: 100%;
+    align-self: center;
+}
+
+.card .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card .head span {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+h4 {
+    font-size: 2.8rem;
+}
+
+.card p {
+    font-size: 1.8rem;
+}
+
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 4rem;
+        margin-left: 4rem;
+        margin-top: 6rem;
+    }
+
+    .back {
+        height: 50rem;
+    }
+
+    .inf_card {
+        max-width: 50rem;
+        margin-right: 4rem;
+        font-size: 1.8rem;
+        padding: 3rem;
+        margin-bottom: 6rem;
+    }
+
+    .type_selection {
+        padding-left: 4rem;
+        margin-top: 10rem;
+        gap: 1rem;
+    }
+
+    .type_selection button.tab {
+        font-size: 3.2rem;
+        padding: 0.8rem 1.6rem;
+    }
+
+    .cards {
+        margin: 6rem 4rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .card {
+        height: 50rem;
+        padding: 2rem;
+    }
+
+    .card .head span,
+    .card p {
+        font-size: 1.6rem;
+    }
+
+    h4 {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 3.2rem;
+        margin-left: 2rem;
+        margin-top: 4rem;
+    }
+
+    .back {
+        height: 40rem;
+        background-position: center;
+    }
+
+    .inf_card {
+        max-width: 90%;
+        margin-right: 2rem;
+        font-size: 1.6rem;
+        padding: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .type_selection {
+        padding-left: 2rem;
+        margin-top: 6rem;
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .type_selection button.tab {
+        font-size: 2.4rem;
+        padding: 0.8rem 1.2rem;
+        width: 100%;
+        text-align: left;
+    }
+
+    .cards {
+        margin: 4rem 2rem;
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+
+    .card {
+        height: auto;
+        min-height: 40rem;
+        padding: 1.6rem;
+    }
+
+    .card .head span,
+    .card p {
+        font-size: 1.4rem;
+    }
+
+    h4 {
+        font-size: 2rem;
+    }
+}
