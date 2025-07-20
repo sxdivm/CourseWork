@@ -7,7 +7,6 @@ async function loadProjects(type = 'all') {
         }
         const data = await response.json();
         console.log('Полученные данные:', data);
-
         const projects = Array.isArray(data) ? data : data.projects || [];
         console.log('Обработанный массив projects:', projects);
 
@@ -65,7 +64,7 @@ async function loadProjects(type = 'all') {
                 <p class="description">${project.description || 'Описание отсутствует'}</p>
                 <div class="read">
                     <p>Читать</p>
-                    <button><img src="../img/circle_arrow.svg" alt=""></button>
+                    <button onclick="window.location.href='../project_page/index.html?id=${project.id}'"><img src="../img/circle_arrow.svg" alt=""></button>
                 </div>
             `;
             projectsContainer.appendChild(projectDiv);
