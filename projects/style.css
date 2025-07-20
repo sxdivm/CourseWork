@@ -1,0 +1,238 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+    --primary-text: black;
+    --bg-color: white;
+    --border: #E6E6E6;
+    --accent-color: #03A543;
+    --favorite-color: #FF0000;
+    --category-color: #F5F5F5;
+    --footer-bg: #1C1C1C;
+    background-color: var(--bg-color);
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: normal;
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+}
+
+button {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+body * {
+    font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+    margin-top: 9rem;
+    margin-left: 10rem;
+    font-size: 5.2rem;
+    font-weight: bolder;
+    margin-bottom: 5.9rem;
+}
+
+.type_selection {
+    margin-top: 4.5rem;
+    margin-bottom: 4.5rem;
+    margin-left: 10rem;
+    margin-right: 2rem;
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap; 
+}
+
+.type_selection button {
+    font-size: 1.8rem;
+    text-decoration: underline;
+    cursor: pointer;
+    color: var(--primary-text);
+    transition: color 0.3s ease, font-weight 0.3s ease; 
+}
+
+.type_selection button.active {
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--accent-color);
+}
+
+.type_selection button:hover {
+    color: var(--accent-color); 
+}
+
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4rem;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    margin-bottom: 4rem;
+}
+
+.project {
+    height: 62rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.image {
+    width: 100%;
+    height: 30rem; 
+    object-fit: cover; 
+    object-position: center;
+}
+
+.project p.category {
+    font-size: 1.8rem;
+    margin-top: 1.2rem;
+}
+
+.project h4 {
+    font-size: 2.4rem;
+    margin-top: 1.2rem;
+    min-height: 3rem; 
+}
+
+.project p.description {
+    font-size: 1.8rem;
+    margin-top: 1.2rem;
+    flex-grow: 1; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.read {
+    display: flex;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+    align-items: center;
+    font-size: 1.8rem;
+}
+
+.read button {
+    transition: transform 0.2s ease; 
+}
+
+.read button:hover {
+    transform: scale(1.1); 
+}
+
+
+@media (max-width: 1024px) {
+    html {
+        font-size: 55%; 
+    }
+
+    h1 {
+        margin-left: 4rem;
+        font-size: 4rem;
+        margin-top: 6rem;
+        margin-bottom: 4rem;
+    }
+
+    .type_selection {
+        margin-left: 4rem;
+        margin-right: 4rem;
+        gap: 3rem;
+    }
+
+    .type_selection button {
+        font-size: 1.6rem;
+    }
+
+    .grid_container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3rem;
+        margin-left: 4rem;
+        margin-right: 4rem;
+    }
+
+    .project {
+        height: 55rem; 
+    }
+
+    .image {
+        height: 25rem;
+    }
+
+    .project p.category,
+    .project p.description {
+        font-size: 1.6rem;
+    }
+
+    .project h4 {
+        font-size: 2rem;
+        min-height: 2.5rem;
+    }
+
+    .read {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 50%; 
+    }
+
+    h1 {
+        margin-left: 2rem;
+        font-size: 3.2rem;
+        margin-top: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    .type_selection {
+        margin-left: 2rem;
+        margin-right: 2rem;
+        gap: 2rem;
+        flex-direction: column; 
+        align-items: flex-start;
+    }
+
+    .type_selection button {
+        font-size: 1.4rem;
+    }
+
+    .grid_container {
+        grid-template-columns: 1fr; 
+        gap: 2rem;
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    .project {
+        height: 50rem; 
+    }
+
+    .image {
+        height: 20rem; 
+    }
+
+    .project p.category,
+    .project p.description {
+        font-size: 1.4rem;
+    }
+
+    .project h4 {
+        font-size: 1.8rem;
+        min-height: 2rem;
+    }
+
+    .read {
+        font-size: 1.4rem;
+    }
+}
