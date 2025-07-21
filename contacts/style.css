@@ -61,7 +61,7 @@ h1 {
 
 .contact .content {
     font-size: 2rem;
-    color: black;
+    color: var(--primary-text);
 }
 
 .map-container {

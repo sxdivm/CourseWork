@@ -4,16 +4,29 @@
 }
 
 html {
-    font-size: 10px;
+    font-size: 62.5%;
     --primary-text: black;
     --bg-color: white;
     --border: #E6E6E6;
     --banner: #F9F9F9;
     --accent-color: #03A543;
+    --favorite-color: #FF0000;
     --category-color: #F5F5F5;
     --button-circle: #D2D2D2;
     --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
+}
+
+html[data-theme="dark"] {
+    --primary-text: #E6E6E6;
+    --bg-color: #1C1C1C;
+    --border: #333333;
+    --banner: #2A2A2A;
+    --accent-color: #03A543;
+    --favorite-color: #FF5555;
+    --category-color: #2A2A2A;
+    --button-circle: #555555;
+    --footer-bg: #0F0F0F;
 }
 
 body {
@@ -68,6 +81,15 @@ footer {
     border-right: 0.2rem solid var(--border);
     padding-left: 3.4rem;
     padding-right: 3.4rem;
+    cursor: pointer;
+}
+
+.theme img {
+    filter: brightness(1);
+}
+
+html[data-theme="dark"] .theme img,html[data-theme="dark"] .cart img,html[data-theme="dark"] .fav img ,html[data-theme="dark"] .phone img,html[data-theme="dark"] .lang,html[data-theme="dark"] .login img {
+    filter: brightness(0) invert(1);
 }
 
 hr {
@@ -132,6 +154,10 @@ hr {
 
 header .logo {
     margin-left: 10rem;
+}
+
+html[data-theme="dark"] header .logo {
+    filter: brightness(0) invert(1);
 }
 
 header .phone {
@@ -262,7 +288,7 @@ a {
         padding: 1rem;
         border-top: 1px solid var(--border);
         margin-top: 1.5rem;
-        flex-wrap: wrap; 
+        flex-wrap: wrap;
         max-width: 100%;
         width: 100%;
     }
@@ -279,8 +305,8 @@ a {
     .mobile-pre-header .cart,
     .mobile-pre-header .fav,
     .mobile-pre-header .login {
-        font-size: 1.4rem; 
-        padding: 0.5rem 1rem; 
+        font-size: 1.4rem;
+        padding: 0.5rem 1rem;
         border: none;
         display: flex;
         align-items: center;
@@ -317,10 +343,11 @@ a {
         padding-bottom: 3rem;
         box-sizing: border-box;
     }
-    .login a
-    {
+
+    .login a {
         display: none;
     }
+
     .nav-menu ul {
         gap: 1rem;
         padding: 0;
@@ -360,12 +387,12 @@ a {
     .mobile-pre-header .cart,
     .mobile-pre-header .fav,
     .mobile-pre-header .login {
-        font-size: 1.2rem; 
-        padding: 0.3rem 0.8rem; 
-        width: 60px; 
+        font-size: 1.2rem;
+        padding: 0.3rem 0.8rem;
+        width: 60px;
     }
-    .login a
-    {
+
+    .login a {
         display: none;
     }
 

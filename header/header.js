@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-
     fetch('../header/index.html')
         .then(response => response.text())
         .then(html => {
@@ -8,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
             const header = doc.querySelector('header');
             if (header) {
                 document.body.insertBefore(header, document.body.firstChild);
+                updateCounts();
+                updateLoginText();
             }
-            updateCounts();
-            updateLoginText();
         })
         .catch(error => console.error('Error loading header:', error));
 
@@ -22,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.cart-count').forEach(el => el.textContent = '');
             document.querySelectorAll('.fav-count').forEach(el => el.textContent = '');
             if (phoneElement) {
-                phoneElement.style.paddingLeft = '4.75rem'; 
+                phoneElement.style.paddingLeft = '4.75rem';
             }
             return;
         }
@@ -85,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.querySelectorAll('.login a').forEach(loginLink => {
             if (userId) {
                 loginLink.textContent = 'Профиль';
-                loginLink.href = '../profile/index.html'; 
+                loginLink.href = '../profile/index.html';
             } else {
                 loginLink.textContent = 'Войти';
                 loginLink.href = '../login/index.html';

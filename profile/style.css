@@ -4,7 +4,7 @@
 }
 
 html {
-    font-size: 10px;
+Font-size: 10px;
     --primary-text: black;
     --bg-color: white;
     --border: #E6E6E6;
@@ -33,25 +33,16 @@ body * {
     font-family: 'Montserrat', sans-serif;
 }
 
-.form-group p {
-    font-size: 1.8rem;
-}
-
-.log:hover {
-    text-decoration: underline;
-}
-
-main a {
-    color: var(--accent-color);
-}
-
-.registration {
+.profile {
     padding: 10rem;
     max-width: 600px;
     margin: 0 auto;
 }
-
-.registration h2 {
+html[data-theme="dark"] #regenerate-nickname
+{
+    color: var(--accent-color);
+}
+.profile h2 {
     font-size: 4.8rem;
     text-align: center;
     margin-bottom: 4rem;
@@ -72,8 +63,7 @@ main a {
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="tel"],
-.form-group input[type="password"],
-.form-group input[type="date"] {
+.form-group input[type="password"] {
     width: 100%;
     padding: 1.2rem;
     font-size: 1.6rem;
@@ -92,16 +82,6 @@ main a {
     font-size: 1.4rem;
     margin-top: 0.5rem;
     display: block;
-}
-
-.password-choice {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-}
-
-.password-choice input[type="radio"] {
-    margin-right: 0.5rem;
 }
 
 #regenerate-nickname {
@@ -147,97 +127,40 @@ main a {
     cursor: not-allowed;
 }
 
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
+#logout-button {
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-content {
-    background-color: var(--bg-color);
-    max-width: 600px;
-    width: 90%;
-    max-height: 80vh;
-    border-radius: 8px;
-    padding: 2rem;
-    position: relative;
-}
-
-.modal-content h3 {
-    font-size: 2.4rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.agreement-text {
-    max-height: 50vh;
-    overflow-y: auto;
-    font-size: 1.6rem;
-    line-height: 1.5;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    font-family: 'Montserrat', sans-serif;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-}
-
-.modal-buttons button {
-    padding: 1rem 2rem;
-    font-size: 1.6rem;
+    padding: 1.5rem;
+    background-color: #ff4444;
+    color: white;
+    font-size: 1.8rem;
     border-radius: 4px;
     cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
+    margin-top: 1rem;
 }
 
-#confirm-agreement {
-    background-color: var(--accent-color);
-    color: white;
-}
-
-#confirm-agreement:disabled {
-    background-color: var(--button-circle);
-    cursor: not-allowed;
-}
-
-#close-modal {
-    background-color: var(--banner);
-    color: var(--primary-text);
+#logout-button:hover {
+    background-color: #cc0000;
 }
 
 @media screen and (max-width: 1280px) {
-    .registration {
+    .profile {
         padding: 2rem;
     }
 
-    .registration h2 {
+    .profile h2 {
         font-size: 3.6rem;
     }
 }
 
 @media screen and (max-width: 610px) {
-    .registration h2 {
+    .profile h2 {
         font-size: 2.8rem;
     }
 
     .form-group input[type="text"],
     .form-group input[type="email"],
     .form-group input[type="tel"],
-    .form-group input[type="password"],
-    .form-group input[type="date"] {
+    .form-group input[type="password"] {
         font-size: 1.4rem;
     }
 
@@ -245,28 +168,8 @@ main a {
         font-size: 1.6rem;
     }
 
-    #submit-button {
+    #submit-button,
+    #logout-button {
         font-size: 1.6rem;
     }
-
-    .modal-content {
-        padding: 1rem;
-    }
-
-    .modal-content h3 {
-        font-size: 2rem;
-    }
-
-    .agreement-text {
-        font-size: 1.4rem;
-    }
-
-    .modal-buttons button {
-        font-size: 1.4rem;
-        padding: 0.8rem 1.5rem;
-    }
-}
-html[data-theme="dark"] #regenerate-nickname
-{
-    color: var(--accent-color);
 }

@@ -76,15 +76,16 @@ h1 {
     transition: opacity 0.3s, color 0.3s;
     padding: 1rem 2rem;
     touch-action: manipulation;
+    color: var(--primary-text);
 }
 
 .type_selection button.tab:hover {
-    color: black;
+    color: var(--primary-text);
     opacity: 100%;
 }
 
 .type_selection button.tab.active {
-    color: black;
+    color: var(--primary-text);
     text-decoration: underline;
     opacity: 100%;
 }

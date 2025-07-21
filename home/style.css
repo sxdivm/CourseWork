@@ -15,7 +15,17 @@ html {
     --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
 }
-
+html[data-theme="dark"] {
+    --primary-text: #E6E6E6;
+    --bg-color: #1C1C1C;
+    --border: #333333;
+    --banner: #2A2A2A;
+    --accent-color: #03A543;
+    --favorite-color: #FF5555;
+    --category-color: #2A2A2A;
+    --button-circle: #555555;
+    --footer-bg: #0F0F0F;
+}
 body {
     font-family: 'Montserrat', sans-serif;
     font-weight: normal;
@@ -300,7 +310,7 @@ h2 {
 .portfolio .project .info {
     width: 38rem;
     height: 35rem;
-    background: white;
+    background: var(--bg-color);
     padding: 1.2rem;
     margin-top: 7.5rem;
     margin-left: 3.5rem;
