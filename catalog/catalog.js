@@ -254,6 +254,7 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         url.searchParams.append('_order', order);
         if (search) url.searchParams.append('q', search);
         if (availability) url.searchParams.append('availability', availability);
+       49
         if (types.length > 0) url.searchParams.append('type_like', types.join('|'));
         if (minPrice !== null) url.searchParams.append('price_gte', minPrice);
         if (maxPrice !== null) url.searchParams.append('price_lte', maxPrice);
@@ -308,16 +309,11 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             uniqueTypes.forEach(type => {
                 const label = document.createElement('label');
                 label.innerHTML = `
-                    <input type="checkbox" name="type" value="${type}">
+                    <input type="checkbox" name="type" value="${type}" ${types.includes(type) ? 'checked' : ''}>
                     ${type}
                 `;
                 typeFilterGroup.appendChild(label);
             });
-            if (types.length > 0) {
-                document.querySelectorAll('#filter-panel input[name="type"]').forEach(cb => {
-                    cb.checked = types.includes(cb.value);
-                });
-            }
         }
 
         products.forEach(product => {
@@ -509,7 +505,13 @@ function updatePagination(totalPages, currentPage, sort, order, search, availabi
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    loadProducts();
+    // Получаем параметр type из URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const typeFromUrl = urlParams.get('type');
+    const initialTypes = typeFromUrl ? [decodeURIComponent(typeFromUrl)] : [];
+
+    // Загружаем продукты с учётом параметра type
+    loadProducts('name', 'asc', '', '', initialTypes);
 
     const isAdmin = localStorage.getItem('role') === 'admin';
     if (isAdmin) {
@@ -532,13 +534,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('sort-select').addEventListener('change', (event) => {
         const [sort, order] = event.target.value.split(',');
-        loadProducts(sort, order, document.getElementById('search-input').value);
+        const search = document.getElementById('search-input').value.trim();
+        const typeCheckboxes = document.querySelectorAll('#filter-panel input[name="type"]:checked');
+        const types = Array.from(typeCheckboxes).map(cb => cb.value);
+        loadProducts(sort, order, search, '', types);
     });
 
     document.getElementById('search-input').addEventListener('input', (event) => {
         const searchQuery = event.target.value.trim();
         const [sort, order] = document.getElementById('sort-select').value.split(',');
-        loadProducts(sort, order, searchQuery);
+        const typeCheckboxes = document.querySelectorAll('#filter-panel input[name="type"]:checked');
+        const types = Array.from(typeCheckboxes).map(cb => cb.value);
+        loadProducts(sort, order, searchQuery, '', types);
     });
 
     const filterButton = document.getElementById('filter-button');
@@ -698,7 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             console.log('Filters applied:', { types, availability, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock });
             loadProducts(sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock, 1);
-
 
             if (window.innerWidth <= 768) {
                 filterPanel.classList.remove('active');

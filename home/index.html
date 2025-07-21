@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>HTL - Главная</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -11,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
+
 <body>
     <main>
         <section class="banner">
@@ -28,11 +30,10 @@
         <section class="about">
             <p>О компании</p>
             <h2>
-                <span class="accent">HTL</span> — Российская компания<br> по производству светодиодного осpвещения,
+                <span class="accent">HTL</span> — Российская компания<br> по производству светодиодного освещения,
                 Эксперт в области интерьерного и уличного освещения
             </h2>
-            <p>Создаём современное высококачественное светотехническое оборудование и отдельные комплектующие для освеස
-
+            <p>Создаём современное высококачественное светотехническое оборудование и отдельные комплектующие для
                 освещения интерьеров жилых и коммерческих помещений</p>
             <p>О компании</p>
             <div class="cards">
@@ -40,10 +41,12 @@
                     <span class="digit">8</span>
                     <span class="text">На рынке более 8 лет</span>
                 </div>
-                <div class="card"><span class="digit">5</span>
+                <div class="card">
+                    <span class="digit">5</span>
                     <span class="text">Гарантия на продукцию</span>
                 </div>
-                <div class="card"><span class="digit">1</span>
+                <div class="card">
+                    <span class="digit">1</span>
                     <span class="text">Доставка от 1 дня</span>
                 </div>
             </div>
@@ -56,39 +59,8 @@
                     <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
                 </div>
             </div>
-            <div class="categories">
-                <div class="category">
-                    <p>HTL BUSINESS</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL ARCHITECTURAL</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL OUTDOOR</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL RETAIL</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL HOME (DIY)</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL EMERGENCY</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL PRODUCTION</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
-                <div class="category">
-                    <p>HTL INTERIOR</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
-                </div>
+            <div class="categories" id="categories">
+
             </div>
         </section>
         <section class="portfolio">
@@ -96,34 +68,32 @@
                 <h2>Портфолио</h2>
                 <div class="catalog">
                     <p>Все проекты</p>
-                    <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
+                    <a href="../projects/index.html"><img src="../img/circle_arrow.svg" alt=""></a>
                 </div>
             </div>
             <div class="type">
                 <ul>
-                    <li>Все(45)</li>
-                    <li>Уличное(6)</li>
-                    <li>Промышленное (20)</li>
-                    <li>Интерьерное (1)</li>
-                    <li>Ретейл (15)</li>
-                    <li>Медицинское (3)</li>
+                    <li class="active" data-type="all" id="btn-all">Все</li>
+                    <li data-type="Уличное" id="btn-street">Уличное</li>
+                    <li data-type="Промышленное" id="btn-industrial">Промышленное</li>
+                    <li data-type="Интерьерное" id="btn-interior">Интерьерное</li>
+                    <li data-type="Ретейл" id="btn-retail">Ретейл</li>
+                    <li data-type="Медицинское" id="btn-medical">Медицинское</li>
                 </ul>
                 <div class="buttons_div">
-                    <button class="prev"><img src="../img/arrow.svg" alt="arrow"></button>
-                    <button class="next"><img src="../img/arrow.svg" alt="arrow"></button>
+                    <button class="prev"><img src="../img/arrow.svg" alt="prev"></button>
+                    <button class="next"><img src="../img/arrow.svg" alt="next"></button>
                 </div>
             </div>
-            <div class="projects">
-                <div class="project">
-                    <div class="info"></div>
-                </div>
-                <div class="project">
-                    <div class="info"></div>
-                </div>
+            <div class="projects-slider">
+                <div class="projects" id="projects"></div>
             </div>
         </section>
     </main>
+    <script src="../header/header.js"></script>
+    <script src="../footer/footer.js"></script>
+    <script src="script.js"></script>
+    <script src="portfolio.js"></script>
 </body>
-<script src="../header/header.js"></script>
-<script src="../footer/footer.js"></script>
+
 </html>
