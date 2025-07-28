@@ -10,21 +10,66 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <section>
-        <h1 data-i18n="page_title">Проекты</h1>
-        <div class="type_selection">
-            <button class="type-btn active" data-type="all" id="btn-all" data-i18n="filter_all">Все</button>
-            <button class="type-btn" data-type="street" id="btn-street" data-i18n="filter_street">Уличное</button>
-            <button class="type-btn" data-type="industrial" id="btn-industrial" data-i18n="filter_industrial">Промышленное</button>
-            <button class="type-btn" data-type="interior" id="btn-interior" data-i18n="filter_interior">Интеръерное</button>
-            <button class="type-btn" data-type="retail" id="btn-retail" data-i18n="filter_retail">Ретейл</button>
-            <button class="type-btn" data-type="medical" id="btn-medical" data-i18n="filter_medical">Медицинское</button>
+    <main>
+        <section>
+            <h1 data-i18n="page_title">Проекты</h1>
+            <div class="admin-controls" id="admin-controls" style="display: none;">
+                <button id="save-projects" data-i18n="save_projects">Сохранить</button>
+                <button id="add-project" data-i18n="add_project">Добавить</button>
+            </div>
+            <hr>
+            <div class="type_selection">
+                <button class="type-btn active" data-type="all" id="btn-all" data-i18n="filter_all">Все</button>
+                <button class="type-btn" data-type="street" id="btn-street" data-i18n="filter_street">Уличное</button>
+                <button class="type-btn" data-type="industrial" id="btn-industrial" data-i18n="filter_industrial">Промышленное</button>
+                <button class="type-btn" data-type="interior" id="btn-interior" data-i18n="filter_interior">Интеръерное</button>
+                <button class="type-btn" data-type="retail" id="btn-retail" data-i18n="filter_retail">Ретейл</button>
+                <button class="type-btn" data-type="medical" id="btn-medical" data-i18n="filter_medical">Медицинское</button>
+            </div>
+            <div class="grid_container" id="projects-container">
+            </div>
+        </section>
+        <div class="modal" id="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="modal-close" id="modal-close">×</span>
+                <h2 id="modal-title" data-i18n="add_project_title">Добавить проект</h2>
+                <form id="project-form">
+                    <div class="form-group">
+                        <label for="project-id" data-i18n="project_id">ID</label>
+                        <input type="text" id="project-id" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-name" data-i18n="project_name">Название</label>
+                        <input type="text" id="project-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-en-name" data-i18n="project_en_name">Название (на английском)</label>
+                        <input type="text" id="project-en-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-type" data-i18n="project_type">Тип</label>
+                        <input type="text" id="project-type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-en-type" data-i18n="project_en_type">Тип (на английском)</label>
+                        <input type="text" id="project-en-type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-description" data-i18n="project_description">Описание</label>
+                        <textarea id="project-description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="project-en-description" data-i18n="project_en_description">Описание (на английском)</label>
+                        <textarea id="project-en-description" required></textarea>
+                    </div>
+                    <button type="submit" data-i18n="save">Сохранить</button>
+                </form>
+            </div>
         </div>
-        <div class="grid_container" id="projects-container">
-        </div>
-    </section>
+    </main>
     <script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="../header/theme.js"></script>

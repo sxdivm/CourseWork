@@ -91,7 +91,7 @@
       "id": 1
     }
   ],
-  "projects":[
+  "projects": [
     {
       "id": 1,
       "type": "Уличное",
@@ -108,8 +108,14 @@
       "area": "500 м²",
       "client": "Городская администрация",
       "en_client": "City Administration",
-      "team": ["Иван Иванов", "Мария Петрова"],
-      "en_team": ["Ivan Ivanov", "Maria Petrova"],
+      "team": [
+        "Иван Иванов",
+        "Мария Петрова"
+      ],
+      "en_team": [
+        "Ivan Ivanov",
+        "Maria Petrova"
+      ],
       "duration": "6 месяцев"
     },
     {
@@ -128,8 +134,14 @@
       "area": "1200 м²",
       "client": "Региональное управление",
       "en_client": "Regional Administration",
-      "team": ["Алексей Смирнов", "Екатерина Лебедева"],
-      "en_team": ["Alexey Smirnov", "Ekaterina Lebedeva"],
+      "team": [
+        "Алексей Смирнов",
+        "Екатерина Лебедева"
+      ],
+      "en_team": [
+        "Alexey Smirnov",
+        "Ekaterina Lebedeva"
+      ],
       "duration": "12 месяцев"
     },
     {
@@ -148,8 +160,14 @@
       "area": "400 м²",
       "client": "Музейное управление",
       "en_client": "Museum Administration",
-      "team": ["Ольга Иванова", "Дмитрий Сергеев"],
-      "en_team": ["Olga Ivanova", "Dmitry Sergeev"],
+      "team": [
+        "Ольга Иванова",
+        "Дмитрий Сергеев"
+      ],
+      "en_team": [
+        "Olga Ivanova",
+        "Dmitry Sergeev"
+      ],
       "duration": "5 месяцев"
     },
     {
@@ -168,8 +186,14 @@
       "area": "1500 м²",
       "client": "Логистическая компания",
       "en_client": "Logistics Company",
-      "team": ["Сергей Петров", "Наталья Козлова"],
-      "en_team": ["Sergey Petrov", "Natalia Kozlova"],
+      "team": [
+        "Сергей Петров",
+        "Наталья Козлова"
+      ],
+      "en_team": [
+        "Sergey Petrov",
+        "Natalia Kozlova"
+      ],
       "duration": "8 месяцев"
     },
     {
@@ -188,8 +212,14 @@
       "area": "1000 м²",
       "client": "Автозавод",
       "en_client": "Auto Factory",
-      "team": ["Петр Кузнецов", "Анна Смолова"],
-      "en_team": ["Petr Kuznetsov", "Anna Smolova"],
+      "team": [
+        "Петр Кузнецов",
+        "Анна Смолова"
+      ],
+      "en_team": [
+        "Petr Kuznetsov",
+        "Anna Smolova"
+      ],
       "duration": "10 месяцев"
     },
     {
@@ -208,8 +238,14 @@
       "area": "2000 м²",
       "client": "Нефтяная компания",
       "en_client": "Oil Company",
-      "team": ["Игорь Морозов", "Татьяна Иванова"],
-      "en_team": ["Igor Morozov", "Tatiana Ivanova"],
+      "team": [
+        "Игорь Морозов",
+        "Татьяна Иванова"
+      ],
+      "en_team": [
+        "Igor Morozov",
+        "Tatiana Ivanova"
+      ],
       "duration": "14 месяцев"
     },
     {
@@ -228,8 +264,14 @@
       "area": "300 м²",
       "client": "IT-компания",
       "en_client": "IT Company",
-      "team": ["Елена Соколова", "Михаил Орлов"],
-      "en_team": ["Elena Sokolova", "Mikhail Orlov"],
+      "team": [
+        "Елена Соколова",
+        "Михаил Орлов"
+      ],
+      "en_team": [
+        "Elena Sokolova",
+        "Mikhail Orlov"
+      ],
       "duration": "4 месяца"
     },
     {
@@ -248,8 +290,14 @@
       "area": "250 м²",
       "client": "Ресторанная сеть",
       "en_client": "Restaurant Chain",
-      "team": ["Ольга Иванова", "Дмитрий Сергеев"],
-      "en_team": ["Olga Ivanova", "Dmitry Sergeev"],
+      "team": [
+        "Ольга Иванова",
+        "Дмитрий Сергеев"
+      ],
+      "en_team": [
+        "Olga Ivanova",
+        "Dmitry Sergeev"
+      ],
       "duration": "3 месяца"
     },
     {
@@ -268,8 +316,14 @@
       "area": "400 м²",
       "client": "Недвижимость",
       "en_client": "Real Estate",
-      "team": ["Алексей Смирнов", "Екатерина Лебедева"],
-      "en_team": ["Alexey Smirnov", "Ekaterina Lebedeva"],
+      "team": [
+        "Алексей Смирнов",
+        "Екатерина Лебедева"
+      ],
+      "en_team": [
+        "Alexey Smirnov",
+        "Ekaterina Lebedeva"
+      ],
       "duration": "6 месяцев"
     },
     {
@@ -288,8 +342,14 @@
       "area": "800 м²",
       "client": "Торговая сеть",
       "en_client": "Retail Chain",
-      "team": ["Сергей Петров", "Наталья Козлова"],
-      "en_team": ["Sergey Petrov", "Natalia Kozlova"],
+      "team": [
+        "Сергей Петров",
+        "Наталья Козлова"
+      ],
+      "en_team": [
+        "Sergey Petrov",
+        "Natalia Kozlova"
+      ],
       "duration": "7 месяцев"
     },
     {
@@ -308,8 +368,14 @@
       "area": "150 м²",
       "client": "Модный дом",
       "en_client": "Fashion House",
-      "team": ["Ольга Иванова", "Дмитрий Сергеев"],
-      "en_team": ["Olga Ivanova", "Dmitry Sergeev"],
+      "team": [
+        "Ольга Иванова",
+        "Дмитрий Сергеев"
+      ],
+      "en_team": [
+        "Olga Ivanova",
+        "Dmitry Sergeev"
+      ],
       "duration": "2 месяца"
     },
     {
@@ -328,8 +394,14 @@
       "area": "600 м²",
       "client": "Ритейл-компания",
       "en_client": "Retail Company",
-      "team": ["Петр Кузнецов", "Анна Смолова"],
-      "en_team": ["Petr Kuznetsov", "Anna Smolova"],
+      "team": [
+        "Петр Кузнецов",
+        "Анна Смолова"
+      ],
+      "en_team": [
+        "Petr Kuznetsov",
+        "Anna Smolova"
+      ],
       "duration": "5 месяцев"
     },
     {
@@ -348,8 +420,14 @@
       "area": "450 м²",
       "client": "Медицинская сеть",
       "en_client": "Medical Network",
-      "team": ["Игорь Морозов", "Татьяна Иванова"],
-      "en_team": ["Igor Morozov", "Tatiana Ivanova"],
+      "team": [
+        "Игорь Морозов",
+        "Татьяна Иванова"
+      ],
+      "en_team": [
+        "Igor Morozov",
+        "Tatiana Ivanova"
+      ],
       "duration": "6 месяцев"
     },
     {
@@ -368,8 +446,14 @@
       "area": "200 м²",
       "client": "Стоматологическая клиника",
       "en_client": "Dental Clinic",
-      "team": ["Елена Соколова", "Михаил Орлов"],
-      "en_team": ["Elena Sokolova", "Mikhail Orlov"],
+      "team": [
+        "Елена Соколова",
+        "Михаил Орлов"
+      ],
+      "en_team": [
+        "Elena Sokolova",
+        "Mikhail Orlov"
+      ],
       "duration": "4 месяца"
     },
     {
@@ -388,11 +472,17 @@
       "area": "350 м²",
       "client": "Диагностическая сеть",
       "en_client": "Diagnostic Network",
-      "team": ["Алексей Смирнов", "Екатерина Лебедева"],
-      "en_team": ["Alexey Smirnov", "Ekaterina Lebedeva"],
+      "team": [
+        "Алексей Смирнов",
+        "Екатерина Лебедева"
+      ],
+      "en_team": [
+        "Alexey Smirnov",
+        "Ekaterina Lebedeva"
+      ],
       "duration": "5 месяцев"
     }
-],
+  ],
   "requests": [
     {
       "id": 1,
