@@ -1,0 +1,11 @@
+{
+    "cart_title": "Корзина - HTL Business",
+    "cart_heading": "Корзина",
+    "cart_total": "Итого:",
+    "checkout_button": "Оформить заказ",
+    "admin_message": "Администраторы не могут оформлять заказы.",
+    "cart_empty": "Корзина пуста.",
+    "cart_error": "Ошибка загрузки корзины. Попробуйте позже.",
+    "in_stock": "Есть в наличии",
+    "out_of_stock": "Нет в наличии"
+}

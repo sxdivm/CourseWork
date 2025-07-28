@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTL Business Catalog</title>
+    <title data-i18n="title">HTL Business Catalog</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -13,101 +12,100 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
     <main>
-        <h1>HTL BUSINESS</h1>
+        <h1 data-i18n="title">HTL BUSINESS</h1>
         <div class="admin-controls" id="admin-controls" style="display: none;">
-            <button id="save-products">Сохранить</button>
-            <button id="add-product">Добавить</button>
+            <button id="save-products" data-i18n="save_products">Сохранить</button>
+            <button id="add-product" data-i18n="add_product">Добавить</button>
         </div>
         <hr>
         <section>
             <div class="header">
                 <div class="settings">
                     <button id="filter-button"><img src="../img/ar_up.svg" alt="arrow"></button>
-                    <h3>Фильтр</h3>
+                    <h3 data-i18n="filter">Фильтр</h3>
                 </div>
                 <div class="sort">
                     <p>
-                        <span class="bold">Сортировка:</span>
+                        <span class="bold" data-i18n="sort">Сортировка:</span>
                         <select id="sort-select">
-                            <option value="name,asc">по типу (А-Я)</option>
-                            <option value="name,desc">по типу (Я-А)</option>
-                            <option value="price,asc">по цене (возр.)</option>
-                            <option value="price,desc">по цене (убыв.)</option>
-                            <option value="rating,asc">по рейтингу (возр.)</option>
-                            <option value="rating,desc">по рейтингу (убыв.)</option>
+                            <option value="name,asc" data-i18n="sort_name_asc">по типу (А-Я)</option>
+                            <option value="name,desc" data-i18n="sort_name_desc">по типу (Я-А)</option>
+                            <option value="price,asc" data-i18n="sort_price_asc">по цене (возр.)</option>
+                            <option value="price,desc" data-i18n="sort_price_desc">по цене (убыв.)</option>
+                            <option value="rating,asc" data-i18n="sort_rating_asc">по рейтингу (возр.)</option>
+                            <option value="rating,desc" data-i18n="sort_rating_desc">по рейтингу (убыв.)</option>
                         </select>
                     </p>
                     <div class="search">
-                        <input type="text" id="search-input" placeholder="Поиск по названию...">
+                        <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Поиск по названию...">
                     </div>
                 </div>
             </div>
             <div class="content-wrapper">
                 <div class="filter-panel" id="filter-panel">
-                    <h4>Фильтры</h4>
+                    <h4 data-i18n="filters">Фильтры</h4>
                     <div class="filter-group">
-                        <label><input type="checkbox" id="availability-in-stock"> Есть в наличии</label>
+                        <label data-i18n="availability_in_stock"><input type="checkbox" id="availability-in-stock"> Есть в наличии</label>
                     </div>
                     <div class="filter-group">
-                        <h5>Тип</h5>
+                        <h5 data-i18n="type">Тип</h5>
                     </div>
                     <div class="filter-group">
-                        <h5>Цена</h5>
+                        <h5 data-i18n="price">Цена</h5>
                         <div class="price-range">
                             <div class="range-slider">
                                 <input type="range" id="price-slider-min" min="0" max="3500" step="100" value="0">
                                 <input type="range" id="price-slider-max" min="0" max="3500" step="100" value="3500">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="price-value">От 0 ₽ до 3500 ₽</span>
+                            <span id="price-value" data-i18n="price_range">От 0 ₽ до 3500 ₽</span>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <h5>Мощность</h5>
+                        <h5 data-i18n="power">Мощность</h5>
                         <div class="power-range">
                             <div class="range-slider">
                                 <input type="range" id="power-slider-min" min="0" max="100" step="5" value="0">
                                 <input type="range" id="power-slider-max" min="0" max="100" step="5" value="100">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="power-value">От 0 Вт до 100 Вт</span>
+                            <span id="power-value" data-i18n="power_range">От 0 Вт до 100 Вт</span>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <h5>Световой поток</h5>
+                        <h5 data-i18n="luminous_flux">Световой поток</h5>
                         <div class="luminous-flux-range">
                             <div class="range-slider">
                                 <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100" value="0">
                                 <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100" value="6000">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="luminous-flux-value">От 0 лм до 6000 лм</span>
+                            <span id="luminous-flux-value" data-i18n="luminous_flux_range">От 0 лм до 6000 лм</span>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <h5>IP Защита</h5>
-                        <label><input type="checkbox" name="ip" value="IP65"> IP65</label>
+                        <h5 data-i18n="ip_protection">IP Защита</h5>
+                        <label><input type="checkbox" name="ip" value="IP65" data-i18n="ip_protection"> IP65</label>
                     </div>
                     <div class="filter-group">
-                        <h5>Цветовая температура</h5>
+                        <h5 data-i18n="color_temperature">Цветовая температура</h5>
                         <div class="color-temperature-range">
                             <div class="range-slider">
                                 <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100" value="2000">
                                 <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100" value="6500">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="color-temperature-value">От 2000 K до 6500 K</span>
+                            <span id="color-temperature-value" data-i18n="color_temperature_range">От 2000 K до 6500 K</span>
                         </div>
                     </div>
                     <div class="filter-group">
-                        <h5>Блок аварийного питания</h5>
-                        <label><input type="checkbox" id="emergency-block"> Включен</label>
+                        <h5 data-i18n="emergency_block">Блок аварийного питания</h5>
+                        <label data-i18n="emergency_block_enabled"><input type="checkbox" id="emergency-block"> Включен</label>
                     </div>
-                    <button id="apply-filters">Применить</button>
-                    <button id="reset-filters">Сбросить фильтры</button>
+                    <button id="apply-filters" data-i18n="apply_filters">Применить</button>
+                    <button id="reset-filters" data-i18n="reset_filters">Сбросить фильтры</button>
                 </div>
                 <div class="catalog" id="catalog"></div>
                 <div class="pagination" id="pagination"></div>
@@ -116,43 +114,45 @@
         <div class="modal" id="modal" style="display: none;">
             <div class="modal-content">
                 <span class="modal-close" id="modal-close">×</span>
-                <h2 id="modal-title">Добавить товар</h2>
+                <h2 id="modal-title" data-i18n="add_product_title">Добавить товар</h2>
                 <form id="product-form">
                     <div class="form-group">
-                        <label for="product-id">ID</label>
+                        <label for="product-id" data-i18n="product_id">ID</label>
                         <input type="text" id="product-id" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="product-name">Название</label>
+                        <label for="product-name" data-i18n="product_name">Название</label>
                         <input type="text" id="product-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="product-type">Тип</label>
-                        <select id="product-type" required>
-                            <option value="линейный светодиодный светильник">Линейный светодиодный светильник</option>
-                            <option value="тарелка">Тарелка</option>
-                            <option value="прожектор">Прожектор</option>
-                            <option value="бра">Бра</option>
-                            <option value="люстра">Люстра</option>
-                        </select>
+                        <label for="product-en-name" data-i18n="en_name">Название (на английском)</label>
+                        <input type="text" id="product-en-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="product-price">Цена (₽)</label>
+                        <label for="product-type" data-i18n="product_type">Тип</label>
+                        <input type="text" id="product-type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-en-type" data-i18n="product_en_type">Тип (на английском)</label>
+                        <input type="text" id="product-en-type" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price" data-i18n="product_price">Цена (₽)</label>
                         <input type="number" id="product-price" step="100">
                     </div>
                     <div class="form-group">
-                        <label><input type="checkbox" id="product-availability"> Есть в наличии</label>
+                        <label data-i18n="product_availability"><input type="checkbox" id="product-availability"> Есть в наличии</label>
                     </div>
                     <div class="form-group">
-                        <label for="product-power">Мощность (Вт)</label>
+                        <label for="product-power" data-i18n="product_power">Мощность (Вт)</label>
                         <input type="number" id="product-power" step="1">
                     </div>
                     <div class="form-group">
-                        <label for="product-luminous-flux">Световой поток (лм)</label>
+                        <label for="product-luminous-flux" data-i18n="product_luminous_flux">Световой поток (лм)</label>
                         <input type="number" id="product-luminous-flux" step="100">
                     </div>
                     <div class="form-group">
-                        <label for="product-ip">IP Защита</label>
+                        <label for="product-ip" data-i18n="product_ip">IP Защита</label>
                         <select id="product-ip">
                             <option value="IP40">IP40</option>
                             <option value="IP54">IP54</option>
@@ -160,21 +160,19 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="product-color-temperature">Цветовая температура (K)</label>
+                        <label for="product-color-temperature" data-i18n="product_color_temperature">Цветовая температура (K)</label>
                         <input type="number" id="product-color-temperature" step="100">
                     </div>
                     <div class="form-group">
-                        <label><input type="checkbox" id="product-emergency-block"> Блок аварийного питания</label>
+                        <label data-i18n="product_emergency_block"><input type="checkbox" id="product-emergency-block"> Блок аварийного питания</label>
                     </div>
-                    <button type="submit">Сохранить</button>
+                    <button type="submit" data-i18n="save">Сохранить</button>
                 </form>
             </div>
         </div>
     </main>
+    <script src="../header/i18n.js"></script>
     <script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
-    <script src="../header/theme.js"> </script>
+    <script src="../header/theme.js"></script>
     <script src="catalog.js"></script>
-</body>
-
-</html>

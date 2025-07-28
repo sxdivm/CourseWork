@@ -1,0 +1,13 @@
+{
+  "page_title": "Login",
+  "login_heading": "Login",
+  "email_label": "Email",
+  "password_label": "Password",
+  "required_field": "*",
+  "no_account": "No account? <a href=\"../registration/index.html\">Register</a>",
+  "submit_button": "Log In",
+  "error_invalid_credentials": "Invalid email or password",
+  "error_server_unavailable": "Server unavailable",
+  "welcome_message": "Welcome, {firstName}!",
+  "error_missing_user_data": "Error: missing user ID or role"
+}

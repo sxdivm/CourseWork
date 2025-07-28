@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTL - Главная</title>
+    <title data-i18n="title">HTL - Главная</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -12,73 +11,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-
 <body>
     <main>
         <section class="banner">
             <img src="../img/predator.png" alt="predator">
             <div class="content">
                 <h1>
-                    <span>ДИЗАЙНЕРСКИЕ СВЕТИЛЬНИКИ</span>
+                    <span data-i18n="banner_title">ДИЗАЙНЕРСКИЕ СВЕТИЛЬНИКИ</span>
                     <br>
-                    <span class="accent">OFL DROP</span>
+                    <span class="accent" data-i18n="banner_subtitle">OFL DROP</span>
                 </h1>
-                <p>Светильники OFL DROP имеют изящную запоминающуюся форму, а также обладают рядом интересных
-                    технических особенностей, выгодно отличающих их от конкурентов</p>
+                <p data-i18n="banner_description">Светильники OFL DROP имеют изящную запоминающуюся форму, а также обладают рядом интересных технических особенностей, выгодно отличающих их от конкурентов</p>
             </div>
         </section>
         <section class="about">
-            <p>О компании</p>
+            <p data-i18n="about_title">О компании</p>
             <h2>
-                <span class="accent">HTL</span> — Российская компания<br> по производству светодиодного освещения,
-                Эксперт в области интерьерного и уличного освещения
+                <span class="accent">HTL</span> <span data-i18n="about_description">— Российская компания<br> по производству светодиодного освещения, Эксперт в области интерьерного и уличного освещения</span>
             </h2>
-            <p>Создаём современное высококачественное светотехническое оборудование и отдельные комплектующие для
-                освещения интерьеров жилых и коммерческих помещений</p>
-            <p>О компании</p>
+            <p data-i18n="about_text">Создаём современное высококачественное светотехническое оборудование и отдельные комплектующие для освещения интерьеров жилых и коммерческих помещений</p>
+            <p data-i18n="about_link">О компании</p>
             <div class="cards">
                 <div class="card">
                     <span class="digit">8</span>
-                    <span class="text">На рынке более 8 лет</span>
+                    <span class="text" data-i18n="card_years">На рынке более 8 лет</span>
                 </div>
                 <div class="card">
                     <span class="digit">5</span>
-                    <span class="text">Гарантия на продукцию</span>
+                    <span class="text" data-i18n="card_warranty">Гарантия на продукцию</span>
                 </div>
                 <div class="card">
                     <span class="digit">1</span>
-                    <span class="text">Доставка от 1 дня</span>
+                    <span class="text" data-i18n="card_delivery">Доставка от 1 дня</span>
                 </div>
             </div>
         </section>
         <section class="categories_section">
             <div class="head">
-                <h2>Категории продукции</h2>
+                <h2 data-i18n="categories_title">Категории продукции</h2>
                 <div class="catalog">
-                    <p>Перейти в каталог</p>
+                    <p data-i18n="catalog_link">Перейти в каталог</p>
                     <button><img src="../img/circle_arrow.svg" alt="arrow"></button>
                 </div>
             </div>
             <div class="categories" id="categories">
-
             </div>
         </section>
         <section class="portfolio">
             <div class="head">
-                <h2>Портфолио</h2>
+                <h2 data-i18n="portfolio_title">Портфолио</h2>
                 <div class="catalog">
-                    <p>Все проекты</p>
+                    <p data-i18n="portfolio_link">Все проекты</p>
                     <a href="../projects/index.html"><img src="../img/circle_arrow.svg" alt=""></a>
                 </div>
             </div>
             <div class="type">
                 <ul>
-                    <li class="active" data-type="all" id="btn-all">Все</li>
-                    <li data-type="Уличное" id="btn-street">Уличное</li>
-                    <li data-type="Промышленное" id="btn-industrial">Промышленное</li>
-                    <li data-type="Интерьерное" id="btn-interior">Интерьерное</li>
-                    <li data-type="Ретейл" id="btn-retail">Ретейл</li>
-                    <li data-type="Медицинское" id="btn-medical">Медицинское</li>
+                    <li class="active" data-type="all" id="btn-all" data-i18n="portfolio_all">Все</li>
+                    <li data-type="Уличное" id="btn-street" data-i18n="portfolio_street">Уличное</li>
+                    <li data-type="Промышленное" id="btn-industrial" data-i18n="portfolio_industrial">Промышленное</li>
+                    <li data-type="Интерьерное" id="btn-interior" data-i18n="portfolio_interior">Интерьерное</li>
+                    <li data-type="Ретейл" id="btn-retail" data-i18n="portfolio_retail">Ретейл</li>
+                    <li data-type="Медицинское" id="btn-medical" data-i18n="portfolio_medical">Медицинское</li>
                 </ul>
                 <div class="buttons_div">
                     <button class="prev"><img src="../img/arrow.svg" alt="prev"></button>
@@ -91,10 +85,10 @@
         </section>
     </main>
     <script src="../header/header.js"></script>
-    <script src="../header/theme.js"> </script>
+    <script src="../header/theme.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="script.js"></script>
     <script src="portfolio.js"></script>
 </body>
-
 </html>

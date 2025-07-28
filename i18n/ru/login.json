@@ -1,0 +1,13 @@
+{
+  "page_title": "Авторизация",
+  "login_heading": "Авторизация",
+  "email_label": "Email",
+  "password_label": "Пароль",
+  "required_field": "*",
+  "no_account": "Нет аккаунта? <a href=\"../registration/index.html\">Зарегистрируйтесь</a>",
+  "submit_button": "Войти",
+  "error_invalid_credentials": "Неверный email или пароль",
+  "error_server_unavailable": "Нет доступа к серверу",
+  "welcome_message": "Добро пожаловать, {firstName}!",
+  "error_missing_user_data": "Ошибка: отсутствует идентификатор или роль пользователя"
+}

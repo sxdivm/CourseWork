@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title data-i18n="page_title">Registration</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -12,124 +11,114 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-
 <body>
     <main>
         <section class="registration">
-            <h2>Регистрация</h2>
+            <h2 data-i18n="registration_heading">Регистрация</h2>
             <form id="registration-form">
                 <div class="form-group">
-                    <label for="phone">Номер телефона* <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" placeholder="+375 (XX) XXX-XX-XX" required>
-                    <span class="error-message" id="phone-error"></span>
+                    <label for="phone" data-i18n="phone_label">Номер телефона <span class="required" data-i18n="required_field">*</span></label>
+                    <input type="tel" id="phone" name="phone" data-i18n-placeholder="phone_placeholder" placeholder="+375 (XX) XXX-XX-XX" required>
+                    <span class="error-message" id="phone-error" data-i18n="phone_error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="email">Email* <span class="required">*</span></label>
+                    <label for="email" data-i18n="email_label">Email <span class="required" data-i18n="required_field">*</span></label>
                     <input type="email" id="email" name="email" required>
-                    <span class="error-message" id="email-error"></span>
+                    <span class="error-message" id="email-error" data-i18n="email_error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="birthdate">Дата рождения* <span class="required">*</span></label>
+                    <label for="birthdate" data-i18n="birthdate_label">Дата рождения <span class="required" data-i18n="required_field">*</span></label>
                     <input type="date" id="birthdate" name="birthdate" required>
-                    <span class="error-message" id="birthdate-error"></span>
+                    <span class="error-message" id="birthdate-error" data-i18n="birthdate_error"></span>
                 </div>
                 <div class="form-group">
-                    <label>Способ задания пароля* <span class="required">*</span></label>
+                    <label data-i18n="password_type_label">Способ задания пароля <span class="required" data-i18n="required_field">*</span></label>
                     <div class="password-choice">
                         <input type="radio" id="password-auto" name="password-type" value="auto" checked>
-                        <label for="password-auto">Автоматически</label>
+                        <label for="password-auto" data-i18n="password_auto_label">Автоматически</label>
                         <input type="radio" id="password-manual" name="password-type" value="manual">
-                        <label for="password-manual">Вручную</label>
+                        <label for="password-manual" data-i18n="password_manual_label">Вручную</label>
                     </div>
                 </div>
                 <div class="form-group password-manual" style="display: none;">
-                    <label for="password">Пароль* <span class="required">*</span></label>
+                    <label for="password" data-i18n="password_label">Пароль <span class="required" data-i18n="required_field">*</span></label>
                     <input type="password" id="password" name="password">
-                    <span class="error-message" id="password-error"></span>
+                    <span class="error-message" id="password-error" data-i18n="password_error"></span>
                 </div>
                 <div class="form-group password-manual" style="display: none;">
-                    <label for="password-confirm">Подтверждение пароля* <span class="required">*</span></label>
+                    <label for="password-confirm" data-i18n="password_confirm_label">Подтверждение пароля <span class="required" data-i18n="required_field">*</span></label>
                     <input type="password" id="password-confirm" name="password-confirm">
-                    <span class="error-message" id="password-confirm-error"></span>
+                    <span class="error-message" id="password-confirm-error" data-i18n="password_confirm_error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="firstName">Имя* <span class="required">*</span></label>
+                    <label for="firstName" data-i18n="firstName_label">Имя <span class="required" data-i18n="required_field">*</span></label>
                     <input type="text" id="firstName" name="firstName" required>
-                    <span class="error-message" id="firstName-error"></span>
+                    <span class="error-message" id="firstName-error" data-i18n="firstName_error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Фамилия* <span class="required">*</span></label>
+                    <label for="lastName" data-i18n="lastName_label">Фамилия <span class="required" data-i18n="required_field">*</span></label>
                     <input type="text" id="lastName" name="lastName" required>
-                    <span class="error-message" id="lastName-error"></span>
+                    <span class="error-message" id="lastName-error" data-i18n="lastName_error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="middleName">Отчество</label>
+                    <label for="middleName" data-i18n="middleName_label">Отчество</label>
                     <input type="text" id="middleName" name="middleName">
                 </div>
                 <div class="form-group">
-                    <label for="nickname">Никнейм* <span class="required">*</span></label>
+                    <label for="nickname" data-i18n="nickname_label">Никнейм <span class="required" data-i18n="required_field">*</span></label>
                     <input type="text" id="nickname" name="nickname">
-                    <button type="button" id="regenerate-nickname">Сгенерировать новый никнейм</button>
-                    <span class="error-message" id="nickname-error"></span>
-                    <span id="nickname-attempts">Осталось попыток генерации: 5</span>
+                    <button type="button" id="regenerate-nickname" data-i18n="regenerate_nickname_button">Сгенерировать новый никнейм</button>
+                    <span class="error-message" id="nickname-error" data-i18n="nickname_error"></span>
+                    <span id="nickname-attempts"></span>
                 </div>
                 <div class="form-group">
                     <input type="checkbox" id="agreement" name="agreement" required disabled>
-                    <label for="agreement">Я прочитал и принимаю <a href="#" id="agreement-link">Соглашение
-                            пользователя</a>* <span class="required">*</span></label>
-                    <span class="error-message" id="agreement-error"></span>
+                    <label for="agreement" data-i18n="agreement_label">Я прочитал и принимаю <a href="#" id="agreement-link" data-i18n="agreement_link">Соглашение пользователя</a> <span class="required" data-i18n="required_field">*</span></label>
+                    <span class="error-message" id="agreement-error" data-i18n="agreement_error"></span>
                 </div>
                 <div class="form-group">
-                    <p>Уже есть аккаунт? <a class="log" href="../login/index.html">Войдите</a></p>
+                    <p data-i18n="have_account">Уже есть аккаунт? <a class="log" href="../login/index.html" data-i18n="login_link">Войдите</a></p>
                 </div>
-                <button type="submit" id="submit-button" disabled>Зарегистрироваться</button>
+                <button type="submit" id="submit-button" data-i18n="submit_button" disabled>Зарегистрироваться</button>
             </form>
         </section>
         <div class="modal" id="agreement-modal">
             <div class="modal-content">
-                <h3>Пользовательское соглашение</h3>
-                <div class="agreement-text" id="agreement-text">
-                    <p>Это пользовательское соглашение регулирует использование нашего сайта. Пожалуйста, внимательно
-                        прочитайте его перед регистрацией.</p>
+                <h3 data-i18n="agreement_modal_title">Пользовательское соглашение</h3>
+                <div class="agreement-text" id="agreement-text" data-i18n="agreement_text">
+                    <p>Это пользовательское соглашение регулирует использование нашего сайта. Пожалуйста, внимательно прочитайте его перед регистрацией.</p>
                     <p>1. <strong>Общие положения</strong></p>
-                    <p>Настоящее соглашение является юридически обязательным договором между вами и нашей компанией.
-                        Регистрируясь на сайте, вы соглашаетесь соблюдать все указанные условия.</p>
+                    <p>Настоящее соглашение является юридически обязательным договором между вами и нашей компанией. Регистрируясь на сайте, вы соглашаетесь соблюдать все указанные условия.</p>
                     <p>2. <strong>Условия использования</strong></p>
-                    <p>Вы обязуетесь предоставлять достоверную информацию при регистрации и не использовать сайт в
-                        незаконных целях.</p>
+                    <p>Вы обязуетесь предоставлять достоверную информацию при регистрации и не использовать сайт в незаконных целях.</p>
                     <p>3. <strong>Конфиденциальность</strong></p>
-                    <p>Мы обязуемся защищать ваши персональные данные в соответствии с нашей политикой
-                        конфиденциальности.</p>
+                    <p>Мы обязуемся защищать ваши персональные данные в соответствии с нашей политикой конфиденциальности.</p>
                     <p>4. <strong>Ответственность</strong></p>
-                    <p>Вы несете ответственность за любые действия, совершенные с использованием вашей учетной записи.
-                    </p>
+                    <p>Вы несете ответственность за любые действия, совершенные с использованием вашей учетной записи.</p>
                     <p>5. <strong>Изменения условий</strong></p>
-                    <p>Мы оставляем за собой право изменять данное соглашение. Уведомления об изменениях будут размещены
-                        на сайте.</p>
+                    <p>Мы оставляем за собой право изменять данное соглашение. Уведомления об изменениях будут размещены на сайте.</p>
                     <p>6. <strong>Контакты</strong></p>
                     <p>По всем вопросам обращайтесь по адресу: info@h-t-l.ru или по телефону +7 (495) 125-10-07.</p>
                     <p>7. <strong>Заключительные положения</strong></p>
-                    <p>Данное соглашение вступает в силу с момента вашей регистрации и действует до прекращения
-                        использования сайта.</p>
+                    <p>Данное соглашение вступает в силу с момента вашей регистрации и действует до прекращения использования сайта.</p>
                     <p>8. <strong>Дополнительные условия</strong></p>
-                    <p>Вы соглашаетесь не распространять вредоносное ПО и не предпринимать действия, которые могут
-                        нарушить работу сайта.</p>
+                    <p>Вы соглашаетесь не распространять вредоносное ПО и не предпринимать действия, которые могут нарушить работу сайта.</p>
                     <p>9. <strong>Ограничения</strong></p>
-                    <p>Доступ к некоторым функциям сайта может быть ограничен в зависимости от вашего региона или
-                        статуса учетной записи.</p>
+                    <p>Доступ к некоторым функциям сайта может быть ограничен в зависимости от вашего региона или статуса учетной записи.</p>
                     <p>10. <strong>Заключение</strong></p>
                     <p>Мы благодарим вас за выбор нашего сайта и надеемся на плодотворное сотрудничество.</p>
                 </div>
                 <div class="modal-buttons">
-                    <button id="confirm-agreement" disabled>Подтвердить</button>
-                    <button id="close-modal">Закрыть</button>
+                    <button id="confirm-agreement" data-i18n="confirm_agreement_button" disabled>Подтвердить</button>
+                    <button id="close-modal" data-i18n="close_modal_button">Закрыть</button>
                 </div>
             </div>
         </div>
     </main>
+    <script src="../header/i18n.js"></script>
+    <script src="../header/header.js"></script>
+    <script src="../header/theme.js"></script>
+    <script src="../footer/footer.js"></script>
+    <script src="script.js"></script>
 </body>
-<script src="../registration/script.js"></script>
-<script src="../header/header.js"></script>
-<script src="../header/theme.js"> </script>
-<script src="../footer/footer.js"></script>
 </html>

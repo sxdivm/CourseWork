@@ -1,0 +1,16 @@
+{
+  "page_title": "Projects",
+  "filter_all": "All",
+  "filter_street": "Street",
+  "filter_industrial": "Industrial",
+  "filter_interior": "Interior",
+  "filter_retail": "Retail",
+  "filter_medical": "Medical",
+  "projects_not_found": "No projects found.",
+  "projects_not_found_in_category": "No projects found in category \"%s\".",
+  "error_loading": "Error loading projects. Please try again later.",
+  "no_category": "No category",
+  "no_name": "No name",
+  "no_description": "No description",
+  "read": "Read"
+}

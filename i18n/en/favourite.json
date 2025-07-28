@@ -1,0 +1,17 @@
+{
+  "page_title": "Favorites",
+  "empty_favorites": "No items in favorites yet.",
+  "error_loading": "Error loading favorites. Please try again later.",
+  "availability_in_stock": "In stock",
+  "availability_out_of_stock": "Out of stock",
+  "price_on_request": "Price on request",
+  "item_added_to_cart": "Item added to cart!",
+  "item_quantity_updated": "Item quantity updated in cart!",
+  "item_removed_from_favorites": "Item removed from favorites!",
+  "error_adding_to_cart": "Error adding item to cart. Please try again later.",
+  "error_removing_from_favorites": "Error removing item from favorites. Please try again later.",
+  "error_updating_quantity": "Error updating item quantity. Please try again later.",
+  "decrease_quantity": "Decrease quantity",
+  "increase_quantity": "Increase quantity",
+  "remove_from_favorites": "Remove from favorites"
+}

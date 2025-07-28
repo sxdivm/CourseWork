@@ -1,12 +1,18 @@
 async function loadCategories() {
     try {
+        const lang = localStorage.getItem('language') || 'ru';
         const response = await fetch('http://localhost:3000/products');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const products = await response.json();
 
-        const uniqueTypes = [...new Set(products.map(product => product.type))].filter(type => type);
+        const translations = await new Promise(resolve => {
+            window.loadTranslations(lang, 'home', (trans) => resolve(trans || {}));
+        });
+
+        const uniqueTypes = [...new Set(products.map(product => lang === 'ru' ? product.type : product.en_type || product.type))].filter(type => type);
+        console.log('Unique categories:', uniqueTypes); 
 
         const categoriesContainer = document.getElementById('categories');
         categoriesContainer.innerHTML = '';
@@ -25,8 +31,15 @@ async function loadCategories() {
         });
     } catch (error) {
         console.error('Ошибка при загрузке категорий:', error);
+        const lang = localStorage.getItem('language') || 'ru';
         const categoriesContainer = document.getElementById('categories');
-        categoriesContainer.innerHTML = '<p>Ошибка загрузки категорий. Попробуйте позже.</p>';
+        await new Promise(resolve => {
+            window.loadTranslations(lang, 'home', (translations) => {
+                categoriesContainer.innerHTML = `<p data-i18n="error_loading_categories">${translations.error_loading_categories || 'Ошибка загрузки категорий. Попробуйте позже.'}</p>`;
+                resolve();
+            });
+        });
+        window.loadTranslations(lang, 'home');
     }
 }
 
@@ -34,4 +47,11 @@ function goToCatalog(type) {
     window.location.href = `../catalog/index.html?type=${type}`;
 }
 
-document.addEventListener('DOMContentLoaded', loadCategories);
+document.addEventListener('DOMContentLoaded', () => {
+    loadCategories();
+    window.addEventListener('languageChanged', (event) => {
+        const newLang = event.detail?.lang || localStorage.getItem('language') || 'ru';
+        console.log('Language changed to:', newLang);
+        loadCategories();
+    });
+});

@@ -13,24 +13,34 @@ function checkFormFilled() {
 async function validateCredentials(email, password) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        return { isValid: false, message: 'Неверный email или пароль' };
+        return { isValid: false, message: 'error_invalid_credentials' };
     }
     try {
         const response = await fetch(`http://localhost:3000/users?email=${encodeURIComponent(email)}`);
         const users = await response.json();
         console.log('Email fetch result:', users);
         if (users.length === 0) {
-            return { isValid: false, message: 'Неверный email или пароль' };
+            return { isValid: false, message: 'error_invalid_credentials' };
         }
         const user = users[0];
         if (password !== user.password) {
-            return { isValid: false, message: 'Неверный email или пароль' };
+            return { isValid: false, message: 'error_invalid_credentials' };
         }
         return { isValid: true, message: '', user };
     } catch (error) {
         console.error('Validation error:', error);
-        return { isValid: false, message: 'Нет доступа к серверу' };
+        return { isValid: false, message: 'error_server_unavailable' };
     }
+}
+
+function updateLoginTranslations() {
+    const currentLang = localStorage.getItem('language') || 'ru';
+    loadTranslations(currentLang, 'login', (translations) => {
+        if (translations) {
+            formError.textContent = translations[formError.getAttribute('data-i18n')] || '';
+            console.log('Updated login translations');
+        }
+    });
 }
 
 form.querySelectorAll('input').forEach(input => {
@@ -50,16 +60,28 @@ form.addEventListener('submit', async (e) => {
     if (validation.isValid) {
         if (!validation.user.id || !validation.user.role) {
             console.error('User ID or role is missing in server response');
-            formError.textContent = 'Ошибка: отсутствует идентификатор или роль пользователя';
+            formError.setAttribute('data-i18n', 'error_missing_user_data');
+            updateLoginTranslations();
             return;
         }
         localStorage.setItem('userId', validation.user.id);
         localStorage.setItem('role', validation.user.role);
-        alert(`Добро пожаловать, ${validation.user.firstName}!`);
-        form.reset();
-        submitButton.disabled = true;
-        window.location.href = '../catalog/index.html';
+        const currentLang = localStorage.getItem('language') || 'ru';
+        loadTranslations(currentLang, 'login', (translations) => {
+            if (translations && translations.welcome_message) {
+                alert(translations.welcome_message.replace('{firstName}', validation.user.firstName));
+            } else {
+                alert(`Welcome, ${validation.user.firstName}!`);
+            }
+            form.reset();
+            submitButton.disabled = true;
+            window.location.href = '../catalog/index.html';
+        });
     } else {
-        formError.textContent = validation.message;
+        formError.setAttribute('data-i18n', validation.message);
+        updateLoginTranslations();
     }
 });
+
+window.updateLoginTranslations = updateLoginTranslations;
+checkFormFilled();

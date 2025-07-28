@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проект - [Название проекта]</title>
+    <title data-i18n="page_title">Проект - [Название проекта]</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -15,9 +15,9 @@
         <div class="project-header">
             <h1 id="project-name" class="project-title">Название проекта</h1>
             <div class="project-meta">
-                <p><strong>Дата:</strong> <span id="project-date">20.07.2025</span></p>
-                <p><strong>Статус:</strong> <span id="project-status">Завершено</span></p>
-                <p><strong>Местоположение:</strong> <span id="project-location">Москва, Россия</span></p>
+                <p><strong data-i18n="label_date">Дата:</strong> <span id="project-date">20.07.2025</span></p>
+                <p><strong data-i18n="label_status">Статус:</strong> <span id="project-status">Завершено</span></p>
+                <p><strong data-i18n="label_location">Местоположение:</strong> <span id="project-location">Москва, Россия</span></p>
             </div>
             <div class="header-decoration"></div>
         </div>
@@ -27,30 +27,30 @@
                 <div class="image-overlay"></div>
             </div>
             <div class="project-info">
-                <h2 class="section-title">Описание</h2>
+                <h2 class="section-title" data-i18n="section_description">Описание</h2>
                 <p id="project-description" class="project-desc">Описание проекта будет загружено здесь...</p>
                 <div class="info-decoration"></div>
-                <h2 class="section-title">Детали проекта</h2>
+                <h2 class="section-title" data-i18n="section_details">Детали проекта</h2>
                 <div class="project-details">
-                    <p><strong>Бюджет:</strong> <span id="project-budget">Бюджет не указан</span></p>
-                    <p><strong>Площадь:</strong> <span id="project-area">Площадь не указана</span></p>
-                    <p><strong>Клиент:</strong> <span id="project-client">Клиент не указан</span></p>
-                    <p><strong>Длительность:</strong> <span id="project-duration">Длительность не указана</span></p>
+                    <p><strong data-i18n="label_budget">Бюджет:</strong> <span id="project-budget">Бюджет не указан</span></p>
+                    <p><strong data-i18n="label_area">Площадь:</strong> <span id="project-area">Площадь не указана</span></p>
+                    <p><strong data-i18n="label_client">Клиент:</strong> <span id="project-client">Клиент не указан</span></p>
+                    <p><strong data-i18n="label_duration">Длительность:</strong> <span id="project-duration">Длительность не указана</span></p>
                 </div>
                 <div class="info-decoration"></div>
-                <h2 class="section-title">Команда</h2>
+                <h2 class="section-title" data-i18n="section_team">Команда</h2>
                 <ul id="project-team" class="team-list"></ul>
             </div>
         </div>
         <div class="sidebar">
             <div class="contact-info">
-                <h3>Контакты</h3>
-                <p><iconify-icon icon="mdi:email" class="icon"></iconify-icon> info@company.com</p>
-                <p><iconify-icon icon="mdi:phone" class="icon"></iconify-icon> +7 (495) 123-45-67</p>
-                <p><iconify-icon icon="mdi:map-marker" class="icon"></iconify-icon> г. Москва, ул. Пример, д. 1</p>
+                <h3 data-i18n="section_contacts">Контакты</h3>
+                <p><iconify-icon icon="mdi:email" class="icon"></iconify-icon> <span data-i18n="contact_email">info@company.com</span></p>
+                <p><iconify-icon icon="mdi:phone" class="icon"></iconify-icon> <span data-i18n="contact_phone">+7 (495) 123-45-67</span></p>
+                <p><iconify-icon icon="mdi:map-marker" class="icon"></iconify-icon> <span data-i18n="contact_address">г. Москва, ул. Пример, д. 1</span></p>
             </div>
             <div class="decorative-element">
-                <p>Поделиться:</p>
+                <p data-i18n="share">Поделиться:</p>
                 <div class="social-icons">
                     <a href="#" class="social-link"><iconify-icon icon="mdi:facebook" class="icon"></iconify-icon></a>
                     <a href="#" class="social-link"><iconify-icon icon="mdi:twitter" class="icon"></iconify-icon></a>
@@ -60,8 +60,9 @@
         </div>
     </section>
     <script src="../header/header.js"></script>
-    <script src="../header/theme.js"> </script>
+    <script src="../header/theme.js"></script>
     <script src="../footer/footer.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

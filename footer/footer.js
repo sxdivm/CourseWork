@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const footer = doc.querySelector('footer');
             if (footer) {
                 document.body.appendChild(footer);
+                const currentLang = localStorage.getItem('language') || 'ru';
+                window.loadTranslations(currentLang, 'footer');
             }
         })
         .catch(error => console.error('Error loading footer:', error));

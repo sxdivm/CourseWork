@@ -1,0 +1,17 @@
+{
+  "page_title": "Избранное",
+  "empty_favorites": "В избранном пока нет товаров.",
+  "error_loading": "Ошибка загрузки избранного. Попробуйте позже.",
+  "availability_in_stock": "Есть в наличии",
+  "availability_out_of_stock": "Нет в наличии",
+  "price_on_request": "Цена по запросу",
+  "item_added_to_cart": "Товар добавлен в корзину!",
+  "item_quantity_updated": "Количество товара в корзине обновлено!",
+  "item_removed_from_favorites": "Товар удален из избранного!",
+  "error_adding_to_cart": "Ошибка при добавлении товара в корзину. Попробуйте позже.",
+  "error_removing_from_favorites": "Ошибка при удалении товара из избранного. Попробуйте позже.",
+  "error_updating_quantity": "Ошибка при обновлении количества товара. Попробуйте позже.",
+  "decrease_quantity": "Уменьшить количество",
+  "increase_quantity": "Увеличить количество",
+  "remove_from_favorites": "Удалить из избранного"
+}

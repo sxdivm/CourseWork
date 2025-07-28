@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title data-i18n="title">Контакты</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -12,34 +11,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-
 <body>
     <section>
-        <h1>Контакты</h1>
+        <h1 data-i18n="section_title">Контакты</h1>
         <div class="contacts">
             <div class="contact">
-                <p class="name">Телефон</p>
-                <p class="content">+7 (495) 125-10-07</p>
+                <p class="name" data-i18n="phone_name">Телефон</p>
+                <p class="content" data-i18n="phone_content">+7 (495) 125-10-07</p>
             </div>
             <div class="contact">
-                <p class="name">Электронная почта</p>
-                <p class="content">info@h-t-l.ru</p>
+                <p class="name" data-i18n="email_name">Электронная почта</p>
+                <p class="content" data-i18n="email_content">info@h-t-l.ru</p>
             </div>
             <div class="contact">
-                <p class="name">Сервисный центр</p>
-                <p class="content">service@h-t-l.ru</p>
+                <p class="name" data-i18n="service_name">Сервисный центр</p>
+                <p class="content" data-i18n="service_content">service@h-t-l.ru</p>
             </div>
             <div class="contact">
-                <p class="name">Дилерский центр</p>
-                <p class="content">cooperation@h-t-l.ru</p>
+                <p class="name" data-i18n="dealer_name">Дилерский центр</p>
+                <p class="content" data-i18n="dealer_content">cooperation@h-t-l.ru</p>
             </div>
             <div class="contact">
-                <p class="name">Центральный офис</p>
-                <p class="content">г. Москва, 2-ой Рощинский проезд, д.8</p>
+                <p class="name" data-i18n="office_name">Центральный офис</p>
+                <p class="content" data-i18n="office_content">г. Москва, 2-ой Рощинский проезд, д.8</p>
             </div>
             <div class="contact">
-                <p class="name">Склад</p>
-                <p class="content">г. Москва, Нагорный проезд, д.7 стр.13</p>
+                <p class="name" data-i18n="warehouse_name">Склад</p>
+                <p class="content" data-i18n="warehouse_content">г. Москва, Нагорный проезд, д.7 стр.13</p>
             </div>
         </div>
         <div class="map-container">
@@ -47,10 +45,10 @@
         </div>
     </section>
     <script src="../header/header.js"></script>
+    <script src="../header/theme.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="../footer/footer.js"></script>
-    <script src="../header/theme.js"> </script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=ваш_api_ключ"></script>
     <script src="script.js"></script>
 </body>
-
 </html>

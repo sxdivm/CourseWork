@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Корзина - HTL Business</title>
+    <title data-i18n="cart_title">Корзина - HTL Business</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -16,23 +16,29 @@
 
 <body>
     <main>
-        <h1>Корзина</h1>
+        <h1 data-i18n="cart_heading">Корзина</h1>
         <hr>
         <section>
             <div class="content-wrapper">
                 <div class="cart-items" id="cart-items">
                 </div>
                 <div class="cart-summary">
-                    <h3>Итого: <span id="total-cost">0 ₽</span></h3>
-                    <button id="checkout-button" disabled>Оформить заказ</button>
-                    <p id="admin-message" style="display: none;">Администраторы не могут оформлять заказы.</p>
+                    <div class="order-details">
+                        <h3 data-i18n="cart_order_details">Детали заказа</h3>
+                        <ul class="items-list" id="items-list">
+                        </ul>
+                        <div class="total-cost" id="total-cost">0 ₽</div>
+                    </div>
+                    <button id="checkout-button" data-i18n="checkout_button" disabled>Оформить заказ</button>
+                    <p id="admin-message" data-i18n="admin_message" style="display: none;">Администраторы не могут оформлять заказы.</p>
                 </div>
             </div>
         </section>
     </main>
+    <script src="../header/i18n.js"></script>
     <script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
-    <script src="../header/theme.js"> </script>
+    <script src="../header/theme.js"></script>
     <script src="script.js"></script>
 </body>
 

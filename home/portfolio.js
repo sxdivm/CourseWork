@@ -1,5 +1,6 @@
 async function loadProjects(type = 'all') {
     try {
+        const lang = localStorage.getItem('language') || 'ru';
         const response = await fetch('http://localhost:3000/projects');
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -10,8 +11,13 @@ async function loadProjects(type = 'all') {
         const projectsContainer = document.getElementById('projects');
         projectsContainer.innerHTML = '';
 
+        const translations = await new Promise(resolve => {
+            window.loadTranslations(lang, 'home', (trans) => resolve(trans || {}));
+        });
+
         if (projects.length === 0) {
-            projectsContainer.innerHTML = '<p>Проекты не найдены.</p>';
+            projectsContainer.innerHTML = `<p data-i18n="no_projects">${translations.no_projects || 'Проекты не найдены.'}</p>`;
+            window.loadTranslations(lang, 'home');
             return;
         }
 
@@ -23,23 +29,37 @@ async function loadProjects(type = 'all') {
             Ретейл: 0,
             Медицинское: 0
         };
+        console.log('Projects from API:', projects); 
         projects.forEach(project => {
-            if (project.type && categoryCounts.hasOwnProperty(project.type)) {
-                categoryCounts[project.type]++;
+            if (project.type) {
+                const normalizedType = project.type.trim();
+                if (categoryCounts.hasOwnProperty(normalizedType)) {
+                    categoryCounts[normalizedType]++;
+                } else {
+                    console.warn(`Unexpected project type: "${project.type}"`); 
+                }
+            } else {
+                console.warn('Project missing type:', project); 
             }
         });
-
-        const updateButtonText = (id, text) => {
+        console.log('Category counts:', categoryCounts); 
+        const updateButtonText = (id, key, count) => {
             const button = document.getElementById(id);
-            if (button) button.textContent = text;
+            if (button) {
+                const categoryText = translations[key] || button.getAttribute('data-i18n');
+                button.textContent = `${categoryText} (${count})`;
+                console.log(`Updated button ${id} to "${button.textContent}"`);
+            } else {
+                console.warn(`Button with ID ${id} not found`); 
+            }
         };
 
-        updateButtonText('btn-all', `Все (${categoryCounts.all})`);
-        updateButtonText('btn-street', `Уличное (${categoryCounts.Уличное})`);
-        updateButtonText('btn-industrial', `Промышленное (${categoryCounts.Промышленное})`);
-        updateButtonText('btn-interior', `Интерьерное (${categoryCounts.Интерьерное})`);
-        updateButtonText('btn-retail', `Ретейл (${categoryCounts.Ретейл})`);
-        updateButtonText('btn-medical', `Медицинское (${categoryCounts.Медицинское})`);
+        updateButtonText('btn-all', 'portfolio_all', categoryCounts.all);
+        updateButtonText('btn-street', 'portfolio_street', categoryCounts.Уличное);
+        updateButtonText('btn-industrial', 'portfolio_industrial', categoryCounts.Промышленное);
+        updateButtonText('btn-interior', 'portfolio_interior', categoryCounts.Интерьерное);
+        updateButtonText('btn-retail', 'portfolio_retail', categoryCounts.Ретейл);
+        updateButtonText('btn-medical', 'portfolio_medical', categoryCounts.Медицинское);
 
         const filteredProjects = type === 'all'
             ? projects
@@ -48,7 +68,9 @@ async function loadProjects(type = 'all') {
             );
 
         if (filteredProjects.length === 0) {
-            projectsContainer.innerHTML = `<p>Проекты в категории "${type}" не найдены.</p>`;
+            const categoryKey = `portfolio_${type.toLowerCase()}`;
+            projectsContainer.innerHTML = `<p data-i18n="no_projects_in_category">${translations.no_projects_in_category || `Проекты в категории "${lang === 'ru' ? type : translations[categoryKey] || type}" не найдены.`}</p>`;
+            window.loadTranslations(lang, 'home');
             return;
         }
 
@@ -61,10 +83,10 @@ async function loadProjects(type = 'all') {
             projectDiv.style.backgroundRepeat = 'no-repeat';
             projectDiv.innerHTML = `
                 <div class="info">
-                    <p class="category">${project.type || 'Без категории'}</p>
-                    <h4>${project.name || 'Без названия'}</h4>
+                    <p class="category">${lang === 'ru' ? project.type : project.en_type || project.type || translations.no_category || 'Без категории'}</p>
+                    <h4>${lang === 'ru' ? project.name : project.en_name || project.name || translations.no_name || 'Без названия'}</h4>
                     <div class="read">
-                        <p>Подробнее</p>
+                        <p data-i18n="read_more">${translations.read_more || 'Подробнее'}</p>
                         <button onclick="window.location.href='project_page/index.html?id=${project.id}'">
                             <img src="../img/circle_arrow.svg" alt="arrow">
                         </button>
@@ -77,8 +99,10 @@ async function loadProjects(type = 'all') {
         initializeSlider();
     } catch (error) {
         console.error('Ошибка при загрузке проектов:', error);
+        const lang = localStorage.getItem('language') || 'ru';
         const projectsContainer = document.getElementById('projects');
-        projectsContainer.innerHTML = '<p>Ошибка загрузки проектов. Попробуйте позже.</p>';
+        projectsContainer.innerHTML = `<p data-i18n="error_loading">${translations.error_loading || 'Ошибка загрузки проектов. Попробуйте позже.'}</p>`;
+        window.loadTranslations(lang, 'home');
     }
 }
 
@@ -102,7 +126,6 @@ function initializeSlider() {
         const offset = -currentIndex * cardWidth;
         projectsContainer.style.transform = `translateX(${offset}px)`;
 
-        // Показываем кнопки, даже если третья карточка влезает частично
         prevButton.style.display = totalWidth > containerWidth ? 'flex' : 'none';
         nextButton.style.display = totalWidth > containerWidth ? 'flex' : 'none';
 
@@ -145,5 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const type = button.getAttribute('data-type');
             loadProjects(type);
         });
+    });
+
+    window.addEventListener('languageChanged', (event) => {
+        const newLang = event.detail?.lang || localStorage.getItem('language') || 'ru';
+        console.log('Language changed to:', newLang);
+        const activeButton = document.querySelector('.type li.active');
+        const type = activeButton ? activeButton.getAttribute('data-type') : 'all';
+        loadProjects(type);
     });
 });

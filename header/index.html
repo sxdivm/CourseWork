@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,20 +8,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
-
 <body>
     <header>
         <hr class="first">
         <div class="pre_header">
             <div class="left_part">
-                <button class="lang">RU</button>
+                <button class="lang" data-i18n="lang">RU</button>
                 <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
             </div>
             <div class="right_part">
                 <button class="cart"><a href="../cart/index.html"><img src="../img/cart.svg" alt="cart"><span class="cart-count"></span></a></button>
                 <button class="fav"><a href="../favourite/index.html"><img src="../img/fav.svg" alt="favourite"><span class="fav-count"></span></a></button>
                 <button class="login">
-                    <a href="../login/index.html">Войти</a>
+                    <a href="../login/index.html" data-i18n="login">Войти</a>
                     <img src="../img/user.svg" alt="user">
                 </button>
             </div>
@@ -38,22 +36,22 @@
             </label>
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="../home/index.html">Главная</a></li>
-                    <li><a href="../about/index.html">О компании</a></li>
-                    <li><a href="../projects/index.html">Проекты</a></li>
-                    <li><a href="../services/index.html">Услуги</a></li>
-                    <li><a href="../catalog/index.html">Каталог</a></li>
-                    <li><a href="../contacts/index.html">Контакты</a></li>
+                    <li><a href="../home/index.html" data-i18n="home">Главная</a></li>
+                    <li><a href="../about/index.html" data-i18n="about">О компании</a></li>
+                    <li><a href="../projects/index.html" data-i18n="projects">Проекты</a></li>
+                    <li><a href="../services/index.html" data-i18n="services">Услуги</a></li>
+                    <li><a href="../catalog/index.html" data-i18n="catalog">Каталог</a></li>
+                    <li><a href="../contacts/index.html" data-i18n="contacts">Контакты</a></li>
                     <li class="mobile-pre-header">
                         <div class="left_part">
-                            <button class="lang">RU</button>
+                            <button class="lang" data-i18n="lang">RU</button>
                             <button class="theme"><img src="../img/theme.svg" alt="theme"></button>
                         </div>
                         <div class="right_part">
                             <button class="cart"><a href="../cart/index.html"><img src="../img/cart.svg" alt="cart"><span class="cart-count"></span></a></button>
                             <button class="fav"><a href="../favourite/index.html"><img src="../img/fav.svg" alt="favourite"><span class="fav-count"></span></a></button>
                             <button class="login">
-                                <a href="../login/index.html">Войти</a>
+                                <a href="../login/index.html" data-i18n="login">Войти</a>
                                 <img src="../img/user.svg" alt="user">
                             </button>
                         </div>
@@ -61,13 +59,13 @@
                 </ul>
             </nav>
             <div class="phone"><img src="../img/phone.svg" alt="phone">
-                <p>+7 (495) 125-10-07</p>
+                <p data-i18n="phone">+7 (495) 125-10-07</p>
             </div>
         </div>
         <hr>
     </header>
     <script src="header.js"></script>
     <script src="theme.js"></script>
+    <script src="i18n.js"></script>
 </body>
-
 </html>

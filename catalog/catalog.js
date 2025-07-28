@@ -1,5 +1,24 @@
 const ITEMS_PER_PAGE = 12;
 
+let currentFilters = {
+    sort: 'name',
+    order: 'asc',
+    search: '',
+    availability: '',
+    types: [],
+    minPrice: null,
+    maxPrice: null,
+    minPower: null,
+    maxPower: null,
+    minLuminousFlux: null,
+    maxLuminousFlux: null,
+    ip: '',
+    minColorTemperature: null,
+    maxColorTemperature: null,
+    emergencyBlock: '',
+    page: 1
+};
+
 async function addToCart(productId) {
     try {
         const userId = localStorage.getItem('userId');
@@ -52,9 +71,7 @@ async function addToCart(productId) {
             alert('Товар добавлен в корзину!');
         }
 
-        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
-        const search = document.getElementById('search-input')?.value.trim() || '';
-        loadProducts(sort, order, search);
+        loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     } catch (error) {
         console.error('Ошибка при добавлении в корзину:', error);
         alert('Ошибка при добавлении товара в корзину. Попробуйте позже.');
@@ -107,9 +124,7 @@ async function toggleFavorite(productId) {
             alert('Товар добавлен в избранное!');
         }
 
-        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
-        const search = document.getElementById('search-input')?.value.trim() || '';
-        loadProducts(sort, order, search);
+        loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     } catch (error) {
         console.error('Ошибка при работе с избранным:', error);
         alert('Ошибка при добавлении/удалении товара из избранного. Попробуйте позже.');
@@ -136,9 +151,7 @@ async function updateCartItemQuantity(cartItemId, newQuantity) {
         }
 
         console.log('Количество товара обновлено:', await response.json());
-        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
-        const search = document.getElementById('search-input')?.value.trim() || '';
-        loadProducts(sort, order, search);
+        loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     } catch (error) {
         console.error('Ошибка при обновлении количества:', error);
         alert('Ошибка при обновлении количества товара. Попробуйте позже.');
@@ -157,9 +170,7 @@ async function deleteProduct(productId) {
 
         console.log('Товар удален:', productId);
         alert('Товар удален!');
-        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
-        const search = document.getElementById('search-input')?.value.trim() || '';
-        loadProducts(sort, order, search);
+        loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     } catch (error) {
         console.error('Ошибка при удалении товара:', error);
         alert('Ошибка при удалении товара. Попробуйте позже.');
@@ -173,7 +184,7 @@ async function openProductModal(productId = null) {
     const idInput = document.getElementById('product-id');
 
     if (productId) {
-        title.textContent = 'Редактировать товар';
+        title.setAttribute('data-i18n', 'edit_product_title');
         const response = await fetch(`http://localhost:3000/products/${productId}`);
         if (!response.ok) {
             throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
@@ -181,7 +192,9 @@ async function openProductModal(productId = null) {
         const product = await response.json();
         idInput.value = product.id;
         document.getElementById('product-name').value = product.name || '';
+        document.getElementById('product-en-name').value = product.en_name || '';
         document.getElementById('product-type').value = product.type || '';
+        document.getElementById('product-en-type').value = product.en_type || '';
         document.getElementById('product-price').value = product.price || '';
         document.getElementById('product-availability').checked = product.availability || false;
         document.getElementById('product-power').value = product.power || '';
@@ -190,7 +203,7 @@ async function openProductModal(productId = null) {
         document.getElementById('product-color-temperature').value = product['color temperature'] || '';
         document.getElementById('product-emergency-block').checked = product['emergency block'] || false;
     } else {
-        title.textContent = 'Добавить товар';
+        title.setAttribute('data-i18n', 'add_product_title');
         const response = await fetch('http://localhost:3000/products?_sort=id&_order=desc&_limit=1');
         const lastProduct = (await response.json())[0];
         const newId = lastProduct ? parseInt(lastProduct.id) + 1 : 1;
@@ -199,7 +212,10 @@ async function openProductModal(productId = null) {
         document.getElementById('product-id').value = newId;
     }
 
-    modal.style.display = 'flex';
+    window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog', () => {
+        console.log('Translations applied to modal form');
+        modal.style.display = 'flex';
+    });
 }
 
 async function saveProduct(event) {
@@ -208,7 +224,9 @@ async function saveProduct(event) {
     const product = {
         id: id,
         name: document.getElementById('product-name').value,
+        en_name: document.getElementById('product-en-name').value,
         type: document.getElementById('product-type').value,
+        en_type: document.getElementById('product-en-type').value,
         price: document.getElementById('product-price').value ? parseFloat(document.getElementById('product-price').value) : null,
         availability: document.getElementById('product-availability').checked,
         power: document.getElementById('product-power').value ? parseFloat(document.getElementById('product-power').value) : null,
@@ -238,9 +256,7 @@ async function saveProduct(event) {
         console.log(method === 'PATCH' ? 'Товар обновлен' : 'Товар добавлен', await response.json());
         alert(method === 'PATCH' ? 'Товар обновлен!' : 'Товар добавлен!');
         document.getElementById('modal').style.display = 'none';
-        const [sort, order] = document.getElementById('sort-select')?.value.split(',') || ['name', 'asc'];
-        const search = document.getElementById('search-input')?.value.trim() || '';
-        loadProducts(sort, order, search);
+        loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     } catch (error) {
         console.error('Ошибка при сохранении товара:', error);
         alert('Ошибка при сохранении товара. Попробуйте позже.');
@@ -248,13 +264,15 @@ async function saveProduct(event) {
 }
 
 async function loadProducts(sort = 'name', order = 'asc', search = '', availability = '', types = [], minPrice = null, maxPrice = null, minPower = null, maxPower = null, minLuminousFlux = null, maxLuminousFlux = null, ip = '', minColorTemperature = null, maxColorTemperature = null, emergencyBlock = '', page = 1) {
+
+    currentFilters = { sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock, page };
+
     try {
         const url = new URL('http://localhost:3000/products');
         url.searchParams.append('_sort', sort);
         url.searchParams.append('_order', order);
         if (search) url.searchParams.append('q', search);
         if (availability) url.searchParams.append('availability', availability);
-       49
         if (types.length > 0) url.searchParams.append('type_like', types.join('|'));
         if (minPrice !== null) url.searchParams.append('price_gte', minPrice);
         if (maxPrice !== null) url.searchParams.append('price_lte', maxPrice);
@@ -281,9 +299,10 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         catalog.innerHTML = '';
 
         if (products.length === 0) {
-            catalog.innerHTML = '<p>Товары не найдены.</p>';
+            catalog.innerHTML = '<p data-i18n="products_not_found">Товары не найдены.</p>';
             console.log('No products found.');
             updatePagination(0, page, sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock);
+            window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
             return;
         }
 
@@ -302,10 +321,11 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             document.getElementById('admin-controls').style.display = 'flex';
         }
 
+        const currentLang = localStorage.getItem('language') || 'ru';
         const typeFilterGroup = document.querySelector('#filter-panel .filter-group:nth-child(2)');
         if (typeFilterGroup) {
-            const uniqueTypes = [...new Set(products.map(product => product.type))];
-            typeFilterGroup.innerHTML = '<h5>Тип</h5>';
+            const uniqueTypes = [...new Set(products.map(product => currentLang === 'ru' ? product.type : product.en_type || product.type))];
+            typeFilterGroup.innerHTML = `<h5 data-i18n="type">${currentLang === 'ru' ? 'Тип' : 'Type'}</h5>`;
             uniqueTypes.forEach(type => {
                 const label = document.createElement('label');
                 label.innerHTML = `
@@ -325,9 +345,9 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             if (cartItem) {
                 buttonContent = `
                     <div class="cart-control">
-                        <button class="cart-decrement" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Уменьшить количество">-</button>
+                        <button class="cart-decrement" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Decrease quantity">-</button>
                         <span class="cart-quantity">${cartItem.quantity}</span>
-                        <button class="cart-increment" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Увеличить количество">+</button>
+                        <button class="cart-increment" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Increase quantity">+</button>
                     </div>
                 `;
             } else {
@@ -336,22 +356,22 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
             let adminButtons = '';
             if (isAdmin) {
                 adminButtons = `
-                    <button class="edit-btn" data-product-id="${product.id}" aria-label="Редактировать товар"><i class="fas fa-edit"></i></button>
-                    <button class="delete-btn" data-product-id="${product.id}" aria-label="Удалить товар"><i class="fas fa-trash"></i></button>
+                    <button class="edit-btn" data-product-id="${product.id}" aria-label="Edit product"><i class="fas fa-edit"></i></button>
+                    <button class="delete-btn" data-product-id="${product.id}" aria-label="Delete product"><i class="fas fa-trash"></i></button>
                 `;
             }
             productDiv.innerHTML = `
                 ${adminButtons}
-                <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-product-id="${product.id}" aria-label="Добавить в избранное">
+                <button class="favorite-btn ${isFavorite ? 'active' : ''}" data-product-id="${product.id}" aria-label="Add to favorites">
                     <i class="fa-regular fa-heart"></i>
                     <i class="fa-solid fa-heart"></i>
                 </button>
-                <img src="../img/catalog/${product.id}.png" alt="${product.name}" onerror="this.src='../img/catalog/fallback.png'">
+                <img src="../img/catalog/${product.id}.png" alt="${currentLang === 'ru' ? product.name : product.en_name || product.name}" onerror="this.src='../img/catalog/fallback.png'">
                 <div class="text-content">
-                    <p class="accent">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
-                    <p class="type">${product.type}</p>
-                    <p class="name">${product.name}</p>
-                    <p class="price">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
+                    <p class="accent" data-i18n="${product.availability ? 'in_stock' : 'out_of_stock'}">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
+                    <p class="type">${currentLang === 'ru' ? product.type : product.en_type || product.type}</p>
+                    <p class="name">${currentLang === 'ru' ? product.name : product.en_name || product.name}</p>
+                    <p class="price" data-i18n="${product.price === null ? 'price_on_request' : ''}">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
                 </div>
                 ${buttonContent}
             `;
@@ -430,11 +450,12 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);
 
         updatePagination(totalPages, page, sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock);
+        window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
     } catch (error) {
         console.error('Error fetching products:', error);
         const catalog = document.getElementById('catalog');
-        catalog.innerHTML = '<p>Ошибка загрузки каталога. Попробуйте позже.</p>';
-        updatePagination(0, page);
+        catalog.innerHTML = '<p data-i18n="catalog_error">Ошибка загрузки каталога. Попробуйте позже.</p>';
+        window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
     }
 }
 
@@ -504,23 +525,23 @@ function updatePagination(totalPages, currentPage, sort, order, search, availabi
     pagination.appendChild(lastButton);
 }
 
+
+window.updateCatalogTranslations = function() {
+    loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Получаем параметр type из URL
     const urlParams = new URLSearchParams(window.location.search);
     const typeFromUrl = urlParams.get('type');
     const initialTypes = typeFromUrl ? [decodeURIComponent(typeFromUrl)] : [];
-
-    // Загружаем продукты с учётом параметра type
     loadProducts('name', 'asc', '', '', initialTypes);
 
     const isAdmin = localStorage.getItem('role') === 'admin';
     if (isAdmin) {
         document.getElementById('admin-controls').style.display = 'flex';
-
         document.getElementById('save-products').addEventListener('click', () => {
             alert('Функция сохранения каталога пока не реализована.');
         });
-
         document.getElementById('add-product').addEventListener('click', () => {
             openProductModal();
         });
@@ -537,7 +558,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const search = document.getElementById('search-input').value.trim();
         const typeCheckboxes = document.querySelectorAll('#filter-panel input[name="type"]:checked');
         const types = Array.from(typeCheckboxes).map(cb => cb.value);
-        loadProducts(sort, order, search, '', types);
+        loadProducts(sort, order, search, currentFilters.availability, types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     });
 
     document.getElementById('search-input').addEventListener('input', (event) => {
@@ -545,7 +566,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const [sort, order] = document.getElementById('sort-select').value.split(',');
         const typeCheckboxes = document.querySelectorAll('#filter-panel input[name="type"]:checked');
         const types = Array.from(typeCheckboxes).map(cb => cb.value);
-        loadProducts(sort, order, searchQuery, '', types);
+        loadProducts(sort, order, searchQuery, currentFilters.availability, types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
     });
 
     const filterButton = document.getElementById('filter-button');
@@ -579,6 +600,8 @@ document.addEventListener('DOMContentLoaded', () => {
         activeRange.style.left = `${minPercent}%`;
         activeRange.style.right = `${100 - maxPercent}%`;
         valueElement.textContent = `От ${sliderMin.value} ${unit} до ${sliderMax.value} ${unit}`;
+        valueElement.setAttribute('data-i18n', unit === '₽' ? 'price_range' : unit === 'Вт' ? 'power_range' : unit === 'лм' ? 'luminous_flux_range' : 'color_temperature_range');
+        window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
     }
 
     if (priceSliderMin && priceSliderMax && priceValue && activeRangePrice) {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title data-i18n="page_title">Login</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -14,29 +14,31 @@
 <body>
     <main>
         <section class="registration">
-            <h2>Авторизация</h2>
+            <h2 data-i18n="login_heading">Авторизация</h2>
             <form id="login-form">
                 <div class="form-group">
-                    <label for="email">Email* <span class="required">*</span></label>
+                    <label for="email" data-i18n="email_label">Email <span class="required" data-i18n="required_field">*</span></label>
                     <input type="email" id="email" name="email" required>
                 </div>
                 <div class="form-group">
-                    <label for="password">Пароль* <span class="required">*</span></label>
+                    <label for="password" data-i18n="password_label">Пароль <span class="required" data-i18n="required_field">*</span></label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form-group">
-                    <span class="error-message" id="form-error"></span>
+                    <span class="error-message" id="form-error" data-i18n="error_message"></span>
                 </div>
                 <div class="form-group">
-                    <p>Нет аккаунта? <a href="../registration/index.html">Зарегистрируйтесь</a></p>
+                    <p data-i18n="no_account">Нет аккаунта? <a href="../registration/index.html">Зарегистрируйтесь</a></p>
                 </div>
-                <button type="submit" id="submit-button" disabled>Войти</button>
+                <button type="submit" id="submit-button" data-i18n="submit_button" disabled>Войти</button>
             </form>
         </section>
     </main>
+    
     <script src="../header/header.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="../footer/footer.js"></script>
-    <script src="../header/theme.js"> </script>
-    <script src="../login/script.js"></script>
+    <script src="../header/theme.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,0 +1,16 @@
+{
+  "title": "Контакты",
+  "section_title": "Контакты",
+  "phone_name": "Телефон",
+  "phone_content": "+7 (495) 125-10-07",
+  "email_name": "Электронная почта",
+  "email_content": "info@h-t-l.ru",
+  "service_name": "Сервисный центр",
+  "service_content": "service@h-t-l.ru",
+  "dealer_name": "Дилерский центр",
+  "dealer_content": "cooperation@h-t-l.ru",
+  "office_name": "Центральный офис",
+  "office_content": "г. Москва, 2-ой Рощинский проезд, д.8",
+  "warehouse_name": "Склад",
+  "warehouse_content": "г. Москва, Нагорный проезд, д.7 стр.13"
+}

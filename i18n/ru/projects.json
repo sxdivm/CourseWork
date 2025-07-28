@@ -1,0 +1,16 @@
+{
+  "page_title": "Проекты",
+  "filter_all": "Все",
+  "filter_street": "Уличное",
+  "filter_industrial": "Промышленное",
+  "filter_interior": "Интеръерное",
+  "filter_retail": "Ретейл",
+  "filter_medical": "Медицинское",
+  "projects_not_found": "Проекты не найдены.",
+  "projects_not_found_in_category": "Проекты в категории \"%s\" не найдены.",
+  "error_loading": "Ошибка загрузки проектов. Попробуйте позже.",
+  "no_category": "Без категории",
+  "no_name": "Без названия",
+  "no_description": "Описание отсутствует",
+  "read": "Читать"
+}

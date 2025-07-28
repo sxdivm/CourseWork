@@ -9,6 +9,7 @@ async function addToCart(productId) {
 
         const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}&productId=${productId}`);
         const cartItems = await cartResponse.json();
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
 
         if (cartItems.length > 0) {
             const cartItem = cartItems[0];
@@ -26,7 +27,7 @@ async function addToCart(productId) {
             }
 
             console.log('Количество товара обновлено:', await updateResponse.json());
-            alert('Количество товара в корзине обновлено!');
+            alert(translations.item_quantity_updated || 'Item quantity updated in cart!');
         } else {
             const cartItem = {
                 productId: productId,
@@ -47,13 +48,14 @@ async function addToCart(productId) {
             }
 
             console.log('Товар добавлен в корзину:', await response.json());
-            alert('Товар добавлен в корзину!');
+            alert(translations.item_added_to_cart || 'Item added to cart!');
         }
 
-        loadFavorites();
+        await loadFavorites();
     } catch (error) {
         console.error('Ошибка при добавлении в корзину:', error);
-        alert('Ошибка при добавлении товара в корзину. Попробуйте позже.');
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
+        alert(translations.error_adding_to_cart || 'Error adding item to cart. Please try again later.');
     }
 }
 
@@ -68,6 +70,7 @@ async function toggleFavorite(productId) {
 
         const favoriteResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}&productId=${productId}`);
         const favorites = await favoriteResponse.json();
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
 
         if (favorites.length > 0) {
             const favorite = favorites[0];
@@ -80,13 +83,14 @@ async function toggleFavorite(productId) {
             }
 
             console.log('Товар удален из избранного');
-            alert('Товар удален из избранного!');
+            alert(translations.item_removed_from_favorites || 'Item removed from favorites!');
         }
 
-        loadFavorites();
+        await loadFavorites();
     } catch (error) {
         console.error('Ошибка при удалении из избранного:', error);
-        alert('Ошибка при удалении товара из избранного. Попробуйте позже.');
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
+        alert(translations.error_removing_from_favorites || 'Error removing item from favorites. Please try again later.');
     }
 }
 
@@ -110,10 +114,11 @@ async function updateCartItemQuantity(cartItemId, newQuantity) {
         }
 
         console.log('Количество товара обновлено:', await response.json());
-        loadFavorites();
+        await loadFavorites();
     } catch (error) {
         console.error('Ошибка при обновлении количества:', error);
-        alert('Ошибка при обновлении количества товара. Попробуйте позже.');
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
+        alert(translations.error_updating_quantity || 'Error updating item quantity. Please try again later.');
     }
 }
 
@@ -126,6 +131,11 @@ async function loadFavorites() {
             return;
         }
 
+        const lang = localStorage.getItem('language') || 'ru';
+        await new Promise((resolve) => {
+            window.loadTranslations(lang, 'favourite', resolve);
+        });
+
         const response = await fetch(`http://localhost:3000/favorites?userId=${userId}`);
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -137,8 +147,8 @@ async function loadFavorites() {
         catalog.innerHTML = '';
 
         if (favorites.length === 0) {
-            catalog.innerHTML = '<p>В избранном пока нет товаров.</p>';
-            console.log('No favorites found.');
+            catalog.innerHTML = '<p data-i18n="empty_favorites">В избранном пока нет товаров.</p>';
+            window.loadTranslations(lang, 'favourite');
             return;
         }
 
@@ -148,9 +158,11 @@ async function loadFavorites() {
             throw new Error(`HTTP error! Status: ${productsResponse.status}`);
         }
         const products = await productsResponse.json();
+        console.log('Products received:', products);
 
         const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}`);
         const cartItems = await cartResponse.json();
+        console.log('Cart items received:', cartItems);
 
         products.forEach(product => {
             const productDiv = document.createElement('div');
@@ -160,29 +172,32 @@ async function loadFavorites() {
             if (cartItem) {
                 buttonContent = `
                     <div class="cart-control">
-                        <button class="cart-decrement" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Уменьшить количество">-</button>
+                        <button class="cart-decrement" data-product-id="${product.id}" data-cart-id="${cartItem.id}" data-i18n-aria-label="decrease_quantity">-</button>
                         <span class="cart-quantity">${cartItem.quantity}</span>
-                        <button class="cart-increment" data-product-id="${product.id}" data-cart-id="${cartItem.id}" aria-label="Увеличить количество">+</button>
+                        <button class="cart-increment" data-product-id="${product.id}" data-cart-id="${cartItem.id}" data-i18n-aria-label="increase_quantity">+</button>
                     </div>
                 `;
             } else {
                 buttonContent = `<button class="add-to-cart" data-product-id="${product.id}"><i class="fas fa-shopping-cart"></i></button>`;
             }
             productDiv.innerHTML = `
-                <button class="favorite-btn active" data-product-id="${product.id}" aria-label="Удалить из избранного">
+                <button class="favorite-btn active" data-product-id="${product.id}" data-i18n-aria-label="remove_from_favorites">
                     <i class="fa-solid fa-heart"></i>
                 </button>
-                <img src="../img/catalog/${product.id}.png" alt="${product.name}" onerror="this.src='../img/catalog/fallback.png'">
+                <img src="../img/catalog/${product.id}.png" alt="${lang === 'ru' ? product.name : product.en_name || product.name}" onerror="this.src='../img/catalog/fallback.png'">
                 <div class="text-content">
-                    <p class="accent">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
-                    <p class="type">${product.type}</p>
-                    <p class="name">${product.name}</p>
-                    <p class="price">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
+                    <p class="accent" data-i18n="${product.availability ? 'availability_in_stock' : 'availability_out_of_stock'}">${product.availability ? 'Есть в наличии' : 'Нет в наличии'}</p>
+                    <p class="type">${lang === 'ru' ? product.type : product.en_type || product.type}</p>
+                    <p class="name">${lang === 'ru' ? product.name : product.en_name || product.name}</p>
+                    <p class="price" data-i18n="${product.price === null ? 'price_on_request' : ''}">${product.price === null ? 'Цена по запросу' : product.price + ' ₽'}</p>
                 </div>
                 ${buttonContent}
             `;
             catalog.appendChild(productDiv);
         });
+
+
+        window.loadTranslations(lang, 'favourite');
 
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', () => {
@@ -220,10 +235,18 @@ async function loadFavorites() {
     } catch (error) {
         console.error('Error fetching favorites:', error);
         const catalog = document.getElementById('catalog');
-        catalog.innerHTML = '<p>Ошибка загрузки избранного. Попробуйте позже.</p>';
+        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
+        catalog.innerHTML = `<p data-i18n="error_loading">${translations.error_loading || 'Ошибка загрузки избранного. Попробуйте позже.'}</p>`;
+        window.loadTranslations(localStorage.getItem('language') || 'ru', 'favourite');
     }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     loadFavorites();
+});
+
+
+window.addEventListener('languageChanged', (event) => {
+    const lang = event.detail.lang;
+    loadFavorites(); 
 });

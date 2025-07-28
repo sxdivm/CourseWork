@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проекты</title>
+    <title data-i18n="page_title">Проекты - HTL Business</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -13,22 +13,22 @@
 </head>
 <body>
     <section>
-        <h1>Проекты</h1>
+        <h1 data-i18n="page_title">Проекты</h1>
         <div class="type_selection">
-            <button class="type-btn active" data-type="all" id="btn-all">Все</button>
-            <button class="type-btn" data-type="Уличное" id="btn-street">Уличное</button>
-            <button class="type-btn" data-type="Промышленное" id="btn-industrial">Промышленное</button>
-            <button class="type-btn" data-type="Интеръерное" id="btn-interior">Интеръерное</button>
-            <button class="type-btn" data-type="Ретейл" id="btn-retail">Ретейл</button>
-            <button class="type-btn" data-type="Медицинское" id="btn-medical">Медицинское</button>
+            <button class="type-btn active" data-type="all" id="btn-all" data-i18n="filter_all">Все</button>
+            <button class="type-btn" data-type="street" id="btn-street" data-i18n="filter_street">Уличное</button>
+            <button class="type-btn" data-type="industrial" id="btn-industrial" data-i18n="filter_industrial">Промышленное</button>
+            <button class="type-btn" data-type="interior" id="btn-interior" data-i18n="filter_interior">Интеръерное</button>
+            <button class="type-btn" data-type="retail" id="btn-retail" data-i18n="filter_retail">Ретейл</button>
+            <button class="type-btn" data-type="medical" id="btn-medical" data-i18n="filter_medical">Медицинское</button>
         </div>
         <div class="grid_container" id="projects-container">
-
         </div>
     </section>
     <script src="../header/header.js"></script>
-    <script src="../header/theme.js"> </script>
     <script src="../footer/footer.js"></script>
+    <script src="../header/theme.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

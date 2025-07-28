@@ -1,0 +1,11 @@
+{
+    "cart_title": "Cart - HTL Business",
+    "cart_heading": "Cart",
+    "cart_total": "Total:",
+    "checkout_button": "Checkout",
+    "admin_message": "Administrators cannot place orders.",
+    "cart_empty": "Cart is empty.",
+    "cart_error": "Error loading cart. Please try again later.",
+    "in_stock": "In Stock",
+    "out_of_stock": "Out of Stock"
+}

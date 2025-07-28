@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title data-i18n="title">О компании</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
@@ -14,57 +14,57 @@
 <body>
     <main>
         <section class="welcome">
-            <h1>О компании</h1>
+            <h1 data-i18n="welcome_title">О компании</h1>
             <div class="parallax-container"></div>
         </section>
         <section class="info">
-            <h2>Что мы предлагаем?</h2>
+            <h2 data-i18n="info_title">Что мы предлагаем?</h2>
             <div class="advant_div">
                 <div class="adv">
                     <img src="../img/adv1.svg" alt="Разработка оборудования">
                     <div>
-                        <h4>Разработка оборудования</h4>
-                        <p>Выяснение конечных потребностей потребителей и разработка нового осветительного оборудования</p>
+                        <h4 data-i18n="adv1_title">Разработка оборудования</h4>
+                        <p data-i18n="adv1_text">Выяснение конечных потребностей потребителей и разработка нового осветительного оборудования</p>
                     </div>
                 </div>
                 <div class="adv">
                     <img src="../img/adv2.svg" alt="Контроль производства">
                     <div>
-                        <h4>Контроль производства</h4>
-                        <p>Тщательный контроль каждого этапа в процессе производства</p>
+                        <h4 data-i18n="adv2_title">Контроль производства</h4>
+                        <p data-i18n="adv2_text">Тщательный контроль каждого этапа в процессе производства</p>
                     </div>
                 </div>
                 <div class="adv">
                     <img src="../img/adv3.svg" alt="Надежность комплектующих">
                     <div>
-                        <h4>Надежность комплектующих</h4>
-                        <p>Использование комплектующих известных вендоров, энергоэффективность и надежность которых проверена временем</p>
+                        <h4 data-i18n="adv3_title">Надежность комплектующих</h4>
+                        <p data-i18n="adv3_text">Использование комплектующих известных вендоров, энергоэффективность и надежность которых проверена временем</p>
                     </div>
                 </div>
             </div>
         </section>
         <section class="bid">
             <div class="left">
-                <h2>Мы сделаем вашу жизнь светлее!</h2>
-                <p>Компания «Системы Освещения» HTL аккредитована комплексом градостроительной политики и строительства города Москвы и внесена в Московский территориальный строительный каталог (МТСК)</p>
-                <p>Вся представленная на сайте продукция соответствует международным стандартам качества, что подтверждено сертификацией СЕ</p>
+                <h2 data-i18n="bid_title">Мы сделаем вашу жизнь светлее!</h2>
+                <p data-i18n="bid_text1">Компания «Системы Освещения» HTL аккредитована комплексом градостроительной политики и строительства города Москвы и внесена в Московский территориальный строительный каталог (МТСК)</p>
+                <p data-i18n="bid_text2">Вся представленная на сайте продукция соответствует международным стандартам качества, что подтверждено сертификацией СЕ</p>
             </div>
             <div class="right">
                 <div class="form-wrapper">
                     <form class="contact-form">
                         <div class="form-row">
-                            <input type="text" name="name" placeholder="Имя*" required>
-                            <input type="text" name="city" placeholder="Город реализации">
+                            <input type="text" name="name" placeholder="Имя*" data-i18n-placeholder="form_name" required>
+                            <input type="text" name="city" placeholder="Город реализации" data-i18n-placeholder="form_city">
                         </div>
                         <div class="form-row">
-                            <input type="tel" name="phone" placeholder="Телефон* (+375...)" required>
-                            <input type="text" name="volume" placeholder="Планируемый объем продаж">
+                            <input type="tel" name="phone" placeholder="Телефон* (+375...)" data-i18n-placeholder="form_phone" required>
+                            <input type="text" name="volume" placeholder="Планируемый объем продаж" data-i18n-placeholder="form_volume">
                         </div>
                         <div class="form-row checkbox-row">
                             <input type="checkbox" id="agree" required>
-                            <label for="agree">Нажав на кнопку, вы соглашаетесь на <a href="#">обработку персональных данных</a></label>
+                            <label for="agree" data-i18n="form_agree">Нажав на кнопку, вы соглашаетесь на <a href="#">обработку персональных данных</a></label>
                         </div>
-                        <button type="submit" class="submit-button">Отправить заявку</button>
+                        <button type="submit" class="submit-button" data-i18n="form_submit">Отправить заявку</button>
                     </form>
                     <div class="error-message"></div>
                 </div>
@@ -73,8 +73,9 @@
         <hr>
     </main>
     <script src="../header/header.js"></script>
+    <script src="../header/theme.js"></script>
+    <script src="../header/i18n.js"></script>
     <script src="../footer/footer.js"></script>
-    <script src="../header/theme.js"> </script>
     <script src="script.js"></script>
 </body>
 </html>

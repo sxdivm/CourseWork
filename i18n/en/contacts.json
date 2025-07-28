@@ -1,0 +1,16 @@
+{
+  "title": "Contacts",
+  "section_title": "Contacts",
+  "phone_name": "Phone",
+  "phone_content": "+7 (495) 125-10-07",
+  "email_name": "Email",
+  "email_content": "info@h-t-l.ru",
+  "service_name": "Service Center",
+  "service_content": "service@h-t-l.ru",
+  "dealer_name": "Dealer Center",
+  "dealer_content": "cooperation@h-t-l.ru",
+  "office_name": "Central Office",
+  "office_content": "Moscow, 2nd Roshchinsky Proezd, 8",
+  "warehouse_name": "Warehouse",
+  "warehouse_content": "Moscow, Nagorny Proezd, 7, bldg. 13"
+}

@@ -1,0 +1,20 @@
+{
+  "title": "About Us",
+  "welcome_title": "About Us",
+  "info_title": "What We Offer",
+  "adv1_title": "Equipment Development",
+  "adv1_text": "Identifying the needs of consumers and developing new lighting equipment",
+  "adv2_title": "Production Control",
+  "adv2_text": "Thorough control of every stage in the production process",
+  "adv3_title": "Reliability of Components",
+  "adv3_text": "Using components from well-known vendors, whose energy efficiency and reliability have been proven over time",
+  "bid_title": "We Make Your Life Brighter!",
+  "bid_text1": "HTL Lighting Systems is accredited by the Moscow Urban Planning and Construction Complex and included in the Moscow Territorial Construction Catalog (MTCC)",
+  "bid_text2": "All products presented on the website meet international quality standards, as confirmed by CE certification",
+  "form_name": "Name*",
+  "form_city": "City of Implementation",
+  "form_phone": "Phone* (+375...)",
+  "form_volume": "Planned Sales Volume",
+  "form_agree": "By clicking the button, you agree to the <a href=\"#\">processing of personal data</a>",
+  "form_submit": "Submit Application"
+}
