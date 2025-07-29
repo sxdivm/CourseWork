@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">HTL Business Catalog</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../preloader/style.css">
+<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -12,7 +14,11 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
+
 <body>
+<div class="preloader">
+        <div class="spinner"></div>
+    </div>
     <main>
         <h1 data-i18n="title">HTL BUSINESS</h1>
         <div class="admin-controls" id="admin-controls" style="display: none;">
@@ -39,7 +45,8 @@
                         </select>
                     </p>
                     <div class="search">
-                        <input type="text" id="search-input" data-i18n-placeholder="search_placeholder" placeholder="Поиск по названию...">
+                        <input type="text" id="search-input" data-i18n-placeholder="search_placeholder"
+                            placeholder="Поиск по названию...">
                     </div>
                 </div>
             </div>
@@ -47,7 +54,8 @@
                 <div class="filter-panel" id="filter-panel">
                     <h4 data-i18n="filters">Фильтры</h4>
                     <div class="filter-group">
-                        <label data-i18n="availability_in_stock"><input type="checkbox" id="availability-in-stock"> Есть в наличии</label>
+                        <label data-i18n="availability_in_stock"><input type="checkbox" id="availability-in-stock"> Есть
+                            в наличии</label>
                     </div>
                     <div class="filter-group">
                         <h5 data-i18n="type">Тип</h5>
@@ -78,8 +86,10 @@
                         <h5 data-i18n="luminous_flux">Световой поток</h5>
                         <div class="luminous-flux-range">
                             <div class="range-slider">
-                                <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100" value="0">
-                                <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100" value="6000">
+                                <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100"
+                                    value="0">
+                                <input type="range" id="luminous-flux-slider-max" min="0" max="6000" step="100"
+                                    value="6000">
                                 <div class="active-range"></div>
                             </div>
                             <span id="luminous-flux-value" data-i18n="luminous_flux_range">От 0 лм до 6000 лм</span>
@@ -93,16 +103,20 @@
                         <h5 data-i18n="color_temperature">Цветовая температура</h5>
                         <div class="color-temperature-range">
                             <div class="range-slider">
-                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100" value="2000">
-                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100" value="6500">
+                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100"
+                                    value="2000">
+                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100"
+                                    value="6500">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="color-temperature-value" data-i18n="color_temperature_range">От 2000 K до 6500 K</span>
+                            <span id="color-temperature-value" data-i18n="color_temperature_range">От 2000 K до 6500
+                                K</span>
                         </div>
                     </div>
                     <div class="filter-group">
                         <h5 data-i18n="emergency_block">Блок аварийного питания</h5>
-                        <label data-i18n="emergency_block_enabled"><input type="checkbox" id="emergency-block"> Включен</label>
+                        <label data-i18n="emergency_block_enabled"><input type="checkbox" id="emergency-block">
+                            Включен</label>
                     </div>
                     <button id="apply-filters" data-i18n="apply_filters">Применить</button>
                     <button id="reset-filters" data-i18n="reset_filters">Сбросить фильтры</button>
@@ -141,7 +155,8 @@
                         <input type="number" id="product-price" step="100">
                     </div>
                     <div class="form-group">
-                        <label data-i18n="product_availability"><input type="checkbox" id="product-availability"> Есть в наличии</label>
+                        <label data-i18n="product_availability"><input type="checkbox" id="product-availability"> Есть в
+                            наличии</label>
                     </div>
                     <div class="form-group">
                         <label for="product-power" data-i18n="product_power">Мощность (Вт)</label>
@@ -160,11 +175,13 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="product-color-temperature" data-i18n="product_color_temperature">Цветовая температура (K)</label>
+                        <label for="product-color-temperature" data-i18n="product_color_temperature">Цветовая
+                            температура (K)</label>
                         <input type="number" id="product-color-temperature" step="100">
                     </div>
                     <div class="form-group">
-                        <label data-i18n="product_emergency_block"><input type="checkbox" id="product-emergency-block"> Блок аварийного питания</label>
+                        <label data-i18n="product_emergency_block"><input type="checkbox" id="product-emergency-block">
+                            Блок аварийного питания</label>
                     </div>
                     <button type="submit" data-i18n="save">Сохранить</button>
                 </form>
@@ -172,7 +189,9 @@
         </div>
     </main>
     <script src="../header/i18n.js"></script>
-    <script src="../header/header.js"></script>
+    <script src="../preloader/script.js"></script>
+<script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="../header/theme.js"></script>
     <script src="catalog.js"></script>
+    

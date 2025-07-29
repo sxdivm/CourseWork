@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">HTL - Главная</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="../preloader/style.css">
+<link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
+
 <body>
+    <div class="preloader">
+        <div class="spinner"></div>
+    </div>
     <main>
         <section class="banner">
             <img src="../img/predator.png" alt="predator">
@@ -21,15 +28,18 @@
                     <br>
                     <span class="accent" data-i18n="banner_subtitle">OFL DROP</span>
                 </h1>
-                <p data-i18n="banner_description">Светильники OFL DROP имеют изящную запоминающуюся форму, а также обладают рядом интересных технических особенностей, выгодно отличающих их от конкурентов</p>
+                <p data-i18n="banner_description">Светильники OFL DROP имеют изящную запоминающуюся форму, а также
+                    обладают рядом интересных технических особенностей, выгодно отличающих их от конкурентов</p>
             </div>
         </section>
         <section class="about">
             <p data-i18n="about_title">О компании</p>
             <h2>
-                <span class="accent">HTL</span> <span data-i18n="about_description">— Российская компания<br> по производству светодиодного освещения, Эксперт в области интерьерного и уличного освещения</span>
+                <span class="accent">HTL</span> <span data-i18n="about_description">— Российская компания<br> по
+                    производству светодиодного освещения, Эксперт в области интерьерного и уличного освещения</span>
             </h2>
-            <p data-i18n="about_text">Создаём современное высококачественное светотехническое оборудование и отдельные комплектующие для освещения интерьеров жилых и коммерческих помещений</p>
+            <p data-i18n="about_text">Создаём современное высококачественное светотехническое оборудование и отдельные
+                комплектующие для освещения интерьеров жилых и коммерческих помещений</p>
             <p data-i18n="about_link">О компании</p>
             <div class="cards">
                 <div class="card">
@@ -84,11 +94,14 @@
             </div>
         </section>
     </main>
+    <script src="../preloader/script.js"></script>
     <script src="../header/header.js"></script>
     <script src="../header/theme.js"></script>
     <script src="../header/i18n.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="script.js"></script>
     <script src="portfolio.js"></script>
+
 </body>
+
 </html>
