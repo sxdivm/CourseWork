@@ -15,6 +15,11 @@ html {
     --button-circle: #D2D2D2;
     --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
+    /* Настройки для слабовидящих */
+    --letter-spacing: 0.12; /* 0.12 от кегля */
+    --word-spacing: 0.16; /* 0.16 от кегля */
+    --line-height: 1.5; /* 1.5 от кегля */
+    --paragraph-spacing: 2; /* 2 от кегля */
 }
 
 html[data-theme="dark"] {
@@ -27,6 +32,243 @@ html[data-theme="dark"] {
     --category-color: #2A2A2A;
     --button-circle: #555555;
     --footer-bg: #0F0F0F;
+}
+
+/* Настройки для слабовидящих: размеры шрифта для страницы home */
+html.font-normal body.home-page h1 {
+    font-size: 6.4rem !important;
+    letter-spacing: calc(6.4rem * var(--letter-spacing)) !important;
+    word-spacing: calc(6.4rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(6.4rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-normal body.home-page h2 {
+    font-size: 4.8rem !important;
+    letter-spacing: calc(4.8rem * var(--letter-spacing)) !important;
+    word-spacing: calc(4.8rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(4.8rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-normal body.home-page h3 {
+    font-size: 3.2rem !important;
+    letter-spacing: calc(3.2rem * var(--letter-spacing)) !important;
+    word-spacing: calc(3.2rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(3.2rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-normal body.home-page h4 {
+    font-size: 2.4rem !important;
+    letter-spacing: calc(2.4rem * var(--letter-spacing)) !important;
+    word-spacing: calc(2.4rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(2.4rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-normal body.home-page p,
+html.font-normal body.home-page li,
+html.font-normal body.home-page a {
+    font-size: 1.8rem !important;
+    letter-spacing: calc(1.8rem * var(--letter-spacing)) !important;
+    word-spacing: calc(1.8rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(1.8rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-large body.home-page h1 {
+    font-size: 8.0rem !important;
+    letter-spacing: calc(8.0rem * var(--letter-spacing)) !important;
+    word-spacing: calc(8.0rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(8.0rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-large body.home-page h2 {
+    font-size: 6.0rem !important;
+    letter-spacing: calc(6.0rem * var(--letter-spacing)) !important;
+    word-spacing: calc(6.0rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(6.0rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-large body.home-page h3 {
+    font-size: 4.0rem !important;
+    letter-spacing: calc(4.0rem * var(--letter-spacing)) !important;
+    word-spacing: calc(4.0rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(4.0rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-large body.home-page h4 {
+    font-size: 3.0rem !important;
+    letter-spacing: calc(3.0rem * var(--letter-spacing)) !important;
+    word-spacing: calc(3.0rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(3.0rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-large body.home-page p,
+html.font-large body.home-page li,
+html.font-large body.home-page a {
+    font-size: 2.4rem !important;
+    letter-spacing: calc(2.4rem * var(--letter-spacing)) !important;
+    word-spacing: calc(2.4rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(2.4rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-extra-large body.home-page h1 {
+    font-size: 9.6rem !important;
+    letter-spacing: calc(9.6rem * var(--letter-spacing)) !important;
+    word-spacing: calc(9.6rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(9.6rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-extra-large body.home-page h2 {
+    font-size: 7.2rem !important;
+    letter-spacing: calc(7.2rem * var(--letter-spacing)) !important;
+    word-spacing: calc(7.2rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(7.2rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-extra-large body.home-page h3 {
+    font-size: 4.8rem !important;
+    letter-spacing: calc(4.8rem * var(--letter-spacing)) !important;
+    word-spacing: calc(4.8rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(4.8rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-extra-large body.home-page h4 {
+    font-size: 3.6rem !important;
+    letter-spacing: calc(3.6rem * var(--letter-spacing)) !important;
+    word-spacing: calc(3.6rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(3.6rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+html.font-extra-large body.home-page p,
+html.font-extra-large body.home-page li,
+html.font-extra-large body.home-page a {
+    font-size: 3.0rem !important;
+    letter-spacing: calc(3.0rem * var(--letter-spacing)) !important;
+    word-spacing: calc(3.0rem * var(--word-spacing)) !important;
+    line-height: var(--line-height) !important;
+    text-align: left !important;
+    max-width: 80ch !important;
+    margin-bottom: calc(3.0rem * var(--paragraph-spacing)) !important;
+    word-break: break-word !important;
+    hyphens: auto !important;
+}
+
+/* Цветовые схемы для слабовидящих */
+html.scheme-black-green {
+    --bg-color: #000000;
+    --primary-text: #00FF00;
+    --banner: #000000;
+    --border: #333333;
+    --category-color: #000000;
+    --footer-bg: #000000;
+}
+
+html.scheme-beige-brown {
+    --bg-color: #F5F5DC;
+    --primary-text: #4A3728;
+    --banner: #F5F5DC;
+    --border: #4A3728;
+    --category-color: #F5F5DC;
+    --footer-bg: #F5F5DC;
+}
+
+html.scheme-blue-darkblue {
+    --bg-color: #ADD8E6;
+    --primary-text: #00008B;
+    --banner: #ADD8E6;
+    --border: #00008B;
+    --category-color: #ADD8E6;
+    --footer-bg: #ADD8E6;
+}
+
+/* Отключение изображений только в <main> на странице home */
+html.hide-images body.home-page main img {
+    display: none;
+    position: relative;
+}
+
+html.hide-images body.home-page main img::after {
+    content: attr(alt);
+    display: block;
+    font-size: 1.8rem;
+    color: var(--primary-text);
+    background-color: var(--bg-color);
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 body {
@@ -59,13 +301,59 @@ footer {
 .pre_header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     height: 7.2rem;
+}
+
+html.font-large .pre_header,
+html.font-extra-large .pre_header {
+    height: auto;
+}
+
+
+html.font-large .pre_header .lang,
+html.font-extra-large .pre_header .lang {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    font-size: 1.5rem;
+}
+
+html.font-large .pre_header .theme,
+html.font-extra-large .pre_header .theme {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+html.font-large .pre_header .accessibility,
+html.font-extra-large .pre_header .accessibility {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+html.font-large .pre_header .cart,
+html.font-extra-large .pre_header .cart {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+html.font-large .pre_header .fav,
+html.font-extra-large .pre_header .fav {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+html.font-large .pre_header .login,
+html.font-extra-large .pre_header .login {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    width: 180px;
 }
 
 .left_part,
 .right_part {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .lang {
@@ -88,7 +376,26 @@ footer {
     filter: brightness(1);
 }
 
-html[data-theme="dark"] .theme img,html[data-theme="dark"] .cart img,html[data-theme="dark"] .fav img ,html[data-theme="dark"] .phone img,html[data-theme="dark"] .lang,html[data-theme="dark"] .login img {
+.accessibility {
+    height: 100%;
+    border-right: 0.2rem solid var(--border);
+    padding-left: 3.4rem;
+    padding-right: 3.4rem;
+    cursor: pointer;
+}
+
+.accessibility iconify-icon {
+    font-size: 2.4rem;
+    color: var(--primary-text);
+}
+
+html[data-theme="dark"] .theme img,
+html[data-theme="dark"] .cart img,
+html[data-theme="dark"] .fav img,
+html[data-theme="dark"] .phone img,
+html[data-theme="dark"] .lang,
+html[data-theme="dark"] .login img,
+html[data-theme="dark"] .accessibility iconify-icon {
     filter: brightness(0) invert(1);
 }
 
@@ -147,9 +454,31 @@ hr {
 .nav_header {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     height: 10.35rem;
     align-items: center;
     position: relative;
+}
+
+html.font-large .nav_header,
+html.font-extra-large .nav_header {
+    height: auto;
+    padding: 1rem 0;
+}
+
+html.font-large .nav_header .logo,
+html.font-extra-large .nav_header .logo {
+    margin-left: 5rem;
+}
+
+html.font-large .nav_header .phone,
+html.font-extra-large .nav_header .phone {
+    padding-left: 2rem;
+}
+
+html.font-large .nav_header .nav-menu,
+html.font-extra-large .nav_header .nav-menu {
+    padding-right: 2rem;
 }
 
 header .logo {
@@ -211,18 +540,84 @@ header .phone {
 .nav-menu {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 header ul {
     list-style: none;
     display: flex;
     gap: 5rem;
+    flex-wrap: wrap;
 }
 
 a {
     text-decoration: none;
     color: var(--primary-text);
     font-size: 1.8rem;
+}
+
+/* Стили для модального окна */
+.accessibility-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--bg-color);
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    color: var(--primary-text);
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.modal-content .close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 2.4rem;
+    cursor: pointer;
+}
+
+.option {
+    margin-bottom: 1.5rem;
+}
+
+.option label {
+    font-size: 1.8rem;
+    margin-right: 1rem;
+}
+
+.option select,
+.option input {
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+}
+
+#saveSettings {
+    font-size: 1.8rem;
+    padding: 1rem 2rem;
+    background-color: var(--accent-color);
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 1280px) {
@@ -243,6 +638,7 @@ a {
         transform: translateX(-100%);
         transition: transform 0.3s ease-in-out;
         z-index: 1000;
+        flex-wrap: wrap;
     }
 
     .burger-toggle:checked ~ .nav-menu {
@@ -254,6 +650,7 @@ a {
         flex-direction: column;
         padding: 2rem;
         align-items: center;
+        flex-wrap: wrap;
     }
 
     .nav-menu li {
@@ -272,15 +669,298 @@ a {
     header .logo {
         margin-left: 2rem;
     }
+
+    /* Адаптивные стили для слабовидящих */
+    html.font-normal body.home-page h1 {
+        font-size: 4.8rem !important;
+        letter-spacing: calc(4.8rem * var(--letter-spacing)) !important;
+        word-spacing: calc(4.8rem * var(--word-spacing)) !important;
+        margin-bottom: calc(4.8rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h2 {
+        font-size: 3.6rem !important;
+        letter-spacing: calc(3.6rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.6rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.6rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h3 {
+        font-size: 2.4rem !important;
+        letter-spacing: calc(2.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h4 {
+        font-size: 2.0rem !important;
+        letter-spacing: calc(2.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page p,
+    html.font-normal body.home-page li,
+    html.font-normal body.home-page a {
+        font-size: 1.6rem !important;
+        letter-spacing: calc(1.6rem * var(--letter-spacing)) !important;
+        word-spacing: calc(1.6rem * var(--word-spacing)) !important;
+        margin-bottom: calc(1.6rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h1 {
+        font-size: 6.0rem !important;
+        letter-spacing: calc(6.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(6.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(6.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h2 {
+        font-size: 4.5rem !important;
+        letter-spacing: calc(4.5rem * var(--letter-spacing)) !important;
+        word-spacing: calc(4.5rem * var(--word-spacing)) !important;
+        margin-bottom: calc(4.5rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h3 {
+        font-size: 3.0rem !important;
+        letter-spacing: calc(3.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h4 {
+        font-size: 2.5rem !important;
+        letter-spacing: calc(2.5rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.5rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.5rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page p,
+    html.font-large body.home-page li,
+    html.font-large body.home-page a {
+        font-size: 2.0rem !important;
+        letter-spacing: calc(2.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h1 {
+        font-size: 7.2rem !important;
+        letter-spacing: calc(7.2rem * var(--letter-spacing)) !important;
+        word-spacing: calc(7.2rem * var(--word-spacing)) !important;
+        margin-bottom: calc(7.2rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h2 {
+        font-size: 5.4rem !important;
+        letter-spacing: calc(5.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(5.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(5.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h3 {
+        font-size: 3.6rem !important;
+        letter-spacing: calc(3.6rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.6rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.6rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h4 {
+        font-size: 3.0rem !important;
+        letter-spacing: calc(3.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page p,
+    html.font-extra-large body.home-page li,
+    html.font-extra-large body.home-page a {
+        font-size: 2.4rem !important;
+        letter-spacing: calc(2.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
 }
 
 @media screen and (max-width: 610px) {
+    html.font-normal body.home-page h1 {
+        font-size: 3.4rem !important;
+        letter-spacing: calc(3.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h2 {
+        font-size: 2.8rem !important;
+        letter-spacing: calc(2.8rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.8rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.8rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h3 {
+        font-size: 2.0rem !important;
+        letter-spacing: calc(2.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page h4 {
+        font-size: 1.6rem !important;
+        letter-spacing: calc(1.6rem * var(--letter-spacing)) !important;
+        word-spacing: calc(1.6rem * var(--word-spacing)) !important;
+        margin-bottom: calc(1.6rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-normal body.home-page p,
+    html.font-normal body.home-page li,
+    html.font-normal body.home-page a {
+        font-size: 1.4rem !important;
+        letter-spacing: calc(1.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(1.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(1.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h1 {
+        font-size: 4.3rem !important;
+        letter-spacing: calc(4.3rem * var(--letter-spacing)) !important;
+        word-spacing: calc(4.3rem * var(--word-spacing)) !important;
+        margin-bottom: calc(4.3rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h2 {
+        font-size: 3.5rem !important;
+        letter-spacing: calc(3.5rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.5rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.5rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h3 {
+        font-size: 2.5rem !important;
+        letter-spacing: calc(2.5rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.5rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.5rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page h4 {
+        font-size: 2.0rem !important;
+        letter-spacing: calc(2.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-large body.home-page p,
+    html.font-large body.home-page li,
+    html.font-large body.home-page a {
+        font-size: 1.8rem !important;
+        letter-spacing: calc(1.8rem * var(--letter-spacing)) !important;
+        word-spacing: calc(1.8rem * var(--word-spacing)) !important;
+        margin-bottom: calc(1.8rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h1 {
+        font-size: 5.1rem !important;
+        letter-spacing: calc(5.1rem * var(--letter-spacing)) !important;
+        word-spacing: calc(5.1rem * var(--word-spacing)) !important;
+        margin-bottom: calc(5.1rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h2 {
+        font-size: 4.2rem !important;
+        letter-spacing: calc(4.2rem * var(--letter-spacing)) !important;
+        word-spacing: calc(4.2rem * var(--word-spacing)) !important;
+        margin-bottom: calc(4.2rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h3 {
+        font-size: 3.0rem !important;
+        letter-spacing: calc(3.0rem * var(--letter-spacing)) !important;
+        word-spacing: calc(3.0rem * var(--word-spacing)) !important;
+        margin-bottom: calc(3.0rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page h4 {
+        font-size: 2.4rem !important;
+        letter-spacing: calc(2.4rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.4rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.4rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
+    html.font-extra-large body.home-page p,
+    html.font-extra-large body.home-page li,
+    html.font-extra-large body.home-page a {
+        font-size: 2.1rem !important;
+        letter-spacing: calc(2.1rem * var(--letter-spacing)) !important;
+        word-spacing: calc(2.1rem * var(--word-spacing)) !important;
+        margin-bottom: calc(2.1rem * var(--paragraph-spacing)) !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+    }
+
     .pre_header {
-        display: none;
+        display: none !important;
     }
 
     .mobile-pre-header {
-        display: flex;
+        display: flex !important;
         flex-direction: row;
         align-items: center;
         justify-content: center;
@@ -293,18 +973,26 @@ a {
         width: 100%;
     }
 
+    html.font-large .mobile-pre-header,
+    html.font-extra-large .mobile-pre-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     .mobile-pre-header .left_part,
     .mobile-pre-header .right_part {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        flex-wrap: wrap;
     }
 
     .mobile-pre-header .lang,
     .mobile-pre-header .theme,
     .mobile-pre-header .cart,
     .mobile-pre-header .fav,
-    .mobile-pre-header .login {
+    .mobile-pre-header .login,
+    .mobile-pre-header .accessibility {
         font-size: 1.4rem;
         padding: 0.5rem 1rem;
         border: none;
@@ -317,6 +1005,40 @@ a {
         width: 70px;
     }
 
+    html.font-large .mobile-pre-header .lang,
+    html.font-large .mobile-pre-header .theme,
+    html.font-large .mobile-pre-header .cart,
+    html.font-large .mobile-pre-header .fav,
+    html.font-large .mobile-pre-header .login,
+    html.font-large .mobile-pre-header .accessibility {
+        font-size: 2.0rem;
+        padding: 0.7rem 1.5rem;
+        width: 100px;
+    }
+
+    html.font-extra-large .mobile-pre-header .lang,
+    html.font-extra-large .mobile-pre-header .theme,
+    html.font-extra-large .mobile-pre-header .cart,
+    html.font-extra-large .mobile-pre-header .fav,
+    html.font-extra-large .mobile-pre-header .login,
+    html.font-extra-large .mobile-pre-header .accessibility {
+        font-size: 2.5rem;
+        padding: 1rem 2rem;
+        width: 120px;
+    }
+
+    .mobile-pre-header .accessibility iconify-icon {
+        font-size: 1.8rem;
+    }
+
+    html.font-large .mobile-pre-header .accessibility iconify-icon {
+        font-size: 2.4rem;
+    }
+
+    html.font-extra-large .mobile-pre-header .accessibility iconify-icon {
+        font-size: 3.0rem;
+    }
+
     .mobile-pre-header .theme img,
     .mobile-pre-header .cart img,
     .mobile-pre-header .fav img,
@@ -324,6 +1046,24 @@ a {
         width: 1.8rem;
         height: 1.8rem;
         margin-left: 0.3rem;
+    }
+
+    html.font-large .mobile-pre-header .theme img,
+    html.font-large .mobile-pre-header .cart img,
+    html.font-large .mobile-pre-header .fav img,
+    html.font-large .mobile-pre-header .login img {
+        width: 2.4rem;
+        height: 2.4rem;
+        margin-left: 0.5rem;
+    }
+
+    html.font-extra-large .mobile-pre-header .theme img,
+    html.font-extra-large .mobile-pre-header .cart img,
+    html.font-extra-large .mobile-pre-header .fav img,
+    html.font-extra-large .mobile-pre-header .login img {
+        width: 3.0rem;
+        height: 3.0rem;
+        margin-left: 0.7rem;
     }
 
     .mobile-pre-header .cart-count,
@@ -386,14 +1126,15 @@ a {
     .mobile-pre-header .theme,
     .mobile-pre-header .cart,
     .mobile-pre-header .fav,
-    .mobile-pre-header .login {
+    .mobile-pre-header .login,
+    .mobile-pre-header .accessibility {
         font-size: 1.2rem;
         padding: 0.3rem 0.8rem;
         width: 60px;
     }
 
-    .login a {
-        display: none;
+    .mobile-pre-header .accessibility iconify-icon {
+        font-size: 1.5rem;
     }
 
     .mobile-pre-header .theme img,
@@ -418,10 +1159,4 @@ a {
 
 .mobile-pre-header {
     display: none;
-}
-
-@media screen and (max-width: 610px) {
-    .mobile-pre-header {
-        display: flex;
-    }
 }
