@@ -1,4 +1,19 @@
 {
+  "accessibility_modal_title": "Настройки доступности",
+  "font_size_label": "Размер шрифта",
+  "font_normal": "Обычный",
+  "font_large": "Большой",
+  "font_extra_large": "Очень большой",
+  "color_scheme_label": "Цветовая схема",
+  "color_default": "По умолчанию",
+  "color_black_green": "Черно-зеленая",
+  "color_beige_brown": "Бежево-коричневая",
+  "color_blue_darkblue": "Сине-темно-синяя",
+  "hide_images_label": "Скрыть изображения",
+  "hide_images_yes": "Да",
+  "hide_images_no": "Нет",
+  "apply_button": "Применить",
+  "reset_button": "Сбросить",
   "title": "HTL - Главная",
   "banner_title": "ДИЗАЙНЕРСКИЕ СВЕТИЛЬНИКИ",
   "banner_subtitle": "OFL DROP",
@@ -20,4 +35,5 @@
   "portfolio_interior": "Интерьерное",
   "portfolio_retail": "Ретейл",
   "portfolio_medical": "Медицинское"
+  
 }

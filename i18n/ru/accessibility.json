@@ -1,0 +1,15 @@
+{
+  "accessibility_title": "Версия для слабовидящих",
+  "font_size_label": "Размер шрифта:",
+  "font_size_normal": "Обычный",
+  "font_size_large": "Большой",
+  "font_size_extra_large": "Очень большой",
+  "color_scheme_label": "Цветовая схема:",
+  "color_scheme_default": "По умолчанию",
+  "color_scheme_black_green": "Чёрный фон, зелёный текст",
+  "color_scheme_beige_brown": "Бежевый фон, коричневый текст",
+  "color_scheme_blue_darkblue": "Голубой фон, тёмно-синий текст",
+  "hide_images_label": "Отключить изображения",
+  "save_button": "Сохранить",
+  "close_button": "Закрыть"
+}

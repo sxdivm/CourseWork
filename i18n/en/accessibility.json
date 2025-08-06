@@ -1,0 +1,15 @@
+{
+  "accessibility_title": "Accessibility Version",
+  "font_size_label": "Font Size:",
+  "font_size_normal": "Normal",
+  "font_size_large": "Large",
+  "font_size_extra_large": "Extra Large",
+  "color_scheme_label": "Color Scheme:",
+  "color_scheme_default": "Default",
+  "color_scheme_black_green": "Black background, green text",
+  "color_scheme_beige_brown": "Beige background, brown text",
+  "color_scheme_blue_darkblue": "Blue background, dark blue text",
+  "hide_images_label": "Disable Images",
+  "save_button": "Save",
+  "close_button": "Close"
+}
