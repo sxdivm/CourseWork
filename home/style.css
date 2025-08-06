@@ -291,6 +291,7 @@ h2 {
 .portfolio .projects {
     display: flex;
     transition: transform 0.5s ease-in-out;
+    gap: 4rem;
 }
 
 .portfolio .project {

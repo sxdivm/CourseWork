@@ -52,7 +52,7 @@ body * {
 .project-title {
     font-size: 3.6rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: var(--primary-text);
     margin-bottom: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 1px;

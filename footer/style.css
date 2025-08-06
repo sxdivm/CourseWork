@@ -15,7 +15,32 @@ html {
     --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
 }
+html.scheme-black-green {
+    --bg-color: #000000;
+    --primary-text: #00FF00;
+    --banner: #000000;
+    --border: #333333;
+    --category-color: #000000;
+    --footer-bg: #000000;
+}
 
+html.scheme-beige-brown {
+    --bg-color: #F5F5DC;
+    --primary-text: #4A3728;
+    --banner: #F5F5DC;
+    --border: #4A3728;
+    --category-color: #F5F5DC;
+    --footer-bg: #F5F5DC;
+}
+
+html.scheme-blue-darkblue {
+    --bg-color: #ADD8E6;
+    --primary-text: #00008B;
+    --banner: #ADD8E6;
+    --border: #00008B;
+    --category-color: #ADD8E6;
+    --footer-bg: #ADD8E6;
+}
 body {
     font-family: 'Montserrat', sans-serif;
     font-weight: normal;

@@ -502,11 +502,13 @@ html[data-theme="dark"] .add-to-cart
     gap: 1rem;
     margin-left: 10rem;
     margin-bottom: 2rem;
+    
 }
 
 .admin-controls button {
     padding: 0.8rem 2rem;
     border: 1px solid var(--primary-text);
+    color: var(--primary-text);
     border-radius: 5px;
     background-color: var(--bg-color);
     font-size: 1.6rem;
@@ -614,6 +616,7 @@ html[data-theme="dark"] .add-to-cart
 .form-group input[readonly] {
     background-color: var(--category-color);
     cursor: not-allowed;
+    color: var(--primary-text);
 }
 
 .modal-content button[type="submit"] {
@@ -625,6 +628,7 @@ html[data-theme="dark"] .add-to-cart
     font-size: 1.4rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    color: var(--primary-text);
 }
 
 .modal-content button[type="submit"]:hover {

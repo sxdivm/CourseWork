@@ -15,11 +15,10 @@ html {
     --button-circle: #D2D2D2;
     --footer-bg: #1C1C1C;
     background-color: var(--bg-color);
-    /* Настройки для слабовидящих */
-    --letter-spacing: 0.12; /* 0.12 от кегля */
-    --word-spacing: 0.16; /* 0.16 от кегля */
-    --line-height: 1.5; /* 1.5 от кегля */
-    --paragraph-spacing: 2; /* 2 от кегля */
+    --letter-spacing: 0.12; 
+    --word-spacing: 0.16; 
+    --line-height: 1.5; 
+    --paragraph-spacing: 2; 
 }
 
 html[data-theme="dark"] {
@@ -34,7 +33,6 @@ html[data-theme="dark"] {
     --footer-bg: #0F0F0F;
 }
 
-/* Настройки для слабовидящих: размеры шрифта для страницы home */
 html.font-normal body.home-page h1 {
     font-size: 6.4rem !important;
     letter-spacing: calc(6.4rem * var(--letter-spacing)) !important;
@@ -221,7 +219,7 @@ html.font-extra-large body.home-page a {
     hyphens: auto !important;
 }
 
-/* Цветовые схемы для слабовидящих */
+
 html.scheme-black-green {
     --bg-color: #000000;
     --primary-text: #00FF00;
@@ -229,6 +227,11 @@ html.scheme-black-green {
     --border: #333333;
     --category-color: #000000;
     --footer-bg: #000000;
+}
+html.scheme-black-green .lang,html.scheme-beige-brown .lang,html.scheme-blue-darkblue .lang
+{
+    color:var(--primary-text);
+    
 }
 
 html.scheme-beige-brown {
@@ -249,7 +252,7 @@ html.scheme-blue-darkblue {
     --footer-bg: #ADD8E6;
 }
 
-/* Отключение изображений только в <main> на странице home */
+
 html.hide-images body.home-page main img {
     display: none;
     position: relative;
