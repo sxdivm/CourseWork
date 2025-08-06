@@ -65,7 +65,7 @@ main a {
 .form-group label {
     font-size: 1.8rem;
     font-weight: 300;
-    display: block;
+    display: flex;
     margin-bottom: 0.5rem;
 }
 
@@ -176,7 +176,11 @@ main a {
     text-align: center;
     font-family: 'Montserrat', sans-serif;
 }
-
+.agreement_label
+{
+    display: flex;
+    gap: 1rem;
+}
 .agreement-text {
     max-height: 50vh;
     overflow-y: auto;
@@ -232,6 +236,10 @@ main a {
     .registration h2 {
         font-size: 2.8rem;
     }
+    .agreement_label
+    {
+        flex-direction: column;
+    }
 
     .form-group input[type="text"],
     .form-group input[type="email"],
@@ -239,6 +247,7 @@ main a {
     .form-group input[type="password"],
     .form-group input[type="date"] {
         font-size: 1.4rem;
+        max-width: 90%;
     }
 
     .form-group label {

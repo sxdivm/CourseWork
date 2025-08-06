@@ -81,6 +81,7 @@ async function loadProjects(type = 'all') {
             projectDiv.style.backgroundSize = 'cover';
             projectDiv.style.backgroundPosition = 'center';
             projectDiv.style.backgroundRepeat = 'no-repeat';
+            projectDiv.style.maxWidth = '80vw'
             projectDiv.innerHTML = `
                 <div class="info">
                     <p class="category">${lang === 'ru' ? project.type : project.en_type || project.type || translations.no_category || 'Без категории'}</p>

@@ -320,6 +320,7 @@ h2 {
     justify-content: space-between;
     border-radius: 8px;
     z-index: 1;
+    max-width: 80%;
 }
 
 .portfolio .project p.category {
