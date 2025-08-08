@@ -1,2 +1,2 @@
 # CourseWork
-[Figma](https://www.figma.com/design/IRxa4kpTcVFquNT35lfxcW/HTL?node-id=1418-10&p=f&t=JTxQV0HCpqrh7KvN-0)
+[Figma](https://www.figma.com/design/zsZ1VzPJ7NpJ5oceH36fy1/HTL--Copy-?node-id=7006-699&t=snh3FVKoH7khM5BM-0)
