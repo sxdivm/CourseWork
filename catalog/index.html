@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">HTL Business Catalog</title>
     <link rel="stylesheet" href="../preloader/style.css">
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="preloader">
+    <div class="preloader">
         <div class="spinner"></div>
     </div>
     <main>
@@ -40,8 +40,6 @@
                             <option value="name,desc" data-i18n="sort_name_desc">по типу (Я-А)</option>
                             <option value="price,asc" data-i18n="sort_price_asc">по цене (возр.)</option>
                             <option value="price,desc" data-i18n="sort_price_desc">по цене (убыв.)</option>
-                            <option value="rating,asc" data-i18n="sort_rating_asc">по рейтингу (возр.)</option>
-                            <option value="rating,desc" data-i18n="sort_rating_desc">по рейтингу (убыв.)</option>
                         </select>
                     </p>
                     <div class="search">
@@ -60,9 +58,14 @@
                     <div class="filter-group">
                         <h5 data-i18n="type">Тип</h5>
                     </div>
+
                     <div class="filter-group">
                         <h5 data-i18n="price">Цена</h5>
                         <div class="price-range">
+                            <div class="slider-values">
+                                <span class="slider-min-value" id="price-min-value">0 ₽</span>
+                                <span class="slider-max-value" id="price-max-value">3500 ₽</span>
+                            </div>
                             <div class="range-slider">
                                 <input type="range" id="price-slider-min" min="0" max="3500" step="100" value="0">
                                 <input type="range" id="price-slider-max" min="0" max="3500" step="100" value="3500">
@@ -71,9 +74,14 @@
                             <span id="price-value" data-i18n="price_range">От 0 ₽ до 3500 ₽</span>
                         </div>
                     </div>
+
                     <div class="filter-group">
                         <h5 data-i18n="power">Мощность</h5>
                         <div class="power-range">
+                            <div class="slider-values">
+                                <span class="slider-min-value" id="power-min-value">0 Вт</span>
+                                <span class="slider-max-value" id="power-max-value">100 Вт</span>
+                            </div>
                             <div class="range-slider">
                                 <input type="range" id="power-slider-min" min="0" max="100" step="5" value="0">
                                 <input type="range" id="power-slider-max" min="0" max="100" step="5" value="100">
@@ -82,9 +90,14 @@
                             <span id="power-value" data-i18n="power_range">От 0 Вт до 100 Вт</span>
                         </div>
                     </div>
+
                     <div class="filter-group">
                         <h5 data-i18n="luminous_flux">Световой поток</h5>
                         <div class="luminous-flux-range">
+                            <div class="slider-values">
+                                <span class="slider-min-value" id="luminous-flux-min-value">0 лм</span>
+                                <span class="slider-max-value" id="luminous-flux-max-value">6000 лм</span>
+                            </div>
                             <div class="range-slider">
                                 <input type="range" id="luminous-flux-slider-min" min="0" max="6000" step="100"
                                     value="0">
@@ -95,21 +108,22 @@
                             <span id="luminous-flux-value" data-i18n="luminous_flux_range">От 0 лм до 6000 лм</span>
                         </div>
                     </div>
-                    <div class="filter-group">
-                        <h5 data-i18n="ip_protection">IP Защита</h5>
-                        <label><input type="checkbox" name="ip" value="IP65" data-i18n="ip_protection"> IP65</label>
-                    </div>
+
                     <div class="filter-group">
                         <h5 data-i18n="color_temperature">Цветовая температура</h5>
                         <div class="color-temperature-range">
+                            <div class="slider-values">
+                                <span class="slider-min-value" id="color-temperature-min-value">0 K</span>
+                                <span class="slider-max-value" id="color-temperature-max-value">6500 K</span>
+                            </div>
                             <div class="range-slider">
-                                <input type="range" id="color-temperature-slider-min" min="2000" max="6500" step="100"
-                                    value="2000">
-                                <input type="range" id="color-temperature-slider-max" min="2000" max="6500" step="100"
+                                <input type="range" id="color-temperature-slider-min" min="0" max="6500" step="100"
+                                    value="0">
+                                <input type="range" id="color-temperature-slider-max" min="0" max="6500" step="100"
                                     value="6500">
                                 <div class="active-range"></div>
                             </div>
-                            <span id="color-temperature-value" data-i18n="color_temperature_range">От 2000 K до 6500
+                            <span id="color-temperature-value" data-i18n="color_temperature_range">От 0 K до 6500
                                 K</span>
                         </div>
                     </div>
@@ -190,8 +204,7 @@
     </main>
     <script src="../header/i18n.js"></script>
     <script src="../preloader/script.js"></script>
-<script src="../header/header.js"></script>
+    <script src="../header/header.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="../header/theme.js"></script>
     <script src="catalog.js"></script>
-    

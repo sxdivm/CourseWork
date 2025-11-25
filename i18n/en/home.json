@@ -34,5 +34,9 @@
   "portfolio_industrial": "Industrial",
   "portfolio_interior": "Interior",
   "portfolio_retail": "Retail",
-  "portfolio_medical": "Medical"
+  "portfolio_medical": "Medical",
+  "read_more": "Read more",
+  "no_projects": "No projects found.",
+  "no_projects_in_category": "No projects in this category.",
+  "error_loading_projects": "Error loading projects."
 }

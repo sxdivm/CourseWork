@@ -11,6 +11,7 @@ async function loadProjects(type = 'all') {
         const projectsContainer = document.getElementById('projects');
         projectsContainer.innerHTML = '';
 
+        // Загружаем переводы один раз
         const translations = await new Promise(resolve => {
             window.loadTranslations(lang, 'home', (trans) => resolve(trans || {}));
         });
@@ -21,6 +22,7 @@ async function loadProjects(type = 'all') {
             return;
         }
 
+        // Подсчёт проектов по категориям
         const categoryCounts = {
             all: projects.length,
             Уличное: 0,
@@ -29,28 +31,19 @@ async function loadProjects(type = 'all') {
             Ретейл: 0,
             Медицинское: 0
         };
-        console.log('Projects from API:', projects); 
+
         projects.forEach(project => {
-            if (project.type) {
-                const normalizedType = project.type.trim();
-                if (categoryCounts.hasOwnProperty(normalizedType)) {
-                    categoryCounts[normalizedType]++;
-                } else {
-                    console.warn(`Unexpected project type: "${project.type}"`); 
-                }
-            } else {
-                console.warn('Project missing type:', project); 
+            if (project.type && categoryCounts.hasOwnProperty(project.type.trim())) {
+                categoryCounts[project.type.trim()]++;
             }
         });
-        console.log('Category counts:', categoryCounts); 
+
+        // Обновляем текст кнопок (с количеством)
         const updateButtonText = (id, key, count) => {
             const button = document.getElementById(id);
             if (button) {
-                const categoryText = translations[key] || button.getAttribute('data-i18n');
-                button.textContent = `${categoryText} (${count})`;
-                console.log(`Updated button ${id} to "${button.textContent}"`);
-            } else {
-                console.warn(`Button with ID ${id} not found`); 
+                const text = translations[key] || button.getAttribute('data-i18n') || key;
+                button.textContent = `${text} (${count})`;
             }
         };
 
@@ -61,19 +54,18 @@ async function loadProjects(type = 'all') {
         updateButtonText('btn-retail', 'portfolio_retail', categoryCounts.Ретейл);
         updateButtonText('btn-medical', 'portfolio_medical', categoryCounts.Медицинское);
 
+        // Фильтрация проектов
         const filteredProjects = type === 'all'
             ? projects
-            : projects.filter(project =>
-                project.type && project.type.trim().toLowerCase() === type.trim().toLowerCase()
-            );
+            : projects.filter(p => p.type && p.type.trim() === type.trim());
 
         if (filteredProjects.length === 0) {
-            const categoryKey = `portfolio_${type.toLowerCase()}`;
-            projectsContainer.innerHTML = `<p data-i18n="no_projects_in_category">${translations.no_projects_in_category || `Проекты в категории "${lang === 'ru' ? type : translations[categoryKey] || type}" не найдены.`}</p>`;
+            projectsContainer.innerHTML = `<p data-i18n="no_projects_in_category">Проекты в выбранной категории не найдены.</p>`;
             window.loadTranslations(lang, 'home');
             return;
         }
 
+        // Генерация карточек
         filteredProjects.forEach(project => {
             const projectDiv = document.createElement('div');
             projectDiv.className = 'project';
@@ -81,29 +73,45 @@ async function loadProjects(type = 'all') {
             projectDiv.style.backgroundSize = 'cover';
             projectDiv.style.backgroundPosition = 'center';
             projectDiv.style.backgroundRepeat = 'no-repeat';
-            projectDiv.style.maxWidth = '80vw'
+            projectDiv.style.maxWidth = '80vw';
+
             projectDiv.innerHTML = `
                 <div class="info">
-                    <p class="category">${lang === 'ru' ? project.type : project.en_type || project.type || translations.no_category || 'Без категории'}</p>
-                    <h4>${lang === 'ru' ? project.name : project.en_name || project.name || translations.no_name || 'Без названия'}</h4>
+                    <p class="category">
+                        ${lang === 'ru' 
+                            ? (project.type || 'Без категории') 
+                            : (project.en_type || project.type || 'No category')
+                        }
+                    </p>
+                    <h4>
+                        ${lang === 'ru' 
+                            ? (project.name || 'Без названия') 
+                            : (project.en_name || project.name || 'No title')
+                        }
+                    </h4>
                     <div class="read">
-                        <p data-i18n="read_more">${translations.read_more || 'Подробнее'}</p>
-                        <button onclick="window.location.href='project_page/index.html?id=${project.id}'">
+                        <p data-i18n="read_more">Подробнее</p>
+                        <button onclick="window.location.href='../project_page/index.html?id=${project.id}'">
                             <img src="../img/circle_arrow.svg" alt="arrow">
                         </button>
                     </div>
                 </div>
             `;
+
             projectsContainer.appendChild(projectDiv);
         });
 
+        // КРИТИЧНО: Запускаем перевод для всех новых элементов (включая "Подробнее")
+        window.loadTranslations(lang, 'home');
+
+        // Инициализируем слайдер после добавления карточек
         initializeSlider();
+
     } catch (error) {
         console.error('Ошибка при загрузке проектов:', error);
-        const lang = localStorage.getItem('language') || 'ru';
         const projectsContainer = document.getElementById('projects');
-        projectsContainer.innerHTML = `<p data-i18n="error_loading">${translations.error_loading || 'Ошибка загрузки проектов. Попробуйте позже.'}</p>`;
-        window.loadTranslations(lang, 'home');
+        projectsContainer.innerHTML = `<p data-i18n="error_loading_projects">Ошибка загрузки проектов. Попробуйте позже.</p>`;
+        window.loadTranslations(localStorage.getItem('language') || 'ru', 'home');
     }
 }
 
@@ -115,14 +123,17 @@ function initializeSlider() {
     let currentIndex = 0;
 
     function getCardWidth() {
-        return projectCards.length > 0 ? projectCards[0].offsetWidth : 0;
+        return projectCards.length > 0 ? projectCards[0].getBoundingClientRect().width : 0;
     }
 
     function updateSlider() {
+        if (projectCards.length === 0) return;
+
         const cardWidth = getCardWidth();
         const containerWidth = document.querySelector('.projects-slider').offsetWidth;
         const totalWidth = cardWidth * projectCards.length;
-        const maxIndex = Math.ceil((totalWidth - containerWidth) / cardWidth);
+        const visibleCards = Math.floor(containerWidth / cardWidth);
+        const maxIndex = projectCards.length - visibleCards;
 
         const offset = -currentIndex * cardWidth;
         projectsContainer.style.transform = `translateX(${offset}px)`;
@@ -135,10 +146,11 @@ function initializeSlider() {
     }
 
     function nextSlide() {
-        const cardWidth = getCardWidth();
         const containerWidth = document.querySelector('.projects-slider').offsetWidth;
-        const totalWidth = cardWidth * projectCards.length;
-        const maxIndex = Math.ceil((totalWidth - containerWidth) / cardWidth);
+        const cardWidth = getCardWidth();
+        const visibleCards = Math.floor(containerWidth / cardWidth);
+        const maxIndex = projectCards.length - visibleCards;
+
         if (currentIndex < maxIndex) {
             currentIndex++;
             updateSlider();
@@ -152,16 +164,20 @@ function initializeSlider() {
         }
     }
 
+    // Обновление при ресайзе
     window.addEventListener('resize', updateSlider);
     prevButton.addEventListener('click', prevSlide);
     nextButton.addEventListener('click', nextSlide);
 
+    // Первичная инициализация
     updateSlider();
 }
 
+// === ЗАГРУЗКА ПРИ СТАРТЕ И ПРИ КЛИКЕ ПО КАТЕГОРИЯМ ===
 document.addEventListener('DOMContentLoaded', () => {
-    loadProjects();
+    loadProjects(); // Загружаем все проекты при старте
 
+    // Обработка кликов по фильтрам
     document.querySelectorAll('.type li').forEach(button => {
         button.addEventListener('click', () => {
             document.querySelectorAll('.type li').forEach(btn => btn.classList.remove('active'));
@@ -171,9 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    window.addEventListener('languageChanged', (event) => {
-        const newLang = event.detail?.lang || localStorage.getItem('language') || 'ru';
-        console.log('Language changed to:', newLang);
+    // Перезагрузка при смене языка
+    window.addEventListener('languageChanged', () => {
         const activeButton = document.querySelector('.type li.active');
         const type = activeButton ? activeButton.getAttribute('data-type') : 'all';
         loadProjects(type);

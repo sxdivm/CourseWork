@@ -34,6 +34,9 @@
   "portfolio_industrial": "Промышленное",
   "portfolio_interior": "Интерьерное",
   "portfolio_retail": "Ретейл",
-  "portfolio_medical": "Медицинское"
-  
+  "portfolio_medical": "Медицинское",
+  "read_more": "Подробнее",
+  "no_projects": "Проекты не найдены.",
+  "no_projects_in_category": "Проекты в этой категории не найдены.",
+  "error_loading_projects": "Ошибка загрузки проектов."
 }

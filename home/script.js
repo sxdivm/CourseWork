@@ -11,24 +11,32 @@ async function loadCategories() {
             window.loadTranslations(lang, 'home', (trans) => resolve(trans || {}));
         });
 
-        const uniqueTypes = [...new Set(products.map(product => lang === 'ru' ? product.type : product.en_type || product.type))].filter(type => type);
-        console.log('Unique categories:', uniqueTypes); 
+        const uniqueTypesRu = [...new Set(products.map(p => p.type).filter(Boolean))];
 
         const categoriesContainer = document.getElementById('categories');
         categoriesContainer.innerHTML = '';
 
-        uniqueTypes.forEach(type => {
-            const shortName = type.length > 18 ? type.slice(0, 18) + '...' : type;
+        uniqueTypesRu.forEach(typeRu => {
+            
+            const exampleProduct = products.find(p => p.type === typeRu);
+
+            const displayName = lang === 'ru' 
+                ? typeRu 
+                : (exampleProduct?.en_type?.trim() || typeRu);
+
+            const shortName = displayName.length > 18 ? displayName.slice(0, 18) + '...' : displayName;
+
             const categoryDiv = document.createElement('div');
             categoryDiv.className = 'category';
             categoryDiv.innerHTML = `
-                <p title="${type}">${shortName}</p>
-                <button onclick="goToCatalog('${encodeURIComponent(type)}')">
+                <p title="${displayName}">${shortName}</p>
+                <button onclick="goToCatalog('${encodeURIComponent(typeRu)}')">
                     <img src="../img/circle_arrow.svg" alt="arrow">
                 </button>
             `;
             categoriesContainer.appendChild(categoryDiv);
         });
+
     } catch (error) {
         console.error('Ошибка при загрузке категорий:', error);
         const lang = localStorage.getItem('language') || 'ru';
@@ -43,15 +51,17 @@ async function loadCategories() {
     }
 }
 
-function goToCatalog(type) {
-    window.location.href = `../catalog/index.html?type=${type}`;
+function goToCatalog(typeRu) {
+
+    window.location.href = `../catalog/index.html?type=${typeRu}`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     loadCategories();
+
     window.addEventListener('languageChanged', (event) => {
         const newLang = event.detail?.lang || localStorage.getItem('language') || 'ru';
         console.log('Language changed to:', newLang);
-        loadCategories();
+        loadCategories(); 
     });
 });

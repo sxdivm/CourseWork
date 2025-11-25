@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="title">Профиль пользователя</title>
     <link rel="stylesheet" href="../preloader/style.css">
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../header/style.css">
     <link rel="stylesheet" href="../footer/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </head>
+
 <body>
-<div class="preloader">
+    <div class="preloader">
         <div class="spinner"></div>
     </div>
     <main>
@@ -22,20 +24,22 @@
             <form id="profile-form">
                 <div class="form-group">
                     <label for="nickname" data-i18n="nickname_label">Никнейм* <span class="required">*</span></label>
-                    <input type="text" id="nickname" name="nickname" required data-i18n-placeholder="nickname_placeholder">
-                    <button type="button" id="regenerate-nickname" data-i18n="regenerate_nickname">Сгенерировать новый никнейм</button>
-                    <span class="error-message" id="nickname-error" data-i18n="nickname_error"></span>
+                    <input type="text" id="nickname" name="nickname" required
+                        data-i18n-placeholder="nickname_placeholder">
+                    <button type="button" id="regenerate-nickname" data-i18n="regenerate_nickname">Сгенерировать новый
+                        никнейм</button>
+                    <span class="error-message" id="nickname-error"></span>
                     <span id="nickname-attempts"></span>
                 </div>
                 <div class="form-group">
-                    <label for="email" data-i18n="email_label">Email* <span class="required">*</span></label>
-                    <input type="email" id="email" name="email" required data-i18n-placeholder="email_placeholder">
-                    <span class="error-message" id="email-error" data-i18n="email_error"></span>
+                    <label for="email" data-i18n="email_label">Email</label>
+                    <input type="email" id="email" name="email" data-i18n-placeholder="email_placeholder">
+                    <span class="error-message" id="email-error"></span>
                 </div>
                 <div class="form-group">
-                    <label for="phone" data-i18n="phone_label">Номер телефона* <span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" required data-i18n-placeholder="phone_placeholder">
-                    <span class="error-message" id="phone-error" data-i18n="phone_error"></span>
+                    <label for="phone" data-i18n="phone_label">Номер телефона</label>
+                    <input type="tel" id="phone" name="phone" data-i18n-placeholder="phone_placeholder">
+                    <span class="error-message" id="phone-error"></span>
                 </div>
                 <div class="form-group">
                     <label for="password" data-i18n="password_label">Новый пароль</label>
@@ -44,7 +48,8 @@
                 </div>
                 <div class="form-group">
                     <label for="password-confirm" data-i18n="password_confirm_label">Подтверждение пароля</label>
-                    <input type="password" id="password-confirm" name="password-confirm" data-i18n-placeholder="password_confirm_placeholder">
+                    <input type="password" id="password-confirm" name="password-confirm"
+                        data-i18n-placeholder="password_confirm_placeholder">
                     <span class="error-message" id="password-confirm-error" data-i18n="password_confirm_error"></span>
                 </div>
                 <button type="submit" id="submit-button" disabled data-i18n="submit_button">Сохранить изменения</button>
@@ -54,10 +59,11 @@
     </main>
     <script src="../header/i18n.js"></script>
     <script src="../preloader/script.js"></script>
-<script src="../header/header.js"></script>
+    <script src="../header/header.js"></script>
     <script src="../header/theme.js"></script>
     <script src="../footer/footer.js"></script>
     <script src="script.js"></script>
-    
+
 </body>
+
 </html>

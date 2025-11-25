@@ -19,6 +19,13 @@ let currentFilters = {
     page: 1
 };
 
+let realRanges = {
+    price: { min: 0, max: 3500 },
+    power: { min: 0, max: 100 },
+    luminousFlux: { min: 0, max: 6000 },
+    colorTemperature: { min: 0, max: 6500 }
+};
+
 async function addToCart(productId) {
     try {
         const userId = localStorage.getItem('userId');
@@ -263,6 +270,77 @@ async function saveProduct(event) {
     }
 }
 
+function calculateRealRanges(products) {
+    const validProducts = products.filter(p => p !== null && p !== undefined);
+
+    const prices = validProducts.map(p => p.price).filter(price => price !== null && price !== undefined);
+    realRanges.price.min = 0;
+    realRanges.price.max = prices.length > 0 ? Math.ceil(Math.max(...prices) / 100) * 100 : 3500;
+
+    const powers = validProducts.map(p => p.power).filter(power => power !== null && power !== undefined);
+    realRanges.power.min = 0;
+    realRanges.power.max = powers.length > 0 ? Math.ceil(Math.max(...powers)) : 100;
+
+    const luminousFluxes = validProducts.map(p => p['luminous flux']).filter(flux => flux !== null && flux !== undefined);
+    realRanges.luminousFlux.min = 0;
+    realRanges.luminousFlux.max = luminousFluxes.length > 0 ? Math.ceil(Math.max(...luminousFluxes) / 100) * 100 : 6000;
+
+    const colorTemperatures = validProducts.map(p => p['color temperature']).filter(temp => temp !== null && temp !== undefined);
+    realRanges.colorTemperature.min = 0;
+    realRanges.colorTemperature.max = colorTemperatures.length > 0 ? Math.ceil(Math.max(...colorTemperatures) / 100) * 100 : 6500;
+
+    console.log('Real ranges calculated:', realRanges);
+}
+
+function updateSlidersWithRealRanges() {
+
+    const priceSliderMin = document.getElementById('price-slider-min');
+    const priceSliderMax = document.getElementById('price-slider-max');
+    if (priceSliderMin && priceSliderMax) {
+        priceSliderMin.min = realRanges.price.min;
+        priceSliderMin.max = realRanges.price.max;
+        priceSliderMax.min = realRanges.price.min;
+        priceSliderMax.max = realRanges.price.max;
+        priceSliderMin.value = realRanges.price.min;
+        priceSliderMax.value = realRanges.price.max;
+    }
+
+    const powerSliderMin = document.getElementById('power-slider-min');
+    const powerSliderMax = document.getElementById('power-slider-max');
+    if (powerSliderMin && powerSliderMax) {
+        powerSliderMin.min = realRanges.power.min;
+        powerSliderMin.max = realRanges.power.max;
+        powerSliderMax.min = realRanges.power.min;
+        powerSliderMax.max = realRanges.power.max;
+        powerSliderMin.value = realRanges.power.min;
+        powerSliderMax.value = realRanges.power.max;
+    }
+
+    const luminousFluxSliderMin = document.getElementById('luminous-flux-slider-min');
+    const luminousFluxSliderMax = document.getElementById('luminous-flux-slider-max');
+    if (luminousFluxSliderMin && luminousFluxSliderMax) {
+        luminousFluxSliderMin.min = realRanges.luminousFlux.min;
+        luminousFluxSliderMin.max = realRanges.luminousFlux.max;
+        luminousFluxSliderMax.min = realRanges.luminousFlux.min;
+        luminousFluxSliderMax.max = realRanges.luminousFlux.max;
+        luminousFluxSliderMin.value = realRanges.luminousFlux.min;
+        luminousFluxSliderMax.value = realRanges.luminousFlux.max;
+    }
+
+    const colorTemperatureSliderMin = document.getElementById('color-temperature-slider-min');
+    const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
+    if (colorTemperatureSliderMin && colorTemperatureSliderMax) {
+        colorTemperatureSliderMin.min = realRanges.colorTemperature.min;
+        colorTemperatureSliderMin.max = realRanges.colorTemperature.max;
+        colorTemperatureSliderMax.min = realRanges.colorTemperature.min;
+        colorTemperatureSliderMax.max = realRanges.colorTemperature.max;
+        colorTemperatureSliderMin.value = realRanges.colorTemperature.min;
+        colorTemperatureSliderMax.value = realRanges.colorTemperature.max;
+    }
+
+    console.log('Sliders updated with real ranges');
+}
+
 async function loadProducts(sort = 'name', order = 'asc', search = '', availability = '', types = [], minPrice = null, maxPrice = null, minPower = null, maxPower = null, minLuminousFlux = null, maxLuminousFlux = null, ip = '', minColorTemperature = null, maxColorTemperature = null, emergencyBlock = '', page = 1) {
 
     currentFilters = { sort, order, search, availability, types, minPrice, maxPrice, minPower, maxPower, minLuminousFlux, maxLuminousFlux, ip, minColorTemperature, maxColorTemperature, emergencyBlock, page };
@@ -295,6 +373,15 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         const products = await response.json();
         console.log('Products received:', products);
 
+        const allProductsUrl = new URL('http://localhost:3000/products');
+        const allProductsResponse = await fetch(allProductsUrl);
+        if (allProductsResponse.ok) {
+            const allProducts = await allProductsResponse.json();
+            calculateRealRanges(allProducts);
+            updateSlidersWithRealRanges();
+            restoreSliderPositions();
+        }
+
         const catalog = document.getElementById('catalog');
         catalog.innerHTML = '';
 
@@ -324,13 +411,28 @@ async function loadProducts(sort = 'name', order = 'asc', search = '', availabil
         const currentLang = localStorage.getItem('language') || 'ru';
         const typeFilterGroup = document.querySelector('#filter-panel .filter-group:nth-child(2)');
         if (typeFilterGroup) {
-            const uniqueTypes = [...new Set(products.map(product => currentLang === 'ru' ? product.type : product.en_type || product.type))];
+            // Получаем ВСЕ товары один раз, чтобы знать все возможные типы
+            const allResponse = await fetch('http://localhost:3000/products');
+            const allProducts = await allResponse.json();
+
+            // Уникальные русские типы (по ним мы всегда фильтруем на сервере)
+            const uniqueTypesRu = [...new Set(allProducts.map(p => p.type).filter(Boolean))];
+
             typeFilterGroup.innerHTML = `<h5 data-i18n="type">${currentLang === 'ru' ? 'Тип' : 'Type'}</h5>`;
-            uniqueTypes.forEach(type => {
+
+            uniqueTypesRu.forEach(typeRu => {
+                // Находим любой товар с этим русским типом, чтобы взять перевод
+                const example = allProducts.find(p => p.type === typeRu);
+                const displayName = currentLang === 'ru'
+                    ? typeRu
+                    : (example?.en_type?.trim() ? example.en_type : typeRu); // если перевода нет — покажем русский
+
+                const isChecked = types.includes(typeRu); // проверяем по РУССКОМУ значению!
+
                 const label = document.createElement('label');
                 label.innerHTML = `
-                    <input type="checkbox" name="type" value="${type}" ${types.includes(type) ? 'checked' : ''}>
-                    ${type}
+                    <input type="checkbox" name="type" value="${typeRu}" ${isChecked ? 'checked' : ''}>
+                    ${displayName}
                 `;
                 typeFilterGroup.appendChild(label);
             });
@@ -526,9 +628,155 @@ function updatePagination(totalPages, currentPage, sort, order, search, availabi
 }
 
 
-window.updateCatalogTranslations = function() {
+window.updateCatalogTranslations = function () {
     loadProducts(currentFilters.sort, currentFilters.order, currentFilters.search, currentFilters.availability, currentFilters.types, currentFilters.minPrice, currentFilters.maxPrice, currentFilters.minPower, currentFilters.maxPower, currentFilters.minLuminousFlux, currentFilters.maxLuminousFlux, currentFilters.ip, currentFilters.minColorTemperature, currentFilters.maxColorTemperature, currentFilters.emergencyBlock, currentFilters.page);
 };
+
+function updateRange(sliderMin, sliderMax, valueElement, activeRange, unit, minValueElement, maxValueElement) {
+    const minPercent = (parseInt(sliderMin.value) / parseInt(sliderMax.max)) * 100;
+    const maxPercent = (parseInt(sliderMax.value) / parseInt(sliderMax.max)) * 100;
+    activeRange.style.left = `${minPercent}%`;
+    activeRange.style.right = `${100 - maxPercent}%`;
+    valueElement.textContent = `От ${sliderMin.value} ${unit} до ${sliderMax.value} ${unit}`;
+    valueElement.setAttribute('data-i18n', unit === '₽' ? 'price_range' : unit === 'Вт' ? 'power_range' : unit === 'лм' ? 'luminous_flux_range' : 'color_temperature_range');
+
+    if (minValueElement) {
+        minValueElement.textContent = `${sliderMin.value} ${unit}`;
+    }
+    if (maxValueElement) {
+        maxValueElement.textContent = `${sliderMax.value} ${unit}`;
+    }
+
+    window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
+}
+function restoreSliderPositions() {
+    const saved = sessionStorage.getItem('sliderPositions');
+    if (saved) {
+        const sliders = JSON.parse(saved);
+
+        const priceSliderMin = document.getElementById('price-slider-min');
+        const priceSliderMax = document.getElementById('price-slider-max');
+        const powerSliderMin = document.getElementById('power-slider-min');
+        const powerSliderMax = document.getElementById('power-slider-max');
+        const luminousFluxSliderMin = document.getElementById('luminous-flux-slider-min');
+        const luminousFluxSliderMax = document.getElementById('luminous-flux-slider-max');
+        const colorTemperatureSliderMin = document.getElementById('color-temperature-slider-min');
+        const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
+
+        if (priceSliderMin && sliders.priceMin) priceSliderMin.value = sliders.priceMin;
+        if (priceSliderMax && sliders.priceMax) priceSliderMax.value = sliders.priceMax;
+        if (powerSliderMin && sliders.powerMin) powerSliderMin.value = sliders.powerMin;
+        if (powerSliderMax && sliders.powerMax) powerSliderMax.value = sliders.powerMax;
+        if (luminousFluxSliderMin && sliders.luminousFluxMin) luminousFluxSliderMin.value = sliders.luminousFluxMin;
+        if (luminousFluxSliderMax && sliders.luminousFluxMax) luminousFluxSliderMax.value = sliders.luminousFluxMax;
+        if (colorTemperatureSliderMin && sliders.colorTemperatureMin) colorTemperatureSliderMin.value = sliders.colorTemperatureMin;
+        if (colorTemperatureSliderMax && sliders.colorTemperatureMax) colorTemperatureSliderMax.value = sliders.colorTemperatureMax;
+
+        initializeSliders();
+    }
+}
+function initializeSliders() {
+
+    const priceSliderMin = document.getElementById('price-slider-min');
+    const priceSliderMax = document.getElementById('price-slider-max');
+    const priceValue = document.getElementById('price-value');
+    const activeRangePrice = document.querySelector('.price-range .active-range');
+    const priceMinValue = document.getElementById('price-min-value');
+    const priceMaxValue = document.getElementById('price-max-value');
+
+    if (priceSliderMin && priceSliderMax && priceValue && activeRangePrice) {
+        updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽', priceMinValue, priceMaxValue);
+
+        priceSliderMin.addEventListener('input', () => {
+            if (parseInt(priceSliderMin.value) > parseInt(priceSliderMax.value)) {
+                priceSliderMin.value = priceSliderMax.value;
+            }
+            updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽', priceMinValue, priceMaxValue);
+        });
+
+        priceSliderMax.addEventListener('input', () => {
+            if (parseInt(priceSliderMax.value) < parseInt(priceSliderMin.value)) {
+                priceSliderMax.value = priceSliderMin.value;
+            }
+            updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽', priceMinValue, priceMaxValue);
+        });
+    }
+
+    const powerSliderMin = document.getElementById('power-slider-min');
+    const powerSliderMax = document.getElementById('power-slider-max');
+    const powerValue = document.getElementById('power-value');
+    const activeRangePower = document.querySelector('.power-range .active-range');
+    const powerMinValue = document.getElementById('power-min-value');
+    const powerMaxValue = document.getElementById('power-max-value');
+
+    if (powerSliderMin && powerSliderMax && powerValue && activeRangePower) {
+        updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт', powerMinValue, powerMaxValue);
+
+        powerSliderMin.addEventListener('input', () => {
+            if (parseInt(powerSliderMin.value) > parseInt(powerSliderMax.value)) {
+                powerSliderMin.value = powerSliderMax.value;
+            }
+            updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт', powerMinValue, powerMaxValue);
+        });
+
+        powerSliderMax.addEventListener('input', () => {
+            if (parseInt(powerSliderMax.value) < parseInt(powerSliderMin.value)) {
+                powerSliderMax.value = powerSliderMin.value;
+            }
+            updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт', powerMinValue, powerMaxValue);
+        });
+    }
+
+    const luminousFluxSliderMin = document.getElementById('luminous-flux-slider-min');
+    const luminousFluxSliderMax = document.getElementById('luminous-flux-slider-max');
+    const luminousFluxValue = document.getElementById('luminous-flux-value');
+    const activeRangeLuminousFlux = document.querySelector('.luminous-flux-range .active-range');
+    const luminousFluxMinValue = document.getElementById('luminous-flux-min-value');
+    const luminousFluxMaxValue = document.getElementById('luminous-flux-max-value');
+
+    if (luminousFluxSliderMin && luminousFluxSliderMax && luminousFluxValue && activeRangeLuminousFlux) {
+        updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм', luminousFluxMinValue, luminousFluxMaxValue);
+
+        luminousFluxSliderMin.addEventListener('input', () => {
+            if (parseInt(luminousFluxSliderMin.value) > parseInt(luminousFluxSliderMax.value)) {
+                luminousFluxSliderMin.value = luminousFluxSliderMax.value;
+            }
+            updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм', luminousFluxMinValue, luminousFluxMaxValue);
+        });
+
+        luminousFluxSliderMax.addEventListener('input', () => {
+            if (parseInt(luminousFluxSliderMax.value) < parseInt(luminousFluxSliderMin.value)) {
+                luminousFluxSliderMax.value = luminousFluxSliderMin.value;
+            }
+            updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм', luminousFluxMinValue, luminousFluxMaxValue);
+        });
+    }
+
+    const colorTemperatureSliderMin = document.getElementById('color-temperature-slider-min');
+    const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
+    const colorTemperatureValue = document.getElementById('color-temperature-value');
+    const activeRangeColorTemperature = document.querySelector('.color-temperature-range .active-range');
+    const colorTemperatureMinValue = document.getElementById('color-temperature-min-value');
+    const colorTemperatureMaxValue = document.getElementById('color-temperature-max-value');
+
+    if (colorTemperatureSliderMin && colorTemperatureSliderMax && colorTemperatureValue && activeRangeColorTemperature) {
+        updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K', colorTemperatureMinValue, colorTemperatureMaxValue);
+
+        colorTemperatureSliderMin.addEventListener('input', () => {
+            if (parseInt(colorTemperatureSliderMin.value) > parseInt(colorTemperatureSliderMax.value)) {
+                colorTemperatureSliderMin.value = colorTemperatureSliderMax.value;
+            }
+            updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K', colorTemperatureMinValue, colorTemperatureMaxValue);
+        });
+
+        colorTemperatureSliderMax.addEventListener('input', () => {
+            if (parseInt(colorTemperatureSliderMax.value) < parseInt(colorTemperatureSliderMin.value)) {
+                colorTemperatureSliderMax.value = colorTemperatureSliderMin.value;
+            }
+            updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K', colorTemperatureMinValue, colorTemperatureMaxValue);
+        });
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -589,116 +837,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const priceSliderMin = document.getElementById('price-slider-min');
-    const priceSliderMax = document.getElementById('price-slider-max');
-    const priceValue = document.getElementById('price-value');
-    const activeRangePrice = document.querySelector('.price-range .active-range');
-
-    function updateRange(sliderMin, sliderMax, valueElement, activeRange, unit) {
-        const minPercent = (parseInt(sliderMin.value) / parseInt(sliderMax.max)) * 100;
-        const maxPercent = (parseInt(sliderMax.value) / parseInt(sliderMax.max)) * 100;
-        activeRange.style.left = `${minPercent}%`;
-        activeRange.style.right = `${100 - maxPercent}%`;
-        valueElement.textContent = `От ${sliderMin.value} ${unit} до ${sliderMax.value} ${unit}`;
-        valueElement.setAttribute('data-i18n', unit === '₽' ? 'price_range' : unit === 'Вт' ? 'power_range' : unit === 'лм' ? 'luminous_flux_range' : 'color_temperature_range');
-        window.loadTranslations(localStorage.getItem('language') || 'ru', 'catalog');
-    }
-
-    if (priceSliderMin && priceSliderMax && priceValue && activeRangePrice) {
-        priceSliderMin.addEventListener('input', () => {
-            if (parseInt(priceSliderMin.value) > parseInt(priceSliderMax.value)) {
-                priceSliderMin.value = priceSliderMax.value;
-            }
-            updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽');
-        });
-
-        priceSliderMax.addEventListener('input', () => {
-            if (parseInt(priceSliderMax.value) < parseInt(priceSliderMin.value)) {
-                priceSliderMax.value = priceSliderMin.value;
-            }
-            updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽');
-        });
-    }
-
-    const powerSliderMin = document.getElementById('power-slider-min');
-    const powerSliderMax = document.getElementById('power-slider-max');
-    const powerValue = document.getElementById('power-value');
-    const activeRangePower = document.querySelector('.power-range .active-range');
-
-    if (powerSliderMin && powerSliderMax && powerValue && activeRangePower) {
-        powerSliderMin.addEventListener('input', () => {
-            if (parseInt(powerSliderMin.value) > parseInt(powerSliderMax.value)) {
-                powerSliderMin.value = powerSliderMax.value;
-            }
-            updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт');
-        });
-
-        powerSliderMax.addEventListener('input', () => {
-            if (parseInt(powerSliderMax.value) < parseInt(powerSliderMin.value)) {
-                powerSliderMax.value = powerSliderMin.value;
-            }
-            updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт');
-        });
-    }
-
-    const luminousFluxSliderMin = document.getElementById('luminous-flux-slider-min');
-    const luminousFluxSliderMax = document.getElementById('luminous-flux-slider-max');
-    const luminousFluxValue = document.getElementById('luminous-flux-value');
-    const activeRangeLuminousFlux = document.querySelector('.luminous-flux-range .active-range');
-
-    if (luminousFluxSliderMin && luminousFluxSliderMax && luminousFluxValue && activeRangeLuminousFlux) {
-        luminousFluxSliderMin.addEventListener('input', () => {
-            if (parseInt(luminousFluxSliderMin.value) > parseInt(luminousFluxSliderMax.value)) {
-                luminousFluxSliderMin.value = luminousFluxSliderMax.value;
-            }
-            updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм');
-        });
-
-        luminousFluxSliderMax.addEventListener('input', () => {
-            if (parseInt(luminousFluxSliderMax.value) < parseInt(luminousFluxSliderMin.value)) {
-                luminousFluxSliderMax.value = luminousFluxSliderMin.value;
-            }
-            updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм');
-        });
-    }
-
-    const colorTemperatureSliderMin = document.getElementById('color-temperature-slider-min');
-    const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
-    const colorTemperatureValue = document.getElementById('color-temperature-value');
-    const activeRangeColorTemperature = document.querySelector('.color-temperature-range .active-range');
-
-    if (colorTemperatureSliderMin && colorTemperatureSliderMax && colorTemperatureValue && activeRangeColorTemperature) {
-        colorTemperatureSliderMin.addEventListener('input', () => {
-            if (parseInt(colorTemperatureSliderMin.value) > parseInt(colorTemperatureSliderMax.value)) {
-                colorTemperatureSliderMin.value = colorTemperatureSliderMax.value;
-            }
-            updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K');
-        });
-
-        colorTemperatureSliderMax.addEventListener('input', () => {
-            if (parseInt(colorTemperatureSliderMax.value) < parseInt(colorTemperatureSliderMin.value)) {
-                colorTemperatureSliderMax.value = colorTemperatureSliderMin.value;
-            }
-            updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K');
-        });
-    }
-
-    if (priceSliderMin && priceSliderMax && priceValue && activeRangePrice) {
-        updateRange(priceSliderMin, priceSliderMax, priceValue, activeRangePrice, '₽');
-    }
-    if (powerSliderMin && powerSliderMax && powerValue && activeRangePower) {
-        updateRange(powerSliderMin, powerSliderMax, powerValue, activeRangePower, 'Вт');
-    }
-    if (luminousFluxSliderMin && luminousFluxSliderMax && luminousFluxValue && activeRangeLuminousFlux) {
-        updateRange(luminousFluxSliderMin, luminousFluxSliderMax, luminousFluxValue, activeRangeLuminousFlux, 'лм');
-    }
-    if (colorTemperatureSliderMin && colorTemperatureSliderMax && colorTemperatureValue && activeRangeColorTemperature) {
-        updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, colorTemperatureValue, activeRangeColorTemperature, 'K');
-    }
-
     document.getElementById('filter-panel').addEventListener('click', (event) => {
         if (event.target.id === 'apply-filters') {
             console.log('Apply filters clicked');
+
+            saveSliderPositions();
+
             const availability = document.getElementById('availability-in-stock') ? document.getElementById('availability-in-stock').checked : false;
             const typeCheckboxes = document.querySelectorAll('#filter-panel input[name="type"]:checked');
             const types = Array.from(typeCheckboxes).map(cb => cb.value);
@@ -714,15 +858,15 @@ document.addEventListener('DOMContentLoaded', () => {
             const colorTemperatureSliderMin = document.getElementById('color-temperature-slider-min');
             const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
 
-            const minPrice = priceSliderMin ? (parseInt(priceSliderMin.value) === 0 ? null : parseInt(priceSliderMin.value)) : null;
-            const maxPrice = priceSliderMax ? (parseInt(priceSliderMax.value) === 3500 ? null : parseInt(priceSliderMax.value)) : null;
-            const minPower = powerSliderMin ? (parseInt(powerSliderMin.value) === 0 ? null : parseInt(powerSliderMin.value)) : null;
-            const maxPower = powerSliderMax ? (parseInt(powerSliderMax.value) === 100 ? null : parseInt(powerSliderMax.value)) : null;
-            const minLuminousFlux = luminousFluxSliderMin ? (parseInt(luminousFluxSliderMin.value) === 0 ? null : parseInt(luminousFluxSliderMin.value)) : null;
-            const maxLuminousFlux = luminousFluxSliderMax ? (parseInt(luminousFluxSliderMax.value) === 6000 ? null : parseInt(luminousFluxSliderMax.value)) : null;
+            const minPrice = priceSliderMin ? (parseInt(priceSliderMin.value) === realRanges.price.min ? null : parseInt(priceSliderMin.value)) : null;
+            const maxPrice = priceSliderMax ? (parseInt(priceSliderMax.value) === realRanges.price.max ? null : parseInt(priceSliderMax.value)) : null;
+            const minPower = powerSliderMin ? (parseInt(powerSliderMin.value) === realRanges.power.min ? null : parseInt(powerSliderMin.value)) : null;
+            const maxPower = powerSliderMax ? (parseInt(powerSliderMax.value) === realRanges.power.max ? null : parseInt(powerSliderMax.value)) : null;
+            const minLuminousFlux = luminousFluxSliderMin ? (parseInt(luminousFluxSliderMin.value) === realRanges.luminousFlux.min ? null : parseInt(luminousFluxSliderMin.value)) : null;
+            const maxLuminousFlux = luminousFluxSliderMax ? (parseInt(luminousFluxSliderMax.value) === realRanges.luminousFlux.max ? null : parseInt(luminousFluxSliderMax.value)) : null;
             const ip = ipValues.length > 0 ? ipValues.join('|') : '';
-            const minColorTemperature = colorTemperatureSliderMin ? (parseInt(colorTemperatureSliderMin.value) === 2000 ? null : parseInt(colorTemperatureSliderMin.value)) : null;
-            const maxColorTemperature = colorTemperatureSliderMax ? (parseInt(colorTemperatureSliderMax.value) === 6500 ? null : parseInt(colorTemperatureSliderMax.value)) : null;
+            const minColorTemperature = colorTemperatureSliderMin ? (parseInt(colorTemperatureSliderMin.value) === realRanges.colorTemperature.min ? null : parseInt(colorTemperatureSliderMin.value)) : null;
+            const maxColorTemperature = colorTemperatureSliderMax ? (parseInt(colorTemperatureSliderMax.value) === realRanges.colorTemperature.max ? null : parseInt(colorTemperatureSliderMax.value)) : null;
             const [sort, order] = document.getElementById('sort-select') ? document.getElementById('sort-select').value.split(',') : ['name', 'asc'];
             const search = document.getElementById('search-input') ? document.getElementById('search-input').value.trim() : '';
 
@@ -739,15 +883,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    function saveSliderPositions() {
+        const sliders = {
+            priceMin: document.getElementById('price-slider-min')?.value,
+            priceMax: document.getElementById('price-slider-max')?.value,
+            powerMin: document.getElementById('power-slider-min')?.value,
+            powerMax: document.getElementById('power-slider-max')?.value,
+            luminousFluxMin: document.getElementById('luminous-flux-slider-min')?.value,
+            luminousFluxMax: document.getElementById('luminous-flux-slider-max')?.value,
+            colorTemperatureMin: document.getElementById('color-temperature-slider-min')?.value,
+            colorTemperatureMax: document.getElementById('color-temperature-slider-max')?.value
+        };
+        sessionStorage.setItem('sliderPositions', JSON.stringify(sliders));
+    }
+
+
     document.getElementById('filter-panel').addEventListener('click', (event) => {
         if (event.target.id === 'reset-filters') {
             console.log('Reset filters clicked');
+            sessionStorage.removeItem('sliderPositions');
             const availabilityCheckbox = document.getElementById('availability-in-stock');
             const emergencyBlockCheckbox = document.getElementById('emergency-block');
             if (availabilityCheckbox) availabilityCheckbox.checked = false;
             if (emergencyBlockCheckbox) emergencyBlockCheckbox.checked = false;
             document.querySelectorAll('#filter-panel input[name="type"]').forEach(cb => cb.checked = false);
             document.querySelectorAll('input[name="ip"]').forEach(cb => cb.checked = false);
+
             const priceSliderMin = document.getElementById('price-slider-min');
             const priceSliderMax = document.getElementById('price-slider-max');
             const powerSliderMin = document.getElementById('power-slider-min');
@@ -758,25 +919,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const colorTemperatureSliderMax = document.getElementById('color-temperature-slider-max');
 
             if (priceSliderMin && priceSliderMax) {
-                priceSliderMin.value = 0;
-                priceSliderMax.value = 3500;
-                updateRange(priceSliderMin, priceSliderMax, document.getElementById('price-value'), document.querySelector('.price-range .active-range'), '₽');
+                priceSliderMin.value = realRanges.price.min;
+                priceSliderMax.value = realRanges.price.max;
             }
             if (powerSliderMin && powerSliderMax) {
-                powerSliderMin.value = 0;
-                powerSliderMax.value = 100;
-                updateRange(powerSliderMin, powerSliderMax, document.getElementById('power-value'), document.querySelector('.power-range .active-range'), 'Вт');
+                powerSliderMin.value = realRanges.power.min;
+                powerSliderMax.value = realRanges.power.max;
             }
             if (luminousFluxSliderMin && luminousFluxSliderMax) {
-                luminousFluxSliderMin.value = 0;
-                luminousFluxSliderMax.value = 6000;
-                updateRange(luminousFluxSliderMin, luminousFluxSliderMax, document.getElementById('luminous-flux-value'), document.querySelector('.luminous-flux-range .active-range'), 'лм');
+                luminousFluxSliderMin.value = realRanges.luminousFlux.min;
+                luminousFluxSliderMax.value = realRanges.luminousFlux.max;
             }
             if (colorTemperatureSliderMin && colorTemperatureSliderMax) {
-                colorTemperatureSliderMin.value = 2000;
-                colorTemperatureSliderMax.value = 6500;
-                updateRange(colorTemperatureSliderMin, colorTemperatureSliderMax, document.getElementById('color-temperature-value'), document.querySelector('.color-temperature-range .active-range'), 'K');
+                colorTemperatureSliderMin.value = realRanges.colorTemperature.min;
+                colorTemperatureSliderMax.value = realRanges.colorTemperature.max;
             }
+
+            initializeSliders();
             loadProducts();
 
             if (window.innerWidth <= 768) {

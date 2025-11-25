@@ -1,127 +1,3 @@
-async function addToCart(productId) {
-    try {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            console.log('Пользователь не авторизован, перенаправление на страницу логина');
-            window.location.href = '../login/index.html';
-            return;
-        }
-
-        const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}&productId=${productId}`);
-        const cartItems = await cartResponse.json();
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
-
-        if (cartItems.length > 0) {
-            const cartItem = cartItems[0];
-            const newQuantity = Math.min(cartItem.quantity + 1, 99);
-            const updateResponse = await fetch(`http://localhost:3000/cart/${cartItem.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ quantity: newQuantity })
-            });
-
-            if (!updateResponse.ok) {
-                throw new Error(`Ошибка HTTP! Статус: ${updateResponse.status}`);
-            }
-
-            console.log('Количество товара обновлено:', await updateResponse.json());
-            alert(translations.item_quantity_updated || 'Item quantity updated in cart!');
-        } else {
-            const cartItem = {
-                productId: productId,
-                userId: userId,
-                quantity: 1
-            };
-
-            const response = await fetch('http://localhost:3000/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(cartItem)
-            });
-
-            if (!response.ok) {
-                throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
-            }
-
-            console.log('Товар добавлен в корзину:', await response.json());
-            alert(translations.item_added_to_cart || 'Item added to cart!');
-        }
-
-        await loadFavorites();
-    } catch (error) {
-        console.error('Ошибка при добавлении в корзину:', error);
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
-        alert(translations.error_adding_to_cart || 'Error adding item to cart. Please try again later.');
-    }
-}
-
-async function toggleFavorite(productId) {
-    try {
-        const userId = localStorage.getItem('userId');
-        if (!userId) {
-            console.log('Пользователь не авторизован, перенаправление на страницу логина');
-            window.location.href = '../login/index.html';
-            return;
-        }
-
-        const favoriteResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}&productId=${productId}`);
-        const favorites = await favoriteResponse.json();
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
-
-        if (favorites.length > 0) {
-            const favorite = favorites[0];
-            const deleteResponse = await fetch(`http://localhost:3000/favorites/${favorite.id}`, {
-                method: 'DELETE'
-            });
-
-            if (!deleteResponse.ok) {
-                throw new Error(`Ошибка HTTP! Статус: ${deleteResponse.status}`);
-            }
-
-            console.log('Товар удален из избранного');
-            alert(translations.item_removed_from_favorites || 'Item removed from favorites!');
-        }
-
-        await loadFavorites();
-    } catch (error) {
-        console.error('Ошибка при удалении из избранного:', error);
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
-        alert(translations.error_removing_from_favorites || 'Error removing item from favorites. Please try again later.');
-    }
-}
-
-async function updateCartItemQuantity(cartItemId, newQuantity) {
-    try {
-        if (newQuantity < 1 || newQuantity > 99) {
-            console.log('Количество вне допустимого диапазона:', newQuantity);
-            return;
-        }
-
-        const response = await fetch(`http://localhost:3000/cart/${cartItemId}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ quantity: newQuantity })
-        });
-
-        if (!response.ok) {
-            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
-        }
-
-        console.log('Количество товара обновлено:', await response.json());
-        await loadFavorites();
-    } catch (error) {
-        console.error('Ошибка при обновлении количества:', error);
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
-        alert(translations.error_updating_quantity || 'Error updating item quantity. Please try again later.');
-    }
-}
-
 async function loadFavorites() {
     try {
         const userId = localStorage.getItem('userId');
@@ -153,11 +29,21 @@ async function loadFavorites() {
         }
 
         const productIds = favorites.map(fav => fav.productId);
-        const productsResponse = await fetch(`http://localhost:3000/products?id=${productIds.join(',')}`);
-        if (!productsResponse.ok) {
-            throw new Error(`HTTP error! Status: ${productsResponse.status}`);
+        
+        
+        const products = [];
+        for (const productId of productIds) {
+            try {
+                const productResponse = await fetch(`http://localhost:3000/products/${productId}`);
+                if (productResponse.ok) {
+                    const product = await productResponse.json();
+                    products.push(product);
+                }
+            } catch (error) {
+                console.error(`Error loading product ${productId}:`, error);
+            }
         }
-        const products = await productsResponse.json();
+
         console.log('Products received:', products);
 
         const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}`);
@@ -196,55 +82,254 @@ async function loadFavorites() {
             catalog.appendChild(productDiv);
         });
 
-
         window.loadTranslations(lang, 'favourite');
-
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const productId = button.getAttribute('data-product-id');
-                addToCart(productId);
-            });
-        });
-
-        document.querySelectorAll('.cart-decrement').forEach(button => {
-            button.addEventListener('click', () => {
-                const cartId = button.getAttribute('data-cart-id');
-                const currentQuantity = parseInt(button.nextElementSibling.textContent);
-                if (currentQuantity > 1) {
-                    updateCartItemQuantity(cartId, currentQuantity - 1);
-                }
-            });
-        });
-
-        document.querySelectorAll('.cart-increment').forEach(button => {
-            button.addEventListener('click', () => {
-                const cartId = button.getAttribute('data-cart-id');
-                const currentQuantity = parseInt(button.previousElementSibling.textContent);
-                if (currentQuantity < 99) {
-                    updateCartItemQuantity(cartId, currentQuantity + 1);
-                }
-            });
-        });
-
-        document.querySelectorAll('.favorite-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const productId = button.getAttribute('data-product-id');
-                toggleFavorite(productId);
-            });
-        });
+        setupEventListeners();
+        
     } catch (error) {
         console.error('Error fetching favorites:', error);
         const catalog = document.getElementById('catalog');
-        const translations = translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {};
+        const translations = window.translationsCache ? window.translationsCache[`${localStorage.getItem('language') || 'ru'}_favourite`] || {} : {};
         catalog.innerHTML = `<p data-i18n="error_loading">${translations.error_loading || 'Ошибка загрузки избранного. Попробуйте позже.'}</p>`;
         window.loadTranslations(localStorage.getItem('language') || 'ru', 'favourite');
     }
 }
 
+async function addToCart(productId) {
+    try {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.log('Пользователь не авторизован, перенаправление на страницу логина');
+            window.location.href = '../login/index.html';
+            return;
+        }
+
+        const cartResponse = await fetch(`http://localhost:3000/cart?userId=${userId}&productId=${productId}`);
+        const cartItems = await cartResponse.json();
+
+        if (cartItems.length > 0) {
+            const cartItem = cartItems[0];
+            const newQuantity = Math.min(cartItem.quantity + 1, 99);
+            const updateResponse = await fetch(`http://localhost:3000/cart/${cartItem.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ quantity: newQuantity })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${updateResponse.status}`);
+            }
+
+            console.log('Количество товара обновлено:', await updateResponse.json());
+
+            updateCartButton(productId, cartItem.id, newQuantity);
+        } else {
+            const cartItem = {
+                productId: productId,
+                userId: userId,
+                quantity: 1
+            };
+
+            const response = await fetch('http://localhost:3000/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(cartItem)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+            }
+
+            const newCartItem = await response.json();
+            console.log('Товар добавлен в корзину:', newCartItem);
+
+            updateCartButton(productId, newCartItem.id, 1);
+        }
+    } catch (error) {
+        console.error('Ошибка при добавлении в корзину:', error);
+    }
+}
+
+async function updateCartItemQuantity(cartItemId, newQuantity) {
+    try {
+        if (newQuantity < 1 || newQuantity > 99) {
+            console.log('Количество вне допустимого диапазона:', newQuantity);
+            return;
+        }
+
+        const response = await fetch(`http://localhost:3000/cart/${cartItemId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ quantity: newQuantity })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+        }
+
+        console.log('Количество товара обновлено:', await response.json());
+
+        updateQuantityDisplay(cartItemId, newQuantity);
+    } catch (error) {
+        console.error('Ошибка при обновлении количества:', error);
+    }
+}
+
+async function toggleFavorite(productId) {
+    try {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            console.log('Пользователь не авторизован, перенаправление на страницу логина');
+            window.location.href = '../login/index.html';
+            return;
+        }
+
+        const favoriteResponse = await fetch(`http://localhost:3000/favorites?userId=${userId}&productId=${productId}`);
+        const favorites = await favoriteResponse.json();
+
+        if (favorites.length > 0) {
+            const favorite = favorites[0];
+            const deleteResponse = await fetch(`http://localhost:3000/favorites/${favorite.id}`, {
+                method: 'DELETE'
+            });
+
+            if (!deleteResponse.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${deleteResponse.status}`);
+            }
+
+            console.log('Товар удален из избранного');
+
+            removeProductFromDOM(productId);
+        } else {
+            const favoriteItem = {
+                productId: productId,
+                userId: userId
+            };
+
+            const response = await fetch('http://localhost:3000/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(favoriteItem)
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP! Статус: ${response.status}`);
+            }
+
+            console.log('Товар добавлен в избранное:', await response.json());
+        }
+    } catch (error) {
+        console.error('Ошибка при работе с избранным:', error);
+    }
+}
+
+function updateCartButton(productId, cartItemId, quantity) {
+    const productElement = document.querySelector(`.product [data-product-id="${productId}"]`).closest('.product');
+    const buttonContainer = productElement.querySelector('.add-to-cart, .cart-control');
+    
+    if (quantity === 1) {
+
+        buttonContainer.outerHTML = `
+            <div class="cart-control">
+                <button class="cart-decrement" data-product-id="${productId}" data-cart-id="${cartItemId}" data-i18n-aria-label="decrease_quantity">-</button>
+                <span class="cart-quantity">${quantity}</span>
+                <button class="cart-increment" data-product-id="${productId}" data-cart-id="${cartItemId}" data-i18n-aria-label="increase_quantity">+</button>
+            </div>
+        `;
+    } else {
+
+        const quantityElement = productElement.querySelector('.cart-quantity');
+        if (quantityElement) {
+            quantityElement.textContent = quantity;
+        }
+    }
+}
+
+function updateQuantityDisplay(cartItemId, quantity) {
+    const quantityElement = document.querySelector(`[data-cart-id="${cartItemId}"]`).closest('.cart-control').querySelector('.cart-quantity');
+    if (quantityElement) {
+        quantityElement.textContent = quantity;
+    }
+}
+
+function removeProductFromDOM(productId) {
+    const productElement = document.querySelector(`.product [data-product-id="${productId}"]`).closest('.product');
+    if (productElement) {
+        productElement.remove();
+
+        const catalog = document.getElementById('catalog');
+        if (catalog.children.length === 0) {
+            catalog.innerHTML = '<p data-i18n="empty_favorites">В избранном пока нет товаров.</p>';
+            window.loadTranslations(localStorage.getItem('language') || 'ru', 'favourite');
+        }
+    }
+}
+
+function setupEventListeners() {
+    const catalog = document.getElementById('catalog');
+    if (!catalog) return;
+
+    catalog.addEventListener('click', (e) => {
+        const addToCartBtn = e.target.closest('.add-to-cart');
+        if (addToCartBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const productId = addToCartBtn.getAttribute('data-product-id');
+            console.log('Add to cart clicked for product:', productId);
+            addToCart(productId);
+            return;
+        }
+
+        const incrementBtn = e.target.closest('.cart-increment');
+        if (incrementBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const cartId = incrementBtn.getAttribute('data-cart-id');
+            const quantityElement = incrementBtn.previousElementSibling;
+            const currentQuantity = parseInt(quantityElement.textContent);
+            if (currentQuantity < 99) {
+                console.log('Increment clicked for cart item:', cartId);
+                updateCartItemQuantity(cartId, currentQuantity + 1);
+            }
+            return;
+        }
+
+        const decrementBtn = e.target.closest('.cart-decrement');
+        if (decrementBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const cartId = decrementBtn.getAttribute('data-cart-id');
+            const quantityElement = decrementBtn.nextElementSibling;
+            const currentQuantity = parseInt(quantityElement.textContent);
+            if (currentQuantity > 1) {
+                console.log('Decrement clicked for cart item:', cartId);
+                updateCartItemQuantity(cartId, currentQuantity - 1);
+            }
+            return;
+        }
+
+        const favoriteBtn = e.target.closest('.favorite-btn');
+        if (favoriteBtn) {
+            e.preventDefault();
+            e.stopPropagation();
+            const productId = favoriteBtn.getAttribute('data-product-id');
+            console.log('Favorite toggle clicked for product:', productId);
+            toggleFavorite(productId);
+            return;
+        }
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     loadFavorites();
 });
-
 
 window.addEventListener('languageChanged', (event) => {
     const lang = event.detail.lang;

@@ -104,10 +104,11 @@ main h3 {
     background-color: var(--bg-color);
     color: var(--primary-text);
 }
-html[data-theme="dark"] .add-to-cart
-{
+
+html[data-theme="dark"] .add-to-cart {
     color: white;
 }
+
 .bold {
     font-weight: bold;
     margin-right: 1.3rem;
@@ -190,11 +191,28 @@ html[data-theme="dark"] .add-to-cart
     padding: 10px 0;
 }
 
+/* Стили для текстовых значений ползунков */
+.slider-values {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 1.4rem;
+    color: var(--primary-text);
+    opacity: 0.8;
+}
+
+.slider-min-value,
+.slider-max-value {
+    font-weight: 500;
+}
+
 .range-slider {
     position: relative;
     width: 100%;
     height: 8px;
     background: #ddd;
+    border-radius: 4px;
+    margin: 10px 0;
 }
 
 .range-slider input[type="range"] {
@@ -242,6 +260,7 @@ html[data-theme="dark"] .add-to-cart
     background: var(--accent-color);
     top: 0;
     z-index: 1;
+    border-radius: 4px;
 }
 
 #price-value,
@@ -249,9 +268,11 @@ html[data-theme="dark"] .add-to-cart
 #luminous-flux-value,
 #color-temperature-value {
     display: block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-top: 0.5rem;
-    text-align: right;
+    text-align: center;
+    color: var(--primary-text);
+    opacity: 0.8;
 }
 
 #apply-filters,
@@ -264,6 +285,7 @@ html[data-theme="dark"] .add-to-cart
     font-size: 1.6rem;
     cursor: pointer;
     width: 100%;
+    transition: background-color 0.3s ease;
 }
 
 #apply-filters:hover,
@@ -363,6 +385,8 @@ html[data-theme="dark"] .add-to-cart
     height: 3rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
 
 .product button:hover {
@@ -502,7 +526,6 @@ html[data-theme="dark"] .add-to-cart
     gap: 1rem;
     margin-left: 10rem;
     margin-bottom: 2rem;
-    
 }
 
 .admin-controls button {
@@ -722,6 +745,10 @@ html[data-theme="dark"] .add-to-cart
         overflow-y: auto;
     }
 
+    .slider-values {
+        font-size: 1.2rem;
+    }
+
     .catalog {
         grid-template-columns: repeat(2, 1fr);
         margin-left: 0;
@@ -893,6 +920,10 @@ html[data-theme="dark"] .add-to-cart
 
     .filter-group label {
         font-size: 1.2rem;
+    }
+
+    .slider-values {
+        font-size: 1rem;
     }
 
     #apply-filters,
